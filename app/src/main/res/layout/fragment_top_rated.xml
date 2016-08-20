@@ -2,12 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="comnikhil_31.httpsgithub.cinestine.Fragments.FragmentTopRated">
+    tools:context="com.example.nikhil.materialtester.Fragment.FragmentTopRated">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_top_rated"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="#E0E0E0" />
 
 </FrameLayout>
+

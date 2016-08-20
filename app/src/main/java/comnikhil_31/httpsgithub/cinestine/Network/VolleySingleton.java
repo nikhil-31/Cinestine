@@ -11,11 +11,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
+import comnikhil_31.httpsgithub.cinestine.MyApplication;
 
 
 public class VolleySingleton {
 
-    private static VolleySingleton sInstance =null;
+    private static VolleySingleton sInstance = null;
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
     private VolleySingleton(){
