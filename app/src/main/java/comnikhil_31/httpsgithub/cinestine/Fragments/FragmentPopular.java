@@ -24,6 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import comnikhil_31.httpsgithub.cinestine.Activities.MovieDetailsActivity;
 import comnikhil_31.httpsgithub.cinestine.Adapters.PopularAdapter;
 import comnikhil_31.httpsgithub.cinestine.Model.Movie;
 import comnikhil_31.httpsgithub.cinestine.Network.VolleySingleton;
@@ -162,9 +163,9 @@ public class FragmentPopular extends Fragment implements PopularAdapter.ClickLis
     @Override
     public void itemClicked(View view, int position) {
         Movie mvs =ListMovies.get(position);
-////        Intent intent =new Intent(getActivity(), MovieDetailsActivity.class);
-//        intent.putExtra("Movie", mvs);
-//        startActivity(intent);
+        Intent intent =new Intent(getActivity(), MovieDetailsActivity.class);
+        intent.putExtra("Movie", mvs);
+        startActivity(intent);
 
     }
 }
