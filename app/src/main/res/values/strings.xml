@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">Cinestine</string>
     <string name="action_settings">Settings</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string-array name="tabs">
+        <item>MOST POPULAR</item>
+        <item>TOP RATED</item>
+        <item>FAVOURITES</item>
+        <item>TAB 4</item>
+        <item>TAB 5</item>
+        <item>TAB 6</item>
+    </string-array>
+
+
 </resources>
