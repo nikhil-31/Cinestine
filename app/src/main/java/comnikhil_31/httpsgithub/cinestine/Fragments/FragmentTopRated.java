@@ -80,15 +80,14 @@ public class FragmentTopRated extends Fragment implements PopularAdapter.ClickLi
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_top_rated, container, false);
         listMovieHits = (RecyclerView) view.findViewById(R.id.recycler_top_rated);
-        listMovieHits.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        listMovieHits.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         adapter = new PopularAdapter(getActivity());
         adapter.setClickListener(this);
         listMovieHits.setAdapter(adapter);
-        if(savedInstanceState !=null){
+        if (savedInstanceState != null) {
             ListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIE);
             adapter.setMoviesList(ListMovies);
-        }
-        else {
+        } else {
             sendJsonRequest();
         }
 
@@ -99,7 +98,7 @@ public class FragmentTopRated extends Fragment implements PopularAdapter.ClickLi
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(STATE_MOVIE,ListMovies);
+        outState.putParcelableArrayList(STATE_MOVIE, ListMovies);
     }
 
     private void sendJsonRequest() {
@@ -129,39 +128,48 @@ public class FragmentTopRated extends Fragment implements PopularAdapter.ClickLi
     }
 
     public ArrayList<Movie> parseJSONResponse(JSONObject response) throws JSONException {
-        ArrayList<Movie> data = new ArrayList<Movie>();
+
+        final String RESULTS = "results";
+        final String POSTER_PATH = "poster_path";
+        final String OVERVIEW = "overview";
+        final String ORIGINAL_TITLE = "original_title";
+        final String RELEASE_DATE = "release_date";
+        final String BACKDROP_PATH = "backdrop_path";
+        final String VOTE_AVERAGE = "vote_average";
+
+        ArrayList<Movie> movieArrayList = new ArrayList<Movie>();
+
         if (response == null || response.length() == 0) {
-            return data;
+            return movieArrayList;
         }
 
-        JSONArray results = response.getJSONArray("results");
-
+        JSONArray results = response.getJSONArray(RESULTS);
 
         for (int i = 0; i < results.length(); i++) {
-            Movie current = new Movie();
 
+            Movie current = new Movie();
 
             JSONObject jsonObject = results.getJSONObject(i);
 
-            current.setPosterPath(jsonObject.getString("poster_path"));
-            current.setOverview(jsonObject.optString("overview"));
-            current.setOriginalTitle(jsonObject.optString("original_title"));
-            current.setReleaseDate(jsonObject.optString("release_date"));
-            current.setVoteAverage(Float.parseFloat(jsonObject.optString("vote_average")));
-            current.setBackdrop(jsonObject.optString("backdrop_path"));
+            current.setPosterPath(jsonObject.getString(POSTER_PATH));
+            current.setOverview(jsonObject.optString(OVERVIEW));
+            current.setOriginalTitle(jsonObject.optString(ORIGINAL_TITLE));
+            current.setReleaseDate(jsonObject.optString(RELEASE_DATE));
+            current.setVoteAverage(Float.parseFloat(jsonObject.optString(VOTE_AVERAGE)));
+            current.setBackdrop(jsonObject.optString(BACKDROP_PATH));
 
-            data.add(current);
+            movieArrayList.add(current);
         }
 
-        return data;
+        return movieArrayList;
 
     }
 
     @Override
     public void itemClicked(View view, int position) {
-        Movie mvs =ListMovies.get(position);
-        Intent intent =new Intent(getActivity(), MovieDetailsActivity.class);
-        intent.putExtra("Movie", mvs);
+        Movie movieObject = ListMovies.get(position);
+        Intent intent = new Intent(getActivity(), MovieDetailsActivity.class);
+        intent.putExtra("Movie", movieObject);
         startActivity(intent);
     }
 }

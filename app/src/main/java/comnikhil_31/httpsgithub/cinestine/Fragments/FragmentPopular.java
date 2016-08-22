@@ -131,26 +131,36 @@ public class FragmentPopular extends Fragment implements PopularAdapter.ClickLis
     }
 
     public ArrayList<Movie> parseJSONResponse(JSONObject response) throws JSONException {
+
+        final String RESULTS = "results";
+        final String POSTER_PATH = "poster_path";
+        final String OVERVIEW = "overview";
+        final String ORIGINAL_TITLE = "original_title";
+        final String RELEASE_DATE = "release_date";
+        final String BACKDROP_PATH = "backdrop_path";
+        final String VOTE_AVERAGE = "vote_average";
+
         ArrayList<Movie> data = new ArrayList<Movie>();
+
         if (response == null || response.length() == 0) {
             return data;
         }
 
-        JSONArray results = response.getJSONArray("results");
-        StringBuilder builder = new StringBuilder();
+        JSONArray results = response.getJSONArray(RESULTS);
+
 
         for (int i = 0; i < results.length(); i++) {
-            Movie current = new Movie();
 
+            Movie current = new Movie();
 
             JSONObject jsonObject = results.getJSONObject(i);
 
-            current.setPosterPath(jsonObject.getString("poster_path"));
-            current.setOverview(jsonObject.optString("overview"));
-            current.setOriginalTitle(jsonObject.optString("original_title"));
-            current.setReleaseDate(jsonObject.optString("release_date"));
-            current.setVoteAverage(Float.parseFloat(jsonObject.optString("vote_average")));
-            current.setBackdrop(jsonObject.optString("backdrop_path"));
+            current.setPosterPath(jsonObject.getString(POSTER_PATH));
+            current.setOverview(jsonObject.optString(OVERVIEW));
+            current.setOriginalTitle(jsonObject.optString(ORIGINAL_TITLE));
+            current.setReleaseDate(jsonObject.optString(RELEASE_DATE));
+            current.setVoteAverage(Float.parseFloat(jsonObject.optString(VOTE_AVERAGE)));
+            current.setBackdrop(jsonObject.optString(BACKDROP_PATH));
 
             data.add(current);
         }
