@@ -14,16 +14,62 @@ public class Movie implements Parcelable {
     private String mReleaseDate;
     private String mBackdrop;
     private String mId;
+    private String mPopularity;
+    private String mVoteCount;
+    private String mOriginalLanguage;
+    private String mTitle;
+    private String mAdult;
+
 
     public Movie() {
 
     }
 
-    public void setmId(String id){
+    public void setmAdult(String adult){
+        mAdult = adult;
+    }
+
+    public String getmAdult(){
+        return mAdult;
+    }
+
+    public void setmTitle(String Title){
+        mTitle = Title;
+    }
+
+    public String getmTitle(){
+        return mTitle;
+    }
+
+    public void setmOriginalLanguage(String language){
+        mOriginalLanguage = language;
+    }
+
+    public String getmOriginalLanguage(){
+        return mOriginalLanguage;
+    }
+
+    public void setmVoteCount(String voteCount){
+        mVoteCount = voteCount;
+    }
+
+    public String getmVoteCount(){
+        return mVoteCount;
+    }
+
+    public void setmPopularity(String popularity) {
+        mPopularity = popularity;
+    }
+
+    public String getmPopularity(){
+        return mPopularity;
+    }
+
+    public void setmId(String id) {
         mId = id;
     }
 
-    public String getmId(){
+    public String getmId() {
         return mId;
     }
 
@@ -106,6 +152,11 @@ public class Movie implements Parcelable {
         dest.writeString(mReleaseDate);
         dest.writeString(mBackdrop);
         dest.writeString(mId);
+        dest.writeString(mPopularity);
+        dest.writeString(mVoteCount);
+        dest.writeString(mOriginalLanguage);
+        dest.writeString(mTitle);
+        dest.writeString(mAdult);
 
     }
 
@@ -117,6 +168,12 @@ public class Movie implements Parcelable {
         mReleaseDate = in.readString();
         mBackdrop = in.readString();
         mId = in.readString();
+        mPopularity = in.readString();
+        mVoteCount = in.readString();
+        mOriginalLanguage = in.readString();
+        mTitle = in.readString();
+        mAdult = in.readString();
+
     }
 
 
