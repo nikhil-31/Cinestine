@@ -31,6 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import in.nikhil.cinestine.Adapters.ReviewAdapter;
 import in.nikhil.cinestine.Adapters.TrailerAdapter;
 import in.nikhil.cinestine.Extras.TmdbUrls;
 import in.nikhil.cinestine.Model.Movie;
@@ -48,6 +49,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     Movie movie;
 
     private TrailerAdapter trailerAdapter;
+    private ReviewAdapter reviewAdapter;
 
     private ArrayList<Trailer> trailersArrayList = new ArrayList<Trailer>();
     private ArrayList<Review> reviewArrayList = new ArrayList<Review>();
@@ -84,6 +86,14 @@ public class MovieDetailsActivity extends AppCompatActivity {
         LinearLayoutManager layoutManagertrailer = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclertrailer.setLayoutManager(layoutManagertrailer);
         recyclertrailer.setAdapter(trailerAdapter);
+
+        reviewAdapter = new ReviewAdapter(this);
+
+        RecyclerView recyclerReview = (RecyclerView) findViewById(R.id.recycler_review);
+        LinearLayoutManager layoutManagerreview = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerReview.setLayoutManager(layoutManagerreview);
+        recyclerReview.setAdapter(reviewAdapter);
+
 
 
         ImageView poster = (ImageView) findViewById(R.id.poster_details);
@@ -198,7 +208,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     reviewArrayList = parseReviewJSONResponse(response);
-//                    adapter.setMoviesList(ListMovies);
+                    reviewAdapter.setReviewsList(reviewArrayList);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
