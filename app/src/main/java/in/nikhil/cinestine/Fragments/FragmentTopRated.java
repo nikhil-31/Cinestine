@@ -137,6 +137,12 @@ public class FragmentTopRated extends Fragment implements PopularAdapter.ClickLi
         final String RELEASE_DATE = "release_date";
         final String BACKDROP_PATH = "backdrop_path";
         final String VOTE_AVERAGE = "vote_average";
+        final String ID = "id";
+        final String POPULARITY = "popularity";
+        final String VOTE_COUNT = "vote_count";
+        final String ORIGINAL_LANGUAGE = "original_language";
+        final String TITLE = "title";
+        final String ADULT = "adult";
 
         ArrayList<Movie> movieArrayList = new ArrayList<Movie>();
 
@@ -145,6 +151,8 @@ public class FragmentTopRated extends Fragment implements PopularAdapter.ClickLi
         }
 
         JSONArray results = response.getJSONArray(RESULTS);
+
+        StringBuilder builder = new StringBuilder();
 
         for (int i = 0; i < results.length(); i++) {
 
@@ -158,9 +166,18 @@ public class FragmentTopRated extends Fragment implements PopularAdapter.ClickLi
             current.setReleaseDate(jsonObject.optString(RELEASE_DATE));
             current.setVoteAverage(Float.parseFloat(jsonObject.optString(VOTE_AVERAGE)));
             current.setBackdrop(jsonObject.optString(BACKDROP_PATH));
+            current.setmId(jsonObject.getString(ID));
+            current.setmPopularity(jsonObject.getString(POPULARITY));
+            current.setmVoteCount(jsonObject.getString(VOTE_COUNT));
+            current.setmOriginalLanguage(jsonObject.getString(ORIGINAL_LANGUAGE));
+            current.setmTitle(jsonObject.getString(TITLE));
+            current.setmAdult(jsonObject.getString(ADULT));
+
+            builder.append("Adult "+jsonObject.getString(ADULT) +"\n" );
 
             movieArrayList.add(current);
         }
+        Toast.makeText(getActivity(),builder,Toast.LENGTH_LONG).show();
 
         return movieArrayList;
 
