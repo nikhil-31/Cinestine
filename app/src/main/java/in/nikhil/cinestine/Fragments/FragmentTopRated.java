@@ -89,8 +89,6 @@ public class FragmentTopRated extends Fragment implements PopularAdapter.ClickLi
         } else {
             sendJsonRequest();
         }
-
-
         return view;
     }
 
@@ -103,9 +101,8 @@ public class FragmentTopRated extends Fragment implements PopularAdapter.ClickLi
     private void sendJsonRequest() {
 
 
-
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
-                TmdbUrls.MOVIE_BASE_URL+TmdbUrls.SORT_TOP_RATED+TmdbUrls.API_KEY,
+                TmdbUrls.MOVIE_BASE_URL + TmdbUrls.SORT_TOP_RATED + TmdbUrls.API_KEY,
                 null
                 , new Response.Listener<JSONObject>() {
             @Override
@@ -152,8 +149,6 @@ public class FragmentTopRated extends Fragment implements PopularAdapter.ClickLi
 
         JSONArray results = response.getJSONArray(RESULTS);
 
-        StringBuilder builder = new StringBuilder();
-
         for (int i = 0; i < results.length(); i++) {
 
             Movie current = new Movie();
@@ -173,14 +168,9 @@ public class FragmentTopRated extends Fragment implements PopularAdapter.ClickLi
             current.setmTitle(jsonObject.getString(TITLE));
             current.setmAdult(jsonObject.getString(ADULT));
 
-            builder.append("Adult "+jsonObject.getString(ADULT) +"\n" );
-
             movieArrayList.add(current);
         }
-        Toast.makeText(getActivity(),builder,Toast.LENGTH_LONG).show();
-
         return movieArrayList;
-
     }
 
     @Override

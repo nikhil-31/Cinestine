@@ -48,7 +48,8 @@ public class FragmentPopular extends Fragment implements PopularAdapter.ClickLis
 
     private RecyclerView listMovieHits;
     private PopularAdapter adapter;
-    private ArrayList<Movie> ListMovies =new ArrayList<Movie>();
+    private ArrayList<Movie> ListMovies = new ArrayList<Movie>();
+
     public FragmentPopular() {
         // Required empty public constructor
     }
@@ -84,15 +85,14 @@ public class FragmentPopular extends Fragment implements PopularAdapter.ClickLis
         View view = inflater.inflate(R.layout.fragment_popular, container, false);
 
         listMovieHits = (RecyclerView) view.findViewById(R.id.recycler_popular);
-        listMovieHits.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        listMovieHits.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         adapter = new PopularAdapter(getActivity());
         adapter.setClickListener(this);
         listMovieHits.setAdapter(adapter);
-        if(savedInstanceState != null){
-            ListMovies=savedInstanceState.getParcelableArrayList(STATE_MOVIE);
+        if (savedInstanceState != null) {
+            ListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIE);
             adapter.setMoviesList(ListMovies);
-        }
-        else {
+        } else {
             sendJsonRequest();
         }
 
@@ -102,20 +102,20 @@ public class FragmentPopular extends Fragment implements PopularAdapter.ClickLis
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(STATE_MOVIE,ListMovies);
+        outState.putParcelableArrayList(STATE_MOVIE, ListMovies);
 
     }
 
-    private void sendJsonRequest(){
+    private void sendJsonRequest() {
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
-                TmdbUrls.MOVIE_BASE_URL+TmdbUrls.SORT_POPULAR+TmdbUrls.API_KEY,
+                TmdbUrls.MOVIE_BASE_URL + TmdbUrls.SORT_POPULAR + TmdbUrls.API_KEY,
                 null
                 , new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    ListMovies =parseJSONResponse(response);
+                    ListMovies = parseJSONResponse(response);
                     adapter.setMoviesList(ListMovies);
 
                 } catch (JSONException e) {
@@ -156,7 +156,6 @@ public class FragmentPopular extends Fragment implements PopularAdapter.ClickLis
 
         JSONArray results = response.getJSONArray(RESULTS);
 
-        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < results.length(); i++) {
 
             Movie current = new Movie();
@@ -176,11 +175,8 @@ public class FragmentPopular extends Fragment implements PopularAdapter.ClickLis
             current.setmTitle(jsonObject.getString(TITLE));
             current.setmAdult(jsonObject.getString(ADULT));
 
-            builder.append("Adult "+jsonObject.getString(ADULT) +"\n" );
-
             data.add(current);
         }
-        Toast.makeText(getActivity(),builder,Toast.LENGTH_LONG).show();
         return data;
 
     }
@@ -188,8 +184,8 @@ public class FragmentPopular extends Fragment implements PopularAdapter.ClickLis
 
     @Override
     public void itemClicked(View view, int position) {
-        Movie mvs =ListMovies.get(position);
-        Intent intent =new Intent(getActivity(), MovieDetailsActivity.class);
+        Movie mvs = ListMovies.get(position);
+        Intent intent = new Intent(getActivity(), MovieDetailsActivity.class);
         intent.putExtra("Movie", mvs);
         startActivity(intent);
 
