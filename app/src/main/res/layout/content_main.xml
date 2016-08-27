@@ -21,7 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <comnikhil_31.httpsgithub.cinestine.tabs.SlidingTabLayout
+    <in.nikhil.cinestine.tabs.SlidingTabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

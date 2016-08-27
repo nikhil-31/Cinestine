@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="comnikhil_31.httpsgithub.cinestine">
+    package="in.nikhil.cinestine">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

@@ -1,4 +1,4 @@
-package comnikhil_31.httpsgithub.cinestine.tabs;
+package in.nikhil.cinestine.tabs;
 
 /**
  * Created by nikhil on 20-08-2016.

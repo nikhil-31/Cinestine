@@ -1,4 +1,4 @@
-package comnikhil_31.httpsgithub.cinestine.Network;
+package in.nikhil.cinestine.Network;
 
 import android.app.Application;
 import android.content.Context;

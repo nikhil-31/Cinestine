@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="comnikhil_31.httpsgithub.cinestine.Fragments.FragmentFavourities">
+    tools:context="in.nikhil.cinestine.Fragments.FragmentFavourities">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

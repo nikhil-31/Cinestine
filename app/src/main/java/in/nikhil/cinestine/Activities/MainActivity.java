@@ -1,8 +1,5 @@
-package comnikhil_31.httpsgithub.cinestine.Activities;
+package in.nikhil.cinestine.Activities;
 
-import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -14,11 +11,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-import comnikhil_31.httpsgithub.cinestine.Fragments.FragmentFavourities;
-import comnikhil_31.httpsgithub.cinestine.Fragments.FragmentPopular;
-import comnikhil_31.httpsgithub.cinestine.Fragments.FragmentTopRated;
-import comnikhil_31.httpsgithub.cinestine.R;
-import comnikhil_31.httpsgithub.cinestine.tabs.SlidingTabLayout;
+import in.nikhil.cinestine.Fragments.FragmentFavourities;
+import in.nikhil.cinestine.Fragments.FragmentPopular;
+import in.nikhil.cinestine.Fragments.FragmentTopRated;
+import in.nikhil.cinestine.R;
+import in.nikhil.cinestine.tabs.SlidingTabLayout;
 
 public class MainActivity extends AppCompatActivity {
 

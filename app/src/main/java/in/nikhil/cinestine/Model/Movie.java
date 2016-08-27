@@ -1,4 +1,4 @@
-package comnikhil_31.httpsgithub.cinestine.Model;
+package in.nikhil.cinestine.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -74,17 +74,18 @@ public class Movie implements Parcelable {
     public String getReleaseDate() {
         return mReleaseDate;
     }
+
     //Just to return data
     @Override
     public String toString() {
-        return "Title"+mOriginalTitle+
-                "Poster Path"+mPosterPath+
-                "overview"+mOverview;
+        return "Title" + mOriginalTitle +
+                "Poster Path" + mPosterPath +
+                "overview" + mOverview;
     }
 
     @Override
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package comnikhil_31.httpsgithub.cinestine.Adapters;
+package in.nikhil.cinestine.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +12,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import comnikhil_31.httpsgithub.cinestine.Model.Movie;
-import comnikhil_31.httpsgithub.cinestine.R;
+import in.nikhil.cinestine.Model.Movie;
+import in.nikhil.cinestine.R;
 
 /**
  * Created by nikhil on 20-08-2016.

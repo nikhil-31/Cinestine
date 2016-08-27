@@ -1,4 +1,4 @@
-package comnikhil_31.httpsgithub.cinestine;
+package in.nikhil.cinestine;
 
 import org.junit.Test;
 

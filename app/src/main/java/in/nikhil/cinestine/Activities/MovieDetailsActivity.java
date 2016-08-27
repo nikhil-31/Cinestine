@@ -1,4 +1,4 @@
-package comnikhil_31.httpsgithub.cinestine.Activities;
+package in.nikhil.cinestine.Activities;
 
 import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import comnikhil_31.httpsgithub.cinestine.Model.Movie;
-import comnikhil_31.httpsgithub.cinestine.R;
+import in.nikhil.cinestine.Model.Movie;
+import in.nikhil.cinestine.R;
 
 public class MovieDetailsActivity extends AppCompatActivity {
 

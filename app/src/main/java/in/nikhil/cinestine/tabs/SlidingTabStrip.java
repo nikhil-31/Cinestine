@@ -1,4 +1,4 @@
-package comnikhil_31.httpsgithub.cinestine.tabs;
+package in.nikhil.cinestine.tabs;
 
 import android.content.Context;
 import android.graphics.Canvas;

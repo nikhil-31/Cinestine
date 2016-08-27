@@ -1,4 +1,4 @@
-package comnikhil_31.httpsgithub.cinestine.Network;
+package in.nikhil.cinestine.Network;
 
 /**
  * Created by nikhil on 20-08-2016.

@@ -1,4 +1,4 @@
-package comnikhil_31.httpsgithub.cinestine.Fragments;
+package in.nikhil.cinestine.Fragments;
 
 
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import comnikhil_31.httpsgithub.cinestine.R;
+import in.nikhil.cinestine.R;
 
 public class FragmentFavourities extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
