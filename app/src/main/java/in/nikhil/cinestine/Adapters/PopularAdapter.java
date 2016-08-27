@@ -7,11 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
-
 import in.nikhil.cinestine.Model.Movie;
 import in.nikhil.cinestine.R;
 
@@ -76,7 +73,6 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
 
         @Override
         public void onClick(View v) {
-
 
             if (clickListener !=null){
                 clickListener.itemClicked(v,getAdapterPosition());

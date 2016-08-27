@@ -1,5 +1,7 @@
 package in.nikhil.cinestine.Model;
 
+import in.nikhil.cinestine.Extras.TmdbUrls;
+
 /**
  * Created by nikhil on 27-08-2016.
  */
@@ -29,7 +31,7 @@ public class Trailer {
     }
 
     public String getKey() {
-        return key;
+        return TmdbUrls.YOUTUBE_THUMB+key+TmdbUrls.YOUTUBE_MEDIUM_QUALITY;
     }
 
     public void setName(String Name) {

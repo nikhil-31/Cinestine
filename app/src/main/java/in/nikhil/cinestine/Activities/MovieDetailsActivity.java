@@ -1,14 +1,19 @@
 package in.nikhil.cinestine.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import in.nikhil.cinestine.Adapters.TrailerAdapter;
 import in.nikhil.cinestine.Extras.TmdbUrls;
 import in.nikhil.cinestine.Model.Movie;
 import in.nikhil.cinestine.Model.Review;
@@ -40,6 +46,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private ImageLoader imageLoader;
     private RequestQueue requestQueue;
     Movie movie;
+
+    private TrailerAdapter trailerAdapter;
 
     private ArrayList<Trailer> trailersArrayList = new ArrayList<Trailer>();
     private ArrayList<Review> reviewArrayList = new ArrayList<Review>();
@@ -70,6 +78,13 @@ public class MovieDetailsActivity extends AppCompatActivity {
             }
         });
 
+        trailerAdapter = new TrailerAdapter(this);
+
+        RecyclerView recyclertrailer = (RecyclerView) findViewById(R.id.recycler_trailer);
+        LinearLayoutManager layoutManagertrailer = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclertrailer.setLayoutManager(layoutManagertrailer);
+        recyclertrailer.setAdapter(trailerAdapter);
+
 
         ImageView poster = (ImageView) findViewById(R.id.poster_details);
         TextView releaseDate = (TextView) findViewById(R.id.Release_write);
@@ -99,7 +114,9 @@ public class MovieDetailsActivity extends AppCompatActivity {
         sendTrailerJsonRequest();
         sendReviewJsonRequest();
 
+
     }
+
 
     private void sendTrailerJsonRequest() {
 
@@ -111,7 +128,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     trailersArrayList = parseTrailerJSONResponse(response);
-//                    adapter.setMoviesList(ListMovies);
+                    trailerAdapter.setTrailerList(trailersArrayList);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -170,6 +187,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         return data;
 
     }
+
     private void sendReviewJsonRequest() {
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
@@ -189,7 +207,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(getActivity(), "Error", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Error getting reviews", Toast.LENGTH_LONG).show();
             }
         });
         requestQueue.add(request);
@@ -222,7 +240,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
             current.setContent(jsonObject.optString(CONTENT));
 
 
-            builder.append("AUTHOR " + jsonObject.optString(AUTHOR) +"CONTENT "+jsonObject.optString(CONTENT)+  "\n");
+            builder.append("AUTHOR " + jsonObject.optString(AUTHOR) + "CONTENT " + jsonObject.optString(CONTENT) + "\n");
             data.add(current);
         }
         Toast.makeText(getApplicationContext(), builder, Toast.LENGTH_LONG).show();
@@ -230,8 +248,6 @@ public class MovieDetailsActivity extends AppCompatActivity {
         return data;
 
     }
-
-
 
 
 }
