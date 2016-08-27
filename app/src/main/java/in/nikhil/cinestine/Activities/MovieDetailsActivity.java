@@ -28,6 +28,7 @@ import java.util.ArrayList;
 
 import in.nikhil.cinestine.Extras.TmdbUrls;
 import in.nikhil.cinestine.Model.Movie;
+import in.nikhil.cinestine.Model.Review;
 import in.nikhil.cinestine.Model.Trailer;
 import in.nikhil.cinestine.Network.VolleySingleton;
 import in.nikhil.cinestine.R;
@@ -41,6 +42,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     Movie movie;
 
     private ArrayList<Trailer> trailersArrayList = new ArrayList<Trailer>();
+    private ArrayList<Review> reviewArrayList = new ArrayList<Review>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,11 +96,12 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         volleySingleton = volleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
+        sendTrailerJsonRequest();
         sendReviewJsonRequest();
 
     }
 
-    private void sendReviewJsonRequest() {
+    private void sendTrailerJsonRequest() {
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
                 TmdbUrls.MOVIE_BASE_URL + movie.getmId() + TmdbUrls.TRAILERS + TmdbUrls.API_KEY,
@@ -162,11 +165,73 @@ public class MovieDetailsActivity extends AppCompatActivity {
             builder.append("Name " + jsonObject.optString(NAME) + "\n");
             data.add(current);
         }
+
+
+        return data;
+
+    }
+    private void sendReviewJsonRequest() {
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
+                TmdbUrls.MOVIE_BASE_URL + movie.getmId() + TmdbUrls.REVIEWS + TmdbUrls.API_KEY,
+                null
+                , new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    reviewArrayList = parseReviewJSONResponse(response);
+//                    adapter.setMoviesList(ListMovies);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(getActivity(), "Error", Toast.LENGTH_LONG).show();
+            }
+        });
+        requestQueue.add(request);
+
+    }
+
+    public ArrayList<Review> parseReviewJSONResponse(JSONObject response) throws JSONException {
+
+        final String RESULTS = "results";
+        final String ID = "id";
+        final String AUTHOR = "author";
+        final String CONTENT = "content";
+
+        ArrayList<Review> data = new ArrayList<Review>();
+
+        if (response == null || response.length() == 0) {
+            return data;
+        }
+
+        JSONArray results = response.getJSONArray(RESULTS);
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < results.length(); i++) {
+
+            Review current = new Review();
+
+            JSONObject jsonObject = results.getJSONObject(i);
+
+            current.setId(jsonObject.optString(ID));
+            current.setAuthor(jsonObject.optString(AUTHOR));
+            current.setContent(jsonObject.optString(CONTENT));
+
+
+            builder.append("AUTHOR " + jsonObject.optString(AUTHOR) +"CONTENT "+jsonObject.optString(CONTENT)+  "\n");
+            data.add(current);
+        }
         Toast.makeText(getApplicationContext(), builder, Toast.LENGTH_LONG).show();
 
         return data;
 
     }
+
+
 
 
 }

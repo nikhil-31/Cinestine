@@ -11,6 +11,7 @@ public class TmdbUrls {
     public static String SORT_TOP_RATED="top_rated?";
     public static String API_KEY = "api_key=609bbb466b647591bcd182c19afd5a2d";
     public static String TRAILERS = "/videos?";
+    public static String REVIEWS = "/reviews?";
     public static String SORT_POPULARITY = "&sort_by=popularity.desc";
     public static String SORT_R_RATED = "&certification_country=US&certification=R&sort_by=vote_average.desc&vote_count.gte=250";
     public static String YOUTUBE_URL = "http://www.youtube.com/watch?v=";
