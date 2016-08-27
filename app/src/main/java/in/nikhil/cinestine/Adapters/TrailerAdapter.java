@@ -1,6 +1,8 @@
 package in.nikhil.cinestine.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import in.nikhil.cinestine.Extras.TmdbUrls;
 import in.nikhil.cinestine.Model.Trailer;
 import in.nikhil.cinestine.R;
 
@@ -45,11 +49,20 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Trailer current = trailers.get(position);
+        final Trailer current = trailers.get(position);
+
         Picasso.with(context)
                 .load(current.getKey())
                 .into(holder.imageView);
         holder.textView.setText(current.getName());
+
+        holder.imageView.setOnClickListener(new ImageView.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(current.getTrailer() ));
+                context.startActivity(intent);
+            }
+        });
 
     }
 
