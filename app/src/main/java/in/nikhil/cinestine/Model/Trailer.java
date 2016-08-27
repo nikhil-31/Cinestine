@@ -1,0 +1,81 @@
+package in.nikhil.cinestine.Model;
+
+/**
+ * Created by nikhil on 27-08-2016.
+ */
+public class Trailer {
+    String id;
+    String key;
+    String name;
+    String site;
+    String size;
+    String type;
+    String language;
+    String country;
+
+    public Trailer() {
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setKey(String Key) {
+        key = Key;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setName(String Name) {
+        name = Name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setSite(String Site) {
+        site = Site;
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSize(String Size) {
+        size = Size;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setType(String Type) {
+        type = Type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setLanguage(String Language){
+        language = Language;
+    }
+
+    public String getLanguage(){
+        return language;
+    }
+
+    public void setCountry(String Country){
+        country = Country;
+    }
+    public String getCountry(){
+        return country;
+    }
+}

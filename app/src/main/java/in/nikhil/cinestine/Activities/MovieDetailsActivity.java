@@ -10,20 +10,45 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import in.nikhil.cinestine.Extras.TmdbUrls;
 import in.nikhil.cinestine.Model.Movie;
+import in.nikhil.cinestine.Model.Trailer;
+import in.nikhil.cinestine.Network.VolleySingleton;
 import in.nikhil.cinestine.R;
 
 public class MovieDetailsActivity extends AppCompatActivity {
+
+
+    private VolleySingleton volleySingleton;
+    private ImageLoader imageLoader;
+    private RequestQueue requestQueue;
+    Movie movie;
+
+    private ArrayList<Trailer> trailersArrayList = new ArrayList<Trailer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
         Intent intent = getIntent();
-        final Movie movie = intent.getParcelableExtra("Movie");
+        movie = intent.getParcelableExtra("Movie");
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -67,7 +92,82 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         overview.setText(movie.getOverview());
 
+        volleySingleton = volleySingleton.getInstance();
+        requestQueue = volleySingleton.getRequestQueue();
+        sendReviewJsonRequest();
 
     }
+
+    private void sendReviewJsonRequest() {
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
+                TmdbUrls.MOVIE_BASE_URL + movie.getmId() + TmdbUrls.TRAILERS + TmdbUrls.API_KEY,
+                null
+                , new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    trailersArrayList = parseTrailerJSONResponse(response);
+//                    adapter.setMoviesList(ListMovies);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(getActivity(), "Error", Toast.LENGTH_LONG).show();
+            }
+        });
+        requestQueue.add(request);
+
+    }
+
+    public ArrayList<Trailer> parseTrailerJSONResponse(JSONObject response) throws JSONException {
+
+        final String RESULTS = "results";
+        final String ID = "id";
+        final String KEY = "key";
+        final String NAME = "name";
+        final String SITE = "site";
+        final String SIZE = "size";
+        final String TYPE = "type";
+        final String LANGUAGE = "iso_639_1";
+        final String COUNTRY = "iso_3166_1";
+
+        ArrayList<Trailer> data = new ArrayList<Trailer>();
+
+        if (response == null || response.length() == 0) {
+            return data;
+        }
+
+        JSONArray results = response.getJSONArray(RESULTS);
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < results.length(); i++) {
+
+            Trailer current = new Trailer();
+
+            JSONObject jsonObject = results.getJSONObject(i);
+
+            current.setId(jsonObject.optString(ID));
+            current.setKey(jsonObject.optString(KEY));
+            current.setName(jsonObject.optString(NAME));
+            current.setSite(jsonObject.optString(SITE));
+            current.setSize(jsonObject.getString(SIZE));
+            current.setType(jsonObject.optString(TYPE));
+            current.setLanguage(jsonObject.getString(LANGUAGE));
+            current.setCountry(jsonObject.getString(COUNTRY));
+
+            builder.append("Name " + jsonObject.optString(NAME) + "\n");
+            data.add(current);
+        }
+        Toast.makeText(getApplicationContext(), builder, Toast.LENGTH_LONG).show();
+
+        return data;
+
+    }
+
+
 }
 

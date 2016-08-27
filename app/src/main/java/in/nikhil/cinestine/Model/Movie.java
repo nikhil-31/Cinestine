@@ -25,35 +25,35 @@ public class Movie implements Parcelable {
 
     }
 
-    public void setmAdult(String adult){
+    public void setmAdult(String adult) {
         mAdult = adult;
     }
 
-    public String getmAdult(){
+    public String getmAdult() {
         return mAdult;
     }
 
-    public void setmTitle(String Title){
+    public void setmTitle(String Title) {
         mTitle = Title;
     }
 
-    public String getmTitle(){
+    public String getmTitle() {
         return mTitle;
     }
 
-    public void setmOriginalLanguage(String language){
+    public void setmOriginalLanguage(String language) {
         mOriginalLanguage = language;
     }
 
-    public String getmOriginalLanguage(){
+    public String getmOriginalLanguage() {
         return mOriginalLanguage;
     }
 
-    public void setmVoteCount(String voteCount){
+    public void setmVoteCount(String voteCount) {
         mVoteCount = voteCount;
     }
 
-    public String getmVoteCount(){
+    public String getmVoteCount() {
         return mVoteCount;
     }
 
@@ -61,7 +61,7 @@ public class Movie implements Parcelable {
         mPopularity = popularity;
     }
 
-    public String getmPopularity(){
+    public String getmPopularity() {
         return mPopularity;
     }
 
