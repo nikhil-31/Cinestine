@@ -141,6 +141,7 @@ public class FragmentPopular extends Fragment implements PopularAdapter.ClickLis
         final String RELEASE_DATE = "release_date";
         final String BACKDROP_PATH = "backdrop_path";
         final String VOTE_AVERAGE = "vote_average";
+        final String ID = "id";
 
         ArrayList<Movie> data = new ArrayList<Movie>();
 
@@ -150,7 +151,7 @@ public class FragmentPopular extends Fragment implements PopularAdapter.ClickLis
 
         JSONArray results = response.getJSONArray(RESULTS);
 
-
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < results.length(); i++) {
 
             Movie current = new Movie();
@@ -163,10 +164,13 @@ public class FragmentPopular extends Fragment implements PopularAdapter.ClickLis
             current.setReleaseDate(jsonObject.optString(RELEASE_DATE));
             current.setVoteAverage(Float.parseFloat(jsonObject.optString(VOTE_AVERAGE)));
             current.setBackdrop(jsonObject.optString(BACKDROP_PATH));
+            current.setmId(jsonObject.getString(ID));
+
+            builder.append("id "+ jsonObject.getString(ID)+ "\n" );
 
             data.add(current);
         }
-
+        Toast.makeText(getActivity(),builder,Toast.LENGTH_LONG).show();
         return data;
 
     }

@@ -13,9 +13,18 @@ public class Movie implements Parcelable {
     private Float mVoteAverage;
     private String mReleaseDate;
     private String mBackdrop;
+    private String mId;
 
     public Movie() {
 
+    }
+
+    public void setmId(String id){
+        mId = id;
+    }
+
+    public String getmId(){
+        return mId;
     }
 
     public void setOriginalTitle(String originalTitle) {
@@ -96,6 +105,7 @@ public class Movie implements Parcelable {
         dest.writeValue(mVoteAverage);
         dest.writeString(mReleaseDate);
         dest.writeString(mBackdrop);
+        dest.writeString(mId);
 
     }
 
@@ -106,6 +116,7 @@ public class Movie implements Parcelable {
         mVoteAverage = (Float) in.readValue(Double.class.getClassLoader());
         mReleaseDate = in.readString();
         mBackdrop = in.readString();
+        mId = in.readString();
     }
 
 
