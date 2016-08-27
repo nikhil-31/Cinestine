@@ -243,7 +243,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
             builder.append("AUTHOR " + jsonObject.optString(AUTHOR) + "CONTENT " + jsonObject.optString(CONTENT) + "\n");
             data.add(current);
         }
-        Toast.makeText(getApplicationContext(), builder, Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), builder, Toast.LENGTH_LONG).show();
 
         return data;
 
