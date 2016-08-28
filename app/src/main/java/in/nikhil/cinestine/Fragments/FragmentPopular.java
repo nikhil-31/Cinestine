@@ -90,16 +90,6 @@ public class FragmentPopular extends Fragment implements PopularAdapter.ClickLis
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         listMovieHits.setLayoutManager(gridLayoutManager);
 
-        adapter = new PopularAdapter(getActivity());
-        adapter.setClickListener(this);
-        listMovieHits.setAdapter(adapter);
-        if (savedInstanceState != null) {
-            ListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIE);
-            adapter.setMoviesList(ListMovies);
-        } else {
-            sendJsonRequest(1);
-        }
-
 
         listMovieHits.addOnScrollListener(new EndlessRecyclerViewScrollListener(gridLayoutManager) {
             @Override
@@ -113,6 +103,16 @@ public class FragmentPopular extends Fragment implements PopularAdapter.ClickLis
 
             }
         });
+
+        adapter = new PopularAdapter(getActivity());
+        adapter.setClickListener(this);
+        listMovieHits.setAdapter(adapter);
+        if (savedInstanceState != null) {
+            ListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIE);
+            adapter.setMoviesList(ListMovies);
+        } else {
+            sendJsonRequest(1);
+        }
 
 
         return view;
@@ -134,8 +134,9 @@ public class FragmentPopular extends Fragment implements PopularAdapter.ClickLis
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    ListMovies = parseJSONResponse(response);
+                    ListMovies.addAll(parseJSONResponse(response));
                     adapter.setMoviesList(ListMovies);
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
