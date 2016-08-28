@@ -2,6 +2,7 @@ package in.nikhil.cinestine.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 
 import in.nikhil.cinestine.Activities.MovieDetailsActivity;
 import in.nikhil.cinestine.Adapters.PopularAdapter;
+import in.nikhil.cinestine.Extras.EndlessRecyclerViewScrollListener;
 import in.nikhil.cinestine.Extras.TmdbUrls;
 import in.nikhil.cinestine.Model.Movie;
 import in.nikhil.cinestine.Network.VolleySingleton;
@@ -79,7 +81,24 @@ public class FragmentTopRated extends Fragment implements PopularAdapter.ClickLi
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_top_rated, container, false);
         listMovieHits = (RecyclerView) view.findViewById(R.id.recycler_top_rated);
-        listMovieHits.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        listMovieHits.setLayoutManager(gridLayoutManager);
+
+        listMovieHits.addOnScrollListener(new EndlessRecyclerViewScrollListener(gridLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                sendJsonRequest(page);
+                Snackbar.make(listMovieHits, "Loading page " + page, Snackbar.LENGTH_LONG)
+                        .show();
+
+
+            }
+        });
+
+
+
         adapter = new PopularAdapter(getActivity());
         adapter.setClickListener(this);
         listMovieHits.setAdapter(adapter);
@@ -87,7 +106,7 @@ public class FragmentTopRated extends Fragment implements PopularAdapter.ClickLi
             ListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIE);
             adapter.setMoviesList(ListMovies);
         } else {
-            sendJsonRequest();
+            sendJsonRequest(1);
         }
         return view;
     }
@@ -98,17 +117,17 @@ public class FragmentTopRated extends Fragment implements PopularAdapter.ClickLi
         outState.putParcelableArrayList(STATE_MOVIE, ListMovies);
     }
 
-    private void sendJsonRequest() {
+    private void sendJsonRequest(int page) {
 
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
-                TmdbUrls.MOVIE_BASE_URL + TmdbUrls.SORT_TOP_RATED + TmdbUrls.API_KEY,
+                TmdbUrls.MOVIE_BASE_URL + TmdbUrls.SORT_TOP_RATED + TmdbUrls.API_KEY+ TmdbUrls.PAGE + page,
                 null
                 , new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    ListMovies = parseJSONResponse(response);
+                    ListMovies.addAll(parseJSONResponse(response));
                     adapter.setMoviesList(ListMovies);
 
                 } catch (JSONException e) {
