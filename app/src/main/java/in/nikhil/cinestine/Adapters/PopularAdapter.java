@@ -28,7 +28,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
     }
 
     public void setMoviesList(ArrayList<Movie> listmovies) {
-        this.mMovie = listmovies;
+        mMovie.addAll(listmovies);
         notifyItemRangeChanged(0, listmovies.size());
     }
 

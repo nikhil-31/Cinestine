@@ -11,6 +11,7 @@ public class TmdbUrls {
     public static String API_KEY = "api_key=609bbb466b647591bcd182c19afd5a2d";
     public static String TRAILERS = "/videos?";
     public static String REVIEWS = "/reviews?";
+    public static String PAGE = "&page=";
     public static String YOUTUBE_URL = "http://www.youtube.com/watch?v=";
     public static String YOUTUBE_THUMB = "http://img.youtube.com/vi/";
     public static String YOUTUBE_MEDIUM_QUALITY = "/mqdefault.jpg";
