@@ -95,7 +95,6 @@ public class MovieDetailsActivity extends AppCompatActivity {
         recyclerReview.setAdapter(reviewAdapter);
 
 
-
         ImageView poster = (ImageView) findViewById(R.id.poster_details);
         TextView releaseDate = (TextView) findViewById(R.id.Release_write);
         TextView rating = (TextView) findViewById(R.id.Rating_write);
