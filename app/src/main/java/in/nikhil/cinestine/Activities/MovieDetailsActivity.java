@@ -42,11 +42,11 @@ import in.nikhil.cinestine.R;
 
 public class MovieDetailsActivity extends AppCompatActivity {
 
-
+    Movie movie;
     private VolleySingleton volleySingleton;
     private ImageLoader imageLoader;
     private RequestQueue requestQueue;
-    Movie movie;
+
 
     private TrailerAdapter trailerAdapter;
     private ReviewAdapter reviewAdapter;
