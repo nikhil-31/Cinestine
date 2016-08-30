@@ -13,6 +13,7 @@
         <item>TAB 5</item>
         <item>TAB 6</item>
     </string-array>
+    <string name="title_activity_details">DetailsActivity</string>
 
 
 </resources>

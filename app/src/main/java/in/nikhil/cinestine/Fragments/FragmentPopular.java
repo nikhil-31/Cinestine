@@ -24,6 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import in.nikhil.cinestine.Activities.DetailsActivity;
 import in.nikhil.cinestine.Activities.MovieDetailsActivity;
 import in.nikhil.cinestine.Adapters.PopularAdapter;
 import in.nikhil.cinestine.Extras.EndlessRecyclerViewScrollListener;
@@ -205,7 +206,8 @@ public class FragmentPopular extends Fragment implements PopularAdapter.ClickLis
     @Override
     public void itemClicked(View view, int position) {
         Movie mvs = ListMovies.get(position);
-        Intent intent = new Intent(getActivity(), MovieDetailsActivity.class);
+
+        Intent intent = new Intent(getActivity(), DetailsActivity.class);
         intent.putExtra("Movie", mvs);
         startActivity(intent);
 
