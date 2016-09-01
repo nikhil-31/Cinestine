@@ -3,11 +3,19 @@ package in.nikhil.cinestine.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import in.nikhil.cinestine.Adapters.FavouriteAdapter;
+import in.nikhil.cinestine.Data.Favourite;
 import in.nikhil.cinestine.R;
+import io.realm.Realm;
+import io.realm.RealmChangeListener;
+import io.realm.RealmResults;
 
 public class FragmentFavourities extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -19,6 +27,11 @@ public class FragmentFavourities extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private RecyclerView mRecyclerView;
+
+    Realm mRealm;
+    RealmResults<Favourite> results;
+    private FavouriteAdapter mAdapter;
 
     public FragmentFavourities() {
         // Required empty public constructor
@@ -47,7 +60,39 @@ public class FragmentFavourities extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favourities, container, false);
+        View v=  inflater.inflate(R.layout.fragment_favourities, container, false);
+
+        mRecyclerView = (RecyclerView) v.findViewById(R.id.recycler_favourite);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        mRecyclerView.setLayoutManager(gridLayoutManager);
+
+        mRealm = Realm.getDefaultInstance();
+        results =mRealm.where(Favourite.class).findAllAsync();
+        mAdapter = new FavouriteAdapter(getActivity(),results);
+        mRecyclerView.setAdapter(mAdapter);
+
+        return v;
     }
 
+    private RealmChangeListener realmChangeListener = new RealmChangeListener() {
+        @Override
+        public void onChange() {
+            Log.v("Listener", " wut ");
+            mAdapter.update(results);
+
+        }
+    };
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        results.addChangeListener(realmChangeListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        results.removeChangeListener(realmChangeListener);
+    }
 }

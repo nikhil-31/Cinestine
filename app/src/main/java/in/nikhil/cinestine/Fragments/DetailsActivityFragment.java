@@ -32,12 +32,15 @@ import java.util.ArrayList;
 
 import in.nikhil.cinestine.Adapters.ReviewAdapter;
 import in.nikhil.cinestine.Adapters.TrailerAdapter;
+import in.nikhil.cinestine.Data.Favourite;
 import in.nikhil.cinestine.Extras.TmdbUrls;
 import in.nikhil.cinestine.Model.Movie;
 import in.nikhil.cinestine.Model.Review;
 import in.nikhil.cinestine.Model.Trailer;
 import in.nikhil.cinestine.Network.VolleySingleton;
 import in.nikhil.cinestine.R;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 
 /**
@@ -47,11 +50,11 @@ public class DetailsActivityFragment extends Fragment {
 
     public DetailsActivityFragment() {
     }
+
     Movie movie;
     Toolbar toolbar;
 
     private VolleySingleton volleySingleton;
-    private ImageLoader imageLoader;
     private RequestQueue requestQueue;
 
 
@@ -61,38 +64,39 @@ public class DetailsActivityFragment extends Fragment {
     private ArrayList<Trailer> trailersArrayList = new ArrayList<Trailer>();
     private ArrayList<Review> reviewArrayList = new ArrayList<Review>();
 
-
+    Realm mRealm;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v=  inflater.inflate(R.layout.fragment_details, container, false);
+        View v = inflater.inflate(R.layout.fragment_details, container, false);
 
         movie = getActivity().getIntent().getParcelableExtra("Movie");
 
         toolbar = (Toolbar) v.findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.mipmap.ic_back));
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().finish();
             }
         });
-
         toolbar.inflateMenu(R.menu.menu_details);
 
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) v.findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(movie.getOriginalTitle());
         collapsingToolbar.setExpandedTitleColor(getResources().getColor(R.color.transperent));
+
+
         FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Will favourite this movie", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Movie Saved", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                addMovie();
             }
         });
 
@@ -111,15 +115,12 @@ public class DetailsActivityFragment extends Fragment {
         recyclerReview.setAdapter(reviewAdapter);
 
 
-
-
         ImageView poster = (ImageView) v.findViewById(R.id.poster_details);
         TextView releaseDate = (TextView) v.findViewById(R.id.Release_write);
         TextView rating = (TextView) v.findViewById(R.id.Rating_write);
         TextView title = (TextView) v.findViewById(R.id.Title_write);
         TextView overview = (TextView) v.findViewById(R.id.overview_new);
         ImageView backdrop = (ImageView) v.findViewById(R.id.backdrop1);
-
 
 
         Picasso.with(getActivity())
@@ -144,6 +145,27 @@ public class DetailsActivityFragment extends Fragment {
         sendReviewJsonRequest();
 
         return v;
+    }
+
+    private void addMovie() {
+        Realm realm = Realm.getDefaultInstance();
+        Favourite favourite = new Favourite(movie.getOriginalTitle(),
+                movie.getPosterPath(),
+                movie.getOverview(),
+                movie.getVoteAverage(),
+                movie.getReleaseDate(),
+                movie.getBackdrop(),
+                movie.getmId(),
+                movie.getmPopularity(),
+                movie.getmVoteCount(),
+                movie.getmOriginalLanguage(),
+                movie.getmTitle(),
+                movie.getmAdult());
+        realm.beginTransaction();
+        realm.copyToRealm(favourite);
+        realm.commitTransaction();
+        realm.close();
+
     }
 
 

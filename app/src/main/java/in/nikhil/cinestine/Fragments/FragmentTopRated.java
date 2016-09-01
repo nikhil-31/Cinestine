@@ -24,6 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import in.nikhil.cinestine.Activities.DetailsActivity;
 import in.nikhil.cinestine.Activities.MovieDetailsActivity;
 import in.nikhil.cinestine.Adapters.PopularAdapter;
 import in.nikhil.cinestine.Extras.EndlessRecyclerViewScrollListener;
@@ -195,7 +196,8 @@ public class FragmentTopRated extends Fragment implements PopularAdapter.ClickLi
     @Override
     public void itemClicked(View view, int position) {
         Movie movieObject = ListMovies.get(position);
-        Intent intent = new Intent(getActivity(), MovieDetailsActivity.class);
+
+        Intent intent = new Intent(getActivity(), DetailsActivity.class);
         intent.putExtra("Movie", movieObject);
         startActivity(intent);
     }
