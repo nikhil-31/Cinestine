@@ -12,7 +12,7 @@ public class Favourite extends RealmObject {
     private String mOriginalTitle;
     private String mPosterPath;
     private String mOverview;
-    private String mVoteAverage;
+    private Float mVoteAverage;
     private String mReleaseDate;
     private String mBackdrop;
     @PrimaryKey
@@ -23,7 +23,7 @@ public class Favourite extends RealmObject {
     private String mTitle;
     private String mAdult;
 
-    public Favourite(String mOriginalTitle, String mPosterPath, String mOverview, String mVoteAverage, String mReleaseDate, String mBackdrop, String mId, String mPopularity, String mVoteCount, String mOriginalLanguage, String mTitle, String mAdult) {
+    public Favourite(String mOriginalTitle, String mPosterPath, String mOverview, Float mVoteAverage, String mReleaseDate, String mBackdrop, String mId, String mPopularity, String mVoteCount, String mOriginalLanguage, String mTitle, String mAdult) {
         this.mOriginalTitle = mOriginalTitle;
         this.mPosterPath = mPosterPath;
         this.mOverview = mOverview;
@@ -66,11 +66,11 @@ public class Favourite extends RealmObject {
         this.mOverview = mOverview;
     }
 
-    public String getmVoteAverage() {
+    public Float getmVoteAverage() {
         return mVoteAverage;
     }
 
-    public void setmVoteAverage(String mVoteAverage) {
+    public void setmVoteAverage(Float mVoteAverage) {
         this.mVoteAverage = mVoteAverage;
     }
 

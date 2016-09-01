@@ -121,9 +121,9 @@ public class Movie implements Parcelable {
 
     }
 
-    public String getVoteAverage() {
-        String rating = mVoteAverage + "/10";
-        return rating;
+    public Float getVoteAverage() {
+        return mVoteAverage;
+
     }
 
     public String getReleaseDate() {

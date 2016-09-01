@@ -20,7 +20,7 @@ import io.realm.RealmResults;
 public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavViewHolder> {
 
     private Context context;
-
+    private ClickListener clickListener;
     private LayoutInflater inflater;
     private RealmResults<Favourite> mItems;
 
@@ -58,15 +58,30 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavV
         return mItems.size();
     }
 
-    public class FavViewHolder extends RecyclerView.ViewHolder{
+    public class FavViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView image;
         TextView text;
         public FavViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.popular_image);
             text = (TextView) itemView.findViewById(R.id.popular_text);
+            itemView.setOnClickListener(this);
 
 
         }
+
+        @Override
+        public void onClick(View v) {
+            if (clickListener !=null){
+                clickListener.itemClicked(v,getAdapterPosition());
+            }
+        }
+    }
+    public void setClickListener(ClickListener clickListener){
+        this.clickListener = clickListener;
+    }
+
+    public interface ClickListener{
+        void itemClicked(View view,int position);
     }
 }

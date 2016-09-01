@@ -1,6 +1,7 @@
 package in.nikhil.cinestine.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,14 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import in.nikhil.cinestine.Activities.DetailsActivity;
 import in.nikhil.cinestine.Adapters.FavouriteAdapter;
 import in.nikhil.cinestine.Data.Favourite;
+import in.nikhil.cinestine.Model.Movie;
 import in.nikhil.cinestine.R;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 
-public class FragmentFavourities extends Fragment {
+public class FragmentFavourities extends Fragment implements FavouriteAdapter.ClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -60,15 +63,16 @@ public class FragmentFavourities extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v=  inflater.inflate(R.layout.fragment_favourities, container, false);
+        View v = inflater.inflate(R.layout.fragment_favourities, container, false);
 
         mRecyclerView = (RecyclerView) v.findViewById(R.id.recycler_favourite);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         mRecyclerView.setLayoutManager(gridLayoutManager);
 
         mRealm = Realm.getDefaultInstance();
-        results =mRealm.where(Favourite.class).findAllAsync();
-        mAdapter = new FavouriteAdapter(getActivity(),results);
+        results = mRealm.where(Favourite.class).findAllAsync();
+        mAdapter = new FavouriteAdapter(getActivity(), results);
+        mAdapter.setClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
 
         return v;
@@ -94,5 +98,29 @@ public class FragmentFavourities extends Fragment {
     public void onStop() {
         super.onStop();
         results.removeChangeListener(realmChangeListener);
+    }
+
+    @Override
+    public void itemClicked(View view, int position) {
+        Movie movie = new Movie();
+        Favourite fav = results.get(position);
+
+        movie.setOriginalTitle(fav.getmOriginalTitle());
+        movie.setPosterPath(fav.getmPosterPath());
+        movie.setOverview(fav.getmOverview());
+        movie.setVoteAverage(fav.getmVoteAverage());
+        movie.setReleaseDate(fav.getmReleaseDate());
+        movie.setBackdrop(fav.getmBackdrop());
+        movie.setmId(fav.getmId());
+        movie.setmPopularity(fav.getmPopularity());
+        movie.setmVoteCount(fav.getmVoteCount());
+        movie.setmOriginalLanguage(fav.getmOriginalLanguage());
+        movie.setmTitle(fav.getmTitle());
+        movie.setmAdult(fav.getmAdult());
+
+        Intent intent = new Intent(getActivity(), DetailsActivity.class);
+        intent.putExtra("Movie", movie);
+        startActivity(intent);
+
     }
 }

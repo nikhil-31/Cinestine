@@ -18,6 +18,8 @@ public class MyApplication extends Application {
         sInstance=this;
         RealmConfiguration configuration=new RealmConfiguration.Builder(this).build();
         Realm.setDefaultConfiguration(configuration);
+
+
     }
     public static MyApplication getsInstance(){
         return sInstance;

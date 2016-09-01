@@ -76,9 +76,9 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
         public void onClick(View v) {
 
             if (clickListener !=null){
-                clickListener.itemClicked(v,getAdapterPosition());
-            }
+            clickListener.itemClicked(v,getAdapterPosition());
         }
+    }
     }
     public void setClickListener(ClickListener clickListener){
         this.clickListener = clickListener;

@@ -133,7 +133,7 @@ public class DetailsActivityFragment extends Fragment {
 
         releaseDate.setText(movie.getReleaseDate());
 
-        rating.setText(movie.getVoteAverage());
+        rating.setText(movie.getVoteAverage().toString()+"/10");
 
         title.setText(movie.getOriginalTitle());
 
@@ -162,7 +162,7 @@ public class DetailsActivityFragment extends Fragment {
                 movie.getmTitle(),
                 movie.getmAdult());
         realm.beginTransaction();
-        realm.copyToRealm(favourite);
+        realm.copyToRealmOrUpdate(favourite);
         realm.commitTransaction();
         realm.close();
 
