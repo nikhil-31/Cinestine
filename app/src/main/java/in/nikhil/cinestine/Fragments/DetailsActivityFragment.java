@@ -99,6 +99,7 @@ public class DetailsActivityFragment extends Fragment {
                 addMovie();
             }
         });
+        fab.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.mipmap.ic_like));
 
         trailerAdapter = new TrailerAdapter(getActivity());
 
