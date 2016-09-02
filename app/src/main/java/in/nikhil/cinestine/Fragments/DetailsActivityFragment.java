@@ -137,11 +137,9 @@ public class DetailsActivityFragment extends Fragment {
         backdrop = (ImageView) v.findViewById(R.id.backdrop1);
 
 
-
         volleySingleton = volleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
         setData(movie);
-
 
 
         return v;
@@ -153,9 +151,7 @@ public class DetailsActivityFragment extends Fragment {
     }
 
 
-
-
-    public void setData(Movie movie){
+    public void setData(Movie movie) {
         try {
             collapsingToolbar.setTitle(movie.getOriginalTitle());
             Picasso.with(getActivity())
@@ -319,7 +315,7 @@ public class DetailsActivityFragment extends Fragment {
         }
 
         JSONArray results = response.getJSONArray(RESULTS);
-        StringBuilder builder = new StringBuilder();
+
         for (int i = 0; i < results.length(); i++) {
 
             Review current = new Review();
@@ -330,11 +326,9 @@ public class DetailsActivityFragment extends Fragment {
             current.setAuthor(jsonObject.optString(AUTHOR));
             current.setContent(jsonObject.optString(CONTENT));
 
-
-            builder.append("AUTHOR " + jsonObject.optString(AUTHOR) + "CONTENT " + jsonObject.optString(CONTENT) + "\n");
             data.add(current);
         }
-//        Toast.makeText(getApplicationContext(), builder, Toast.LENGTH_LONG).show();
+
 
         return data;
 
