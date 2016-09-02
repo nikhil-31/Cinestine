@@ -19,7 +19,7 @@
             android:name="in.nikhil.cinestine.Fragments.DetailsActivityFragment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.55"
+            android:layout_weight="0.70"
             tools:layout="@layout/fragment_details" />
 
     </LinearLayout>

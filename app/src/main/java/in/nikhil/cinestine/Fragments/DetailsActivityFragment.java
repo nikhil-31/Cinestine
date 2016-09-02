@@ -181,7 +181,7 @@ public class DetailsActivityFragment extends Fragment {
 
 
         } catch (NullPointerException e) {
-            Toast.makeText(getActivity(), "Nothing selected", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Please select a movie", Toast.LENGTH_LONG).show();
         }
 
     }

@@ -84,6 +84,7 @@ public class FragmentFavourities extends Fragment implements FavouriteAdapter.Cl
             Log.v("Listener", " Change in data ");
             mAdapter.update(results);
 
+
         }
     };
 

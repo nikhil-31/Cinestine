@@ -6,7 +6,7 @@
 
 
     <string-array name="tabs">
-        <item>MOST POPULAR</item>
+        <item>POPULAR</item>
         <item>TOP RATED</item>
         <item>FAVOURITES</item>
         <item>TAB 4</item>
