@@ -5,6 +5,7 @@ project. I have implemented recyclerview to display movies inside cardviews, mat
 
 # Add API key in the extras package, java class TmdbUrls
 
+Credits: This product uses the TMDb API but is not endorsed or certified by TMDb.
 
 Copyright 2016 Nikhil Bhaskar
 
