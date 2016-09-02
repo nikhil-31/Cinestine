@@ -1,5 +1,6 @@
 package in.nikhil.cinestine.Fragments;
 
+import android.graphics.Bitmap;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -65,6 +66,16 @@ public class DetailsActivityFragment extends Fragment {
     private ArrayList<Review> reviewArrayList = new ArrayList<Review>();
 
     Realm mRealm;
+    private String trailerURL;
+    private String reviewURL;
+
+    CollapsingToolbarLayout collapsingToolbar;
+    ImageView poster;
+    TextView releaseDate;
+    TextView rating;
+    TextView title;
+    TextView overview;
+    ImageView backdrop;
 
 
     @Override
@@ -73,6 +84,7 @@ public class DetailsActivityFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_details, container, false);
 
         movie = getActivity().getIntent().getParcelableExtra("Movie");
+
 
         toolbar = (Toolbar) v.findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.mipmap.ic_back));
@@ -84,9 +96,9 @@ public class DetailsActivityFragment extends Fragment {
         });
         toolbar.inflateMenu(R.menu.menu_details);
 
-        CollapsingToolbarLayout collapsingToolbar =
+        collapsingToolbar =
                 (CollapsingToolbarLayout) v.findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(movie.getOriginalTitle());
+
         collapsingToolbar.setExpandedTitleColor(getResources().getColor(R.color.transperent));
 
 
@@ -116,41 +128,65 @@ public class DetailsActivityFragment extends Fragment {
         recyclerReview.setAdapter(reviewAdapter);
 
 
-        ImageView poster = (ImageView) v.findViewById(R.id.poster_details);
-        TextView releaseDate = (TextView) v.findViewById(R.id.Release_write);
-        TextView rating = (TextView) v.findViewById(R.id.Rating_write);
-        TextView title = (TextView) v.findViewById(R.id.Title_write);
-        TextView overview = (TextView) v.findViewById(R.id.overview_new);
-        ImageView backdrop = (ImageView) v.findViewById(R.id.backdrop1);
+        poster = (ImageView) v.findViewById(R.id.poster_details);
+        releaseDate = (TextView) v.findViewById(R.id.Release_write);
+        rating = (TextView) v.findViewById(R.id.Rating_write);
+        title = (TextView) v.findViewById(R.id.Title_write);
+        overview = (TextView) v.findViewById(R.id.overview_new);
+        backdrop = (ImageView) v.findViewById(R.id.backdrop1);
 
 
-        Picasso.with(getActivity())
-                .load(movie.getPosterPath())
-                .into(poster);
-
-        Picasso.with(getActivity())
-                .load(movie.getBackdrop())
-                .into(backdrop);
-
-        releaseDate.setText(movie.getReleaseDate());
-
-        rating.setText(movie.getVoteAverage().toString()+"/10");
-
-        title.setText(movie.getOriginalTitle());
-
-        overview.setText(movie.getOverview());
-
+        setData(movie);
         volleySingleton = volleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
-        sendTrailerJsonRequest();
-        sendReviewJsonRequest();
+
+
 
         return v;
     }
 
+    public void updateContent(Movie movie) {
+        setData(movie);
+    }
+
+
+
+
+    public void setData(Movie movie){
+        try {
+            collapsingToolbar.setTitle(movie.getOriginalTitle());
+            Picasso.with(getActivity())
+                    .load(movie.getPosterPath())
+                    .into(poster);
+
+            Picasso.with(getActivity())
+                    .load(movie.getBackdrop())
+                    .into(backdrop);
+
+            releaseDate.setText(movie.getReleaseDate());
+
+            rating.setText(movie.getVoteAverage().toString() + "/10");
+
+            title.setText(movie.getOriginalTitle());
+
+            overview.setText(movie.getOverview());
+            trailerURL = TmdbUrls.MOVIE_BASE_URL + movie.getmId() + TmdbUrls.TRAILERS + TmdbUrls.API_KEY;
+            reviewURL = TmdbUrls.MOVIE_BASE_URL + movie.getmId() + TmdbUrls.REVIEWS + TmdbUrls.API_KEY;
+
+            sendTrailerJsonRequest(trailerURL);
+            sendReviewJsonRequest(reviewURL);
+
+
+        } catch (NullPointerException e) {
+            Toast.makeText(getActivity(), "Nothing selected", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
     private void addMovie() {
         Realm realm = Realm.getDefaultInstance();
-        Favourite favourite = new Favourite(movie.getOriginalTitle(),
+        Favourite favourite = new Favourite(
+                movie.getOriginalTitle(),
                 movie.getPosterPath(),
                 movie.getOverview(),
                 movie.getVoteAverage(),
@@ -170,10 +206,10 @@ public class DetailsActivityFragment extends Fragment {
     }
 
 
-    private void sendTrailerJsonRequest() {
+    private void sendTrailerJsonRequest(String trailerURL) {
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
-                TmdbUrls.MOVIE_BASE_URL + movie.getmId() + TmdbUrls.TRAILERS + TmdbUrls.API_KEY,
+                trailerURL,
                 null
                 , new Response.Listener<JSONObject>() {
             @Override
@@ -240,10 +276,10 @@ public class DetailsActivityFragment extends Fragment {
 
     }
 
-    private void sendReviewJsonRequest() {
+    private void sendReviewJsonRequest(String reviewURL) {
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
-                TmdbUrls.MOVIE_BASE_URL + movie.getmId() + TmdbUrls.REVIEWS + TmdbUrls.API_KEY,
+                reviewURL,
                 null
                 , new Response.Listener<JSONObject>() {
             @Override

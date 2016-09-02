@@ -81,7 +81,7 @@ public class FragmentFavourities extends Fragment implements FavouriteAdapter.Cl
     private RealmChangeListener realmChangeListener = new RealmChangeListener() {
         @Override
         public void onChange() {
-            Log.v("Listener", " wut ");
+            Log.v("Listener", " Change in data ");
             mAdapter.update(results);
 
         }

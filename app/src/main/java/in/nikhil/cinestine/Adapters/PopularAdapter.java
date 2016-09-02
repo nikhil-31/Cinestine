@@ -1,5 +1,6 @@
 package in.nikhil.cinestine.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,13 +23,19 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
     private ClickListener clickListener;
     private LayoutInflater inflater;
 
-    public PopularAdapter(Context context) {
+    private Activity mAct;
+    private OnAdapterItemSelectedListener mAdapterCallback;
+
+    public PopularAdapter(Context context, Activity activity) {
         this.context = context;
+        this.mAct = activity;
+        mAdapterCallback = (OnAdapterItemSelectedListener) mAct;
         inflater = LayoutInflater.from(context);
     }
 
     public void setMoviesList(ArrayList<Movie> listmovies) {
         mMovie = listmovies;
+
         notifyItemRangeChanged(0, listmovies.size());
         notifyDataSetChanged();
     }
@@ -42,13 +49,21 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-        Movie currentMovie = mMovie.get(position);
+        final Movie currentMovie = mMovie.get(position);
         holder.text.setText(currentMovie.getOriginalTitle());
         Picasso.with(context)
                 .load(currentMovie.getPosterPath())
                 .into(holder.image);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mAdapterCallback != null) {
+                    mAdapterCallback.onItemSelected(currentMovie);
+                }
+            }
+        });
 
 
     }
@@ -75,7 +90,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
         @Override
         public void onClick(View v) {
 
-            if (clickListener !=null){
+            if (clickListener != null){
             clickListener.itemClicked(v,getAdapterPosition());
         }
     }
@@ -86,6 +101,10 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
 
     public interface ClickListener{
         void itemClicked(View view,int position);
+    }
+
+    public interface OnAdapterItemSelectedListener {
+        void onItemSelected(Movie id);
     }
 }
 

@@ -100,7 +100,7 @@ public class FragmentTopRated extends Fragment implements PopularAdapter.ClickLi
 
 
 
-        adapter = new PopularAdapter(getActivity());
+        adapter = new PopularAdapter(getActivity(),getActivity());
         adapter.setClickListener(this);
         listMovieHits.setAdapter(adapter);
         if (savedInstanceState != null) {
@@ -197,8 +197,8 @@ public class FragmentTopRated extends Fragment implements PopularAdapter.ClickLi
     public void itemClicked(View view, int position) {
         Movie movieObject = ListMovies.get(position);
 
-        Intent intent = new Intent(getActivity(), DetailsActivity.class);
-        intent.putExtra("Movie", movieObject);
-        startActivity(intent);
+//        Intent intent = new Intent(getActivity(), DetailsActivity.class);
+//        intent.putExtra("Movie", movieObject);
+//        startActivity(intent);
     }
 }

@@ -105,7 +105,7 @@ public class FragmentPopular extends Fragment implements PopularAdapter.ClickLis
             }
         });
 
-        adapter = new PopularAdapter(getActivity());
+        adapter = new PopularAdapter(getActivity(),getActivity());
         adapter.setClickListener(this);
         listMovieHits.setAdapter(adapter);
         if (savedInstanceState != null) {
@@ -205,11 +205,11 @@ public class FragmentPopular extends Fragment implements PopularAdapter.ClickLis
 
     @Override
     public void itemClicked(View view, int position) {
-        Movie mvs = ListMovies.get(position);
-
-        Intent intent = new Intent(getActivity(), DetailsActivity.class);
-        intent.putExtra("Movie", mvs);
-        startActivity(intent);
+//        Movie mvs = ListMovies.get(position);
+//
+//        Intent intent = new Intent(getActivity(), DetailsActivity.class);
+//        intent.putExtra("Movie", mvs);
+//        startActivity(intent);
 
     }
 }

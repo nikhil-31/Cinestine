@@ -1,5 +1,6 @@
 package in.nikhil.cinestine.Activities;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -11,13 +12,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
+import in.nikhil.cinestine.Adapters.PopularAdapter;
+import in.nikhil.cinestine.Fragments.DetailsActivityFragment;
 import in.nikhil.cinestine.Fragments.FragmentFavourities;
 import in.nikhil.cinestine.Fragments.FragmentPopular;
 import in.nikhil.cinestine.Fragments.FragmentTopRated;
+import in.nikhil.cinestine.Model.Movie;
 import in.nikhil.cinestine.R;
 import in.nikhil.cinestine.tabs.SlidingTabLayout;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PopularAdapter.OnAdapterItemSelectedListener {
 
 
     private ViewPager mViewPager;
@@ -72,6 +76,24 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemSelected(Movie id) {
+        DetailsActivityFragment detailsActivityFragment = (DetailsActivityFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
+        if (detailsActivityFragment == null) {
+            // DisplayFragment (Fragment B) is not in the layout (handset layout),
+            // so start DisplayActivity (Activity B)
+            // and pass it the info about the selected item
+            Intent mMovieDetailIntent = new Intent(MainActivity.this, DetailsActivity.class);
+            mMovieDetailIntent.putExtra("Movie", id);
+            startActivity(mMovieDetailIntent);
+        } else {
+            // DisplayFragment (Fragment B) is in the layout (tablet layout),
+            // so tell the fragment to update
+            detailsActivityFragment.updateContent(id);
+        }
+
     }
 
     //Using Fragment state pager adapter because it will save the state and not discard it

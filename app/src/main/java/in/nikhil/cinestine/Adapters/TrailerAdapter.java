@@ -72,8 +72,6 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.MyViewHo
     }
 
 
-
-
     class MyViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
         TextView textView;
