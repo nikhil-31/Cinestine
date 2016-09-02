@@ -20,7 +20,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
 
     private ArrayList<Movie> mMovie = new ArrayList<Movie>();
     private Context context;
-    private ClickListener clickListener;
+
     private LayoutInflater inflater;
 
     private Activity mAct;
@@ -74,7 +74,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
     }
 
 
-    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView text;
 
@@ -83,25 +83,14 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
 
             image = (ImageView) itemview.findViewById(R.id.popular_image);
             text = (TextView) itemview.findViewById(R.id.popular_text);
-            itemview.setOnClickListener(this);
+
 
         }
 
-        @Override
-        public void onClick(View v) {
 
-            if (clickListener != null){
-            clickListener.itemClicked(v,getAdapterPosition());
-        }
-    }
-    }
-    public void setClickListener(ClickListener clickListener){
-        this.clickListener = clickListener;
     }
 
-    public interface ClickListener{
-        void itemClicked(View view,int position);
-    }
+
 
     public interface OnAdapterItemSelectedListener {
         void onItemSelected(Movie id);

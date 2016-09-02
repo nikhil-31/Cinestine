@@ -31,7 +31,7 @@ import in.nikhil.cinestine.Network.VolleySingleton;
 import in.nikhil.cinestine.R;
 
 
-public class FragmentTopRated extends Fragment implements PopularAdapter.ClickListener {
+public class FragmentTopRated extends Fragment  {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -98,7 +98,7 @@ public class FragmentTopRated extends Fragment implements PopularAdapter.ClickLi
 
 
         adapter = new PopularAdapter(getActivity(),getActivity());
-        adapter.setClickListener(this);
+
         listMovieHits.setAdapter(adapter);
         if (savedInstanceState != null) {
             ListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIE);
@@ -190,12 +190,5 @@ public class FragmentTopRated extends Fragment implements PopularAdapter.ClickLi
         return movieArrayList;
     }
 
-    @Override
-    public void itemClicked(View view, int position) {
-        Movie movieObject = ListMovies.get(position);
 
-//        Intent intent = new Intent(getActivity(), DetailsActivity.class);
-//        intent.putExtra("Movie", movieObject);
-//        startActivity(intent);
-    }
 }
