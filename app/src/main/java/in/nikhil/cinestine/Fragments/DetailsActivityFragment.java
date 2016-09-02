@@ -1,5 +1,6 @@
 package in.nikhil.cinestine.Fragments;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -96,6 +98,19 @@ public class DetailsActivityFragment extends Fragment {
             }
         });
         toolbar.inflateMenu(R.menu.menu_details);
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                if (item.getItemId() == R.id.action_share) {
+                    String data = trailersArrayList.get(0).getKey();
+                    startActivity(Intent.createChooser(shareIntent(TmdbUrls.YOUTUBE_URL + data), "Share Via"));
+                    return true;
+                }
+                return true;
+            }
+        });
 
         collapsingToolbar =
                 (CollapsingToolbarLayout) v.findViewById(R.id.collapsing_toolbar);
@@ -332,6 +347,13 @@ public class DetailsActivityFragment extends Fragment {
 
         return data;
 
+    }
+    public Intent shareIntent(String data) {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Sent from Cinestine, Check this out");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, data);
+        return sharingIntent;
     }
 
 
