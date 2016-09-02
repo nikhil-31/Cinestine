@@ -1,6 +1,5 @@
 package in.nikhil.cinestine.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -24,8 +23,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import in.nikhil.cinestine.Activities.DetailsActivity;
-import in.nikhil.cinestine.Activities.MovieDetailsActivity;
 import in.nikhil.cinestine.Adapters.PopularAdapter;
 import in.nikhil.cinestine.Extras.EndlessRecyclerViewScrollListener;
 import in.nikhil.cinestine.Extras.TmdbUrls;

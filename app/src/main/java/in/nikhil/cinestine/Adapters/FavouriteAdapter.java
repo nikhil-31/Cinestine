@@ -1,5 +1,6 @@
 package in.nikhil.cinestine.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import in.nikhil.cinestine.Data.Favourite;
+import in.nikhil.cinestine.Model.Movie;
 import in.nikhil.cinestine.R;
 import io.realm.RealmResults;
 
@@ -24,9 +26,14 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavV
     private LayoutInflater inflater;
     private RealmResults<Favourite> mItems;
 
-    public FavouriteAdapter(Context context,RealmResults<Favourite> results) {
+    private Activity mAct;
+    private OnAdapterItemSelectedListener mAdapterCallback;
+
+    public FavouriteAdapter(Context context,RealmResults<Favourite> results,Activity activity) {
         mItems = results;
         this.context = context;
+        this.mAct = activity;
+        mAdapterCallback = (OnAdapterItemSelectedListener) mAct;
         inflater = LayoutInflater.from(context);
     }
 
@@ -44,11 +51,19 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavV
 
     @Override
     public void onBindViewHolder(FavViewHolder holder, int position) {
-        Favourite fav = mItems.get(position);
+        final Favourite fav = mItems.get(position);
         holder.text.setText(fav.getmOriginalTitle());
         Picasso.with(context)
                 .load(fav.getmPosterPath())
                 .into(holder.image);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mAdapterCallback != null) {
+                    mAdapterCallback.onItemSelected(fav);
+                }
+            }
+        });
 
 
     }
@@ -83,5 +98,8 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavV
 
     public interface ClickListener{
         void itemClicked(View view,int position);
+    }
+    public interface OnAdapterItemSelectedListener {
+        void onItemSelected(Favourite id);
     }
 }

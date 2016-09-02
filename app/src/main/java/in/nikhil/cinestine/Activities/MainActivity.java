@@ -12,7 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
+import in.nikhil.cinestine.Adapters.FavouriteAdapter;
 import in.nikhil.cinestine.Adapters.PopularAdapter;
+import in.nikhil.cinestine.Data.Favourite;
 import in.nikhil.cinestine.Fragments.DetailsActivityFragment;
 import in.nikhil.cinestine.Fragments.FragmentFavourities;
 import in.nikhil.cinestine.Fragments.FragmentPopular;
@@ -21,7 +23,7 @@ import in.nikhil.cinestine.Model.Movie;
 import in.nikhil.cinestine.R;
 import in.nikhil.cinestine.tabs.SlidingTabLayout;
 
-public class MainActivity extends AppCompatActivity implements PopularAdapter.OnAdapterItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements PopularAdapter.OnAdapterItemSelectedListener, FavouriteAdapter.OnAdapterItemSelectedListener {
 
 
     private ViewPager mViewPager;
@@ -92,6 +94,39 @@ public class MainActivity extends AppCompatActivity implements PopularAdapter.On
             // DisplayFragment (Fragment B) is in the layout (tablet layout),
             // so tell the fragment to update
             detailsActivityFragment.updateContent(id);
+        }
+
+    }
+
+    @Override
+    public void onItemSelected(Favourite id) {
+        DetailsActivityFragment detailsActivityFragment = (DetailsActivityFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
+
+        Movie movie = new Movie();
+        Favourite fav = id;
+
+        movie.setOriginalTitle(fav.getmOriginalTitle());
+        movie.setPosterPath(fav.getmPosterPath());
+        movie.setOverview(fav.getmOverview());
+        movie.setVoteAverage(fav.getmVoteAverage());
+        movie.setReleaseDate(fav.getmReleaseDate());
+        movie.setBackdrop(fav.getmBackdrop());
+        movie.setmId(fav.getmId());
+        movie.setmPopularity(fav.getmPopularity());
+        movie.setmVoteCount(fav.getmVoteCount());
+        movie.setmOriginalLanguage(fav.getmOriginalLanguage());
+        movie.setmTitle(fav.getmTitle());
+        movie.setmAdult(fav.getmAdult());
+
+        if (detailsActivityFragment == null) {
+
+            Intent mMovieDetailIntent = new Intent(MainActivity.this, DetailsActivity.class);
+            mMovieDetailIntent.putExtra("Movie", movie);
+            startActivity(mMovieDetailIntent);
+        } else {
+            // DisplayFragment (Fragment B) is in the layout (tablet layout),
+            // so tell the fragment to update
+            detailsActivityFragment.updateContent(movie);
         }
 
     }

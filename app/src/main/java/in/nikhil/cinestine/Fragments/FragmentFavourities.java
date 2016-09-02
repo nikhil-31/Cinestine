@@ -71,7 +71,7 @@ public class FragmentFavourities extends Fragment implements FavouriteAdapter.Cl
 
         mRealm = Realm.getDefaultInstance();
         results = mRealm.where(Favourite.class).findAllAsync();
-        mAdapter = new FavouriteAdapter(getActivity(), results);
+        mAdapter = new FavouriteAdapter(getActivity(), results,getActivity());
         mAdapter.setClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -103,25 +103,25 @@ public class FragmentFavourities extends Fragment implements FavouriteAdapter.Cl
 
     @Override
     public void itemClicked(View view, int position) {
-        Movie movie = new Movie();
-        Favourite fav = results.get(position);
-
-        movie.setOriginalTitle(fav.getmOriginalTitle());
-        movie.setPosterPath(fav.getmPosterPath());
-        movie.setOverview(fav.getmOverview());
-        movie.setVoteAverage(fav.getmVoteAverage());
-        movie.setReleaseDate(fav.getmReleaseDate());
-        movie.setBackdrop(fav.getmBackdrop());
-        movie.setmId(fav.getmId());
-        movie.setmPopularity(fav.getmPopularity());
-        movie.setmVoteCount(fav.getmVoteCount());
-        movie.setmOriginalLanguage(fav.getmOriginalLanguage());
-        movie.setmTitle(fav.getmTitle());
-        movie.setmAdult(fav.getmAdult());
-
-        Intent intent = new Intent(getActivity(), DetailsActivity.class);
-        intent.putExtra("Movie", movie);
-        startActivity(intent);
+//        Movie movie = new Movie();
+//        Favourite fav = results.get(position);
+//
+//        movie.setOriginalTitle(fav.getmOriginalTitle());
+//        movie.setPosterPath(fav.getmPosterPath());
+//        movie.setOverview(fav.getmOverview());
+//        movie.setVoteAverage(fav.getmVoteAverage());
+//        movie.setReleaseDate(fav.getmReleaseDate());
+//        movie.setBackdrop(fav.getmBackdrop());
+//        movie.setmId(fav.getmId());
+//        movie.setmPopularity(fav.getmPopularity());
+//        movie.setmVoteCount(fav.getmVoteCount());
+//        movie.setmOriginalLanguage(fav.getmOriginalLanguage());
+//        movie.setmTitle(fav.getmTitle());
+//        movie.setmAdult(fav.getmAdult());
+//
+//        Intent intent = new Intent(getActivity(), DetailsActivity.class);
+//        intent.putExtra("Movie", movie);
+//        startActivity(intent);
 
     }
 }
