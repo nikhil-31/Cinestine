@@ -85,7 +85,7 @@
                     android:layout_toRightOf="@+id/poster_details"
                     android:paddingLeft="10dp"
                     android:paddingTop="10dp"
-                    />
+                    android:text="Release Date"/>
 
                 <TextView
                     android:id="@+id/Release_write"
@@ -105,7 +105,7 @@
                     android:layout_toRightOf="@+id/poster_details"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
-                     />
+                    android:text="Rating"/>
 
                 <TextView
                     android:id="@+id/Rating_write"
