@@ -92,6 +92,7 @@ public class DetailsActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().finish();
+                addMovie();
             }
         });
         toolbar.inflateMenu(R.menu.menu_details);
@@ -136,9 +137,10 @@ public class DetailsActivityFragment extends Fragment {
         backdrop = (ImageView) v.findViewById(R.id.backdrop1);
 
 
-        setData(movie);
+
         volleySingleton = volleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
+        setData(movie);
 
 
 
@@ -147,6 +149,7 @@ public class DetailsActivityFragment extends Fragment {
 
     public void updateContent(Movie movie) {
         setData(movie);
+        this.movie = movie;
     }
 
 

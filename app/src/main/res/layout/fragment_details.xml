@@ -32,7 +32,7 @@
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/trailerthumb"
+                android:background="@color/colorPrimaryDark"
                 app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar
@@ -64,7 +64,8 @@
                 <ImageView
                     android:id="@+id/poster_details"
                     android:layout_width="138dp"
-                    android:layout_height="200dp" />
+                    android:layout_height="200dp"
+                    />
 
                 <TextView
                     android:id="@+id/Title_write"
@@ -73,7 +74,7 @@
                     android:layout_toRightOf="@+id/poster_details"
                     android:paddingLeft="10dp"
                     android:paddingTop="20dp"
-                    android:text="Movie Title"
+                    android:text="Select A Movie"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                 <TextView
@@ -84,7 +85,7 @@
                     android:layout_toRightOf="@+id/poster_details"
                     android:paddingLeft="10dp"
                     android:paddingTop="10dp"
-                    android:text="Release Date" />
+                    />
 
                 <TextView
                     android:id="@+id/Release_write"
@@ -94,7 +95,7 @@
                     android:layout_toRightOf="@+id/poster_details"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
-                    android:text="31-2-2224" />
+                     />
 
                 <TextView
                     android:id="@+id/rating"
@@ -104,7 +105,7 @@
                     android:layout_toRightOf="@+id/poster_details"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
-                    android:text="Rating" />
+                     />
 
                 <TextView
                     android:id="@+id/Rating_write"
@@ -114,7 +115,7 @@
                     android:layout_toRightOf="@+id/poster_details"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
-                    android:text="8.2/10" />
+                     />
 
 
             </RelativeLayout>
