@@ -34,7 +34,7 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.MyViewHo
     }
     public void setTrailerList(ArrayList<Trailer> trailerList) {
         this.trailers = trailerList;
-        notifyItemRangeChanged(0, trailerList.size());
+        notifyDataSetChanged();
     }
 
 

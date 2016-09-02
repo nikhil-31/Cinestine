@@ -31,7 +31,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHold
 
     public void setReviewsList(ArrayList<Review> reviewList){
         ReviewList = reviewList;
-        notifyItemRangeChanged(0, reviewList.size());
+        notifyDataSetChanged();
     }
 
     @Override
