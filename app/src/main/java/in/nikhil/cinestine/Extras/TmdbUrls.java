@@ -16,6 +16,6 @@ public class TmdbUrls {
     public static String YOUTUBE_THUMB = "http://img.youtube.com/vi/";
     public static String YOUTUBE_MEDIUM_QUALITY = "/mqdefault.jpg";
 
-    public static String API_KEY = "api_key=\" Add key here\"";
+    public static String API_KEY = "api_key=609bbb466b647591bcd182c19afd5a2d";
 
 }

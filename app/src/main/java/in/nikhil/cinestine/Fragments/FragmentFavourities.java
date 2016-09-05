@@ -68,13 +68,24 @@ public class FragmentFavourities extends Fragment {
         mRecyclerView = (RecyclerView) v.findViewById(R.id.recycler_favourite);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         mRecyclerView.setLayoutManager(gridLayoutManager);
-
         mRealm = Realm.getDefaultInstance();
         results = mRealm.where(Favourite.class).findAllAsync();
         mAdapter = new FavouriteAdapter(getActivity(), results, getActivity());
         mRecyclerView.setAdapter(mAdapter);
 
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mRealm = Realm.getDefaultInstance();
+        results = mRealm.where(Favourite.class).findAllAsync();
+        mAdapter = new FavouriteAdapter(getActivity(), results, getActivity());
+        mRecyclerView.setAdapter(mAdapter);
+
+        results.addChangeListener(realmChangeListener);
+
     }
 
     private RealmChangeListener realmChangeListener = new RealmChangeListener() {
