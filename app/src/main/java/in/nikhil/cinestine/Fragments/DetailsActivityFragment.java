@@ -104,7 +104,7 @@ public class DetailsActivityFragment extends Fragment {
             public boolean onMenuItemClick(MenuItem item) {
 
                 if (item.getItemId() == R.id.action_share) {
-                    String data = trailersArrayList.get(0).getKey();
+                    String data = trailersArrayList.get(0).getTrailer();
                     startActivity(Intent.createChooser(shareIntent(TmdbUrls.YOUTUBE_URL + data), "Share Via"));
                     return true;
                 }
