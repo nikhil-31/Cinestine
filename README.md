@@ -2,7 +2,7 @@
 
 ## Overview
 
-An application that allows the user to discover new and exiciting movies. It was a part of the udacity nanodegree project P2. The main screen displays movies and upon clicking on a movie more information about the movie is displayed like trailers, reviews, a button to save the movie to a database for future viewing, we can share the movie trailer url using the share button.
+An application that allows the user to discover new and exiciting movies. It was a part of the udacity nanodegree project P2. The main screen displays movies in three tabs the first 2 tabs are sort movies on most popular and top rated. Clicking on a movie will display more information about the movie is displayed like trailers, reviews, The movie can be saved to a database for future viewing which will be displayed in the favouritites tab, The movie trailer url can be shared using the share button at the top right.
 
 ##Instructions
 
