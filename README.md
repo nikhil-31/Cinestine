@@ -15,9 +15,7 @@ Add a valid **TMDb API key** in the extras package, java class TmdbUrls
 * Volley
 * Realm
 
-##Credits: 
 
-This product uses the TMDb API but is not endorsed or certified by TMDb.
 
 ##Screenshots
 
@@ -33,7 +31,9 @@ Details screen
 
 
 
+##Credits: 
 
+This product uses the TMDb API but is not endorsed or certified by TMDb.
 
 ##License
 
