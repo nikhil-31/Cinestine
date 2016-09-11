@@ -19,7 +19,7 @@ Add a valid **TMDb API key** in the extras package, java class TmdbUrls
 
 This product uses the TMDb API but is not endorsed or certified by TMDb.
 
-##Screenshot
+##Screenshots
 
 Main screen
 
