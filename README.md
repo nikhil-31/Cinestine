@@ -6,16 +6,18 @@ An application that allows the user to discover new and exiciting movies. It was
 
 ##Instructions
 
-> Add a valid TMDb API key in the extras package, java class TmdbUrls
+Add a valid **TMDb API key** in the extras package, java class TmdbUrls
 
 ##Libraries used:
 
-*Picasso
-*Android support Library
+* Picasso
+* Android support Library
+* Volley
+* Realm
 
 ##Credits: 
 
->This product uses the TMDb API but is not endorsed or certified by TMDb.
+This product uses the TMDb API but is not endorsed or certified by TMDb.
 
 
 ##License
