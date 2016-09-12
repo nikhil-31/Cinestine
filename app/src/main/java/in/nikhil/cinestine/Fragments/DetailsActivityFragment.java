@@ -2,6 +2,7 @@ package in.nikhil.cinestine.Fragments;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.icu.text.LocaleDisplayNames;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -43,6 +44,7 @@ import in.nikhil.cinestine.Model.Trailer;
 import in.nikhil.cinestine.Network.VolleySingleton;
 import in.nikhil.cinestine.R;
 import io.realm.Realm;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 
@@ -89,6 +91,7 @@ public class DetailsActivityFragment extends Fragment {
 
 
         toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+
         toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.mipmap.ic_back));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,7 +159,7 @@ public class DetailsActivityFragment extends Fragment {
         requestQueue = volleySingleton.getRequestQueue();
         setData(movie);
 
-
+       isMovieinDatabase();
         return v;
     }
 
@@ -193,6 +196,17 @@ public class DetailsActivityFragment extends Fragment {
 
         } catch (NullPointerException e) {
             Toast.makeText(getActivity(), "Please select a movie", Toast.LENGTH_LONG).show();
+        }
+
+    }
+    private void isMovieinDatabase(){
+        mRealm = Realm.getDefaultInstance();
+        RealmResults<Favourite> saved = mRealm.where(Favourite.class).contains("mId",movie.getmId()).findAll();
+        if(saved.size() != 0){
+            Toast.makeText(getActivity(),"IT is present in database", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(getActivity(),"Not present", Toast.LENGTH_LONG).show();
         }
 
     }

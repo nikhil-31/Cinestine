@@ -33,6 +33,7 @@ public class Trailer {
     public String getKey() {
         return TmdbUrls.YOUTUBE_THUMB+key+TmdbUrls.YOUTUBE_MEDIUM_QUALITY;
     }
+
     public String getTrailer(){
         return TmdbUrls.YOUTUBE_URL+key;
     }
