@@ -1,8 +1,6 @@
 package in.nikhil.cinestine.Fragments;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.icu.text.LocaleDisplayNames;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -24,7 +22,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.squareup.picasso.Picasso;
 
@@ -44,7 +41,6 @@ import in.nikhil.cinestine.Model.Trailer;
 import in.nikhil.cinestine.Network.VolleySingleton;
 import in.nikhil.cinestine.R;
 import io.realm.Realm;
-import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 
@@ -80,6 +76,7 @@ public class DetailsActivityFragment extends Fragment {
     TextView title;
     TextView overview;
     ImageView backdrop;
+    FloatingActionButton fab;
 
 
     @Override
@@ -88,7 +85,6 @@ public class DetailsActivityFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_details, container, false);
 
         movie = getActivity().getIntent().getParcelableExtra("Movie");
-
 
         toolbar = (Toolbar) v.findViewById(R.id.toolbar);
 
@@ -121,7 +117,7 @@ public class DetailsActivityFragment extends Fragment {
         collapsingToolbar.setExpandedTitleColor(getResources().getColor(R.color.transperent));
 
 
-        FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
+        fab = (FloatingActionButton) v.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,7 +126,14 @@ public class DetailsActivityFragment extends Fragment {
                 addMovie();
             }
         });
-        fab.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.mipmap.ic_like));
+
+        if(isMovieinDatabase()){
+            fab.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.mipmap.ic_like));
+        }
+        else {
+            fab.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.mipmap.ic_like_outline));
+
+        }
 
         trailerAdapter = new TrailerAdapter(getActivity());
 
@@ -146,7 +149,6 @@ public class DetailsActivityFragment extends Fragment {
         recyclerReview.setLayoutManager(layoutManagerreview);
         recyclerReview.setAdapter(reviewAdapter);
 
-
         poster = (ImageView) v.findViewById(R.id.poster_details);
         releaseDate = (TextView) v.findViewById(R.id.Release_write);
         rating = (TextView) v.findViewById(R.id.Rating_write);
@@ -154,12 +156,11 @@ public class DetailsActivityFragment extends Fragment {
         overview = (TextView) v.findViewById(R.id.overview_new);
         backdrop = (ImageView) v.findViewById(R.id.backdrop1);
 
-
         volleySingleton = volleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
         setData(movie);
 
-       isMovieinDatabase();
+//        isMovieinDatabase();
         return v;
     }
 
@@ -199,14 +200,18 @@ public class DetailsActivityFragment extends Fragment {
         }
 
     }
-    private void isMovieinDatabase(){
+    private boolean isMovieinDatabase(){
         mRealm = Realm.getDefaultInstance();
         RealmResults<Favourite> saved = mRealm.where(Favourite.class).contains("mId",movie.getmId()).findAll();
+
         if(saved.size() != 0){
-            Toast.makeText(getActivity(),"IT is present in database", Toast.LENGTH_LONG).show();
+            Favourite fav = saved.get(0);
+            Toast.makeText(getActivity(),"IT is present in database"+fav.getmId().toString(), Toast.LENGTH_LONG).show();
+            return true;
         }
         else {
             Toast.makeText(getActivity(),"Not present", Toast.LENGTH_LONG).show();
+            return false;
         }
 
     }
@@ -230,6 +235,7 @@ public class DetailsActivityFragment extends Fragment {
         realm.copyToRealmOrUpdate(favourite);
         realm.commitTransaction();
         realm.close();
+        fab.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.mipmap.ic_like));
 
     }
 
@@ -298,10 +304,7 @@ public class DetailsActivityFragment extends Fragment {
             builder.append("Name " + jsonObject.optString(NAME) + "\n");
             data.add(current);
         }
-
-
         return data;
-
     }
 
     private void sendReviewJsonRequest(String reviewURL) {
@@ -357,11 +360,9 @@ public class DetailsActivityFragment extends Fragment {
 
             data.add(current);
         }
-
-
         return data;
-
     }
+
     public Intent shareIntent(String data) {
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
