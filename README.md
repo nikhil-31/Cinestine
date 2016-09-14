@@ -1,12 +1,15 @@
 # Cinestine
 
+##Playstore
+Click here to <a href="https://play.google.com/store/apps/details?id=comnikhil_31.httpsgithub.cinestine&hl=en">Download</a>.
+
 ## Overview
 
 An application that allows the user to discover new and exiciting movies. It was a part of the udacity nanodegree project P2. The main screen displays movies in three tabs the first 2 tabs are sort movies on most popular and top rated. Clicking on a movie will display more information about the movie is displayed like trailers, reviews, The movie can be saved to a database for future viewing which will be displayed in the favouritites tab, The movie trailer url can be shared using the share button at the top right.
 
 ##Instructions
 
-Add a valid **TMDb API key** in the extras package, java class TmdbUrls
+Add a valid **TMDb API key** in the extras package, java class TmdbUrls. Ignore if downloaded application from the play store
 
 ##Libraries used:
 
