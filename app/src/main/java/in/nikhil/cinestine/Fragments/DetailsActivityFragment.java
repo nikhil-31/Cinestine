@@ -93,7 +93,7 @@ public class DetailsActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().finish();
-                addMovie();
+
             }
         });
         toolbar.inflateMenu(R.menu.menu_details);

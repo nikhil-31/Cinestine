@@ -9,6 +9,7 @@
     tools:context=".Activities.MainActivity">
 
 
+
     <include layout="@layout/content_main" />
 
 

@@ -1,5 +1,6 @@
 package in.nikhil.cinestine.Activities;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -89,7 +90,10 @@ public class MainActivity extends AppCompatActivity implements PopularAdapter.On
             // and pass it the info about the selected item
             Intent mMovieDetailIntent = new Intent(MainActivity.this, DetailsActivity.class);
             mMovieDetailIntent.putExtra("Movie", id);
-            startActivity(mMovieDetailIntent);
+            Bundle bundle= ActivityOptions.
+                    makeSceneTransitionAnimation(this)
+                    .toBundle();
+            startActivity(mMovieDetailIntent,bundle);
         } else {
             // DisplayFragment (Fragment B) is in the layout (tablet layout),
             // so tell the fragment to update
