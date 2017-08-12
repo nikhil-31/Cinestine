@@ -83,7 +83,8 @@
                     android:layout_toRightOf="@+id/poster_details"
                     android:paddingLeft="10dp"
                     android:paddingTop="10dp"
-                    android:text="@string/releaseDate" />
+                    android:text="@string/releaseDate"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
                 <TextView
                     android:id="@+id/Release_write"
@@ -92,7 +93,8 @@
                     android:layout_below="@+id/Release_text"
                     android:layout_toRightOf="@+id/poster_details"
                     android:paddingLeft="10dp"
-                    android:paddingTop="5dp" />
+                    android:paddingTop="5dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                 <TextView
                     android:id="@+id/rating"
@@ -102,7 +104,8 @@
                     android:layout_toRightOf="@+id/poster_details"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
-                    android:text="@string/Rating" />
+                    android:text="@string/Rating"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
                 <TextView
                     android:id="@+id/Rating_write"
@@ -111,7 +114,8 @@
                     android:layout_below="@+id/rating"
                     android:layout_toRightOf="@+id/poster_details"
                     android:paddingLeft="10dp"
-                    android:paddingTop="5dp" />
+                    android:paddingTop="5dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
             </RelativeLayout>
 
             <android.support.v7.widget.CardView
@@ -130,14 +134,15 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Overview"
                         android:layout_marginBottom="10dp"
+                        android:text="Overview"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                     <TextView
                         android:id="@+id/overview_new"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
