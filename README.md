@@ -23,13 +23,12 @@ Add a valid **TMDb API key** in the extras package, java class TmdbUrls. Ignore 
 ##Screenshots
 
 Main screen
-![screenshot_20170812-150503](https://user-images.githubusercontent.com/19944703/29239691-9c68961c-7f71-11e7-90cd-6946c677e0dc.png)
+
+![screenshot_20170812-150841](https://user-images.githubusercontent.com/19944703/29239697-d085e256-7f71-11e7-8653-b21d11139122.png)
 
 Details screen
 
 ![screenshot_20170812-151051](https://user-images.githubusercontent.com/19944703/29239692-9d17ff4e-7f71-11e7-87cd-a3c6a1c829e1.png) ![screenshot_20170812-151102](https://user-images.githubusercontent.com/19944703/29239693-9df85904-7f71-11e7-9781-2df36a428c9d.png)
-
-
 
 
 ##Credits: 
