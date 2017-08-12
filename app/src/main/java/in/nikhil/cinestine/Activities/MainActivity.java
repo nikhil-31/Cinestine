@@ -24,7 +24,8 @@ import in.nikhil.cinestine.Model.Movie;
 import in.nikhil.cinestine.R;
 import in.nikhil.cinestine.tabs.SlidingTabLayout;
 
-public class MainActivity extends AppCompatActivity implements PopularAdapter.OnAdapterItemSelectedListener, FavouriteAdapter.OnAdapterItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements PopularAdapter.OnAdapterItemSelectedListener,
+        FavouriteAdapter.OnAdapterItemSelectedListener {
 
 
     private ViewPager mViewPager;
@@ -42,21 +43,17 @@ public class MainActivity extends AppCompatActivity implements PopularAdapter.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mTabs = (SlidingTabLayout) findViewById(R.id.tabs);
         mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-
 
         mTabs.setCustomTabView(R.layout.custom_tab_view, R.id.tabText);
         mTabs.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         mTabs.setSelectedIndicatorColors(getResources().getColor(R.color.colorAccent));
         mTabs.setDistributeEvenly(true);
         mTabs.setViewPager(mViewPager);
-
     }
 
     @Override
@@ -90,10 +87,11 @@ public class MainActivity extends AppCompatActivity implements PopularAdapter.On
             // and pass it the info about the selected item
             Intent mMovieDetailIntent = new Intent(MainActivity.this, DetailsActivity.class);
             mMovieDetailIntent.putExtra("Movie", id);
-            Bundle bundle= ActivityOptions.
-                    makeSceneTransitionAnimation(this)
-                    .toBundle();
-            startActivity(mMovieDetailIntent,bundle);
+//            Bundle bundle= ActivityOptions.
+//                    makeSceneTransitionAnimation(this)
+//                    .toBundle();
+//            startActivity(mMovieDetailIntent,bundle);
+            startActivity(mMovieDetailIntent);
         } else {
             // DisplayFragment (Fragment B) is in the layout (tablet layout),
             // so tell the fragment to update

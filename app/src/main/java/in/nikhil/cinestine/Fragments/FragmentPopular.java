@@ -88,7 +88,6 @@ public class FragmentPopular extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         listMovieHits.setLayoutManager(gridLayoutManager);
 
-
         listMovieHits.addOnScrollListener(new EndlessRecyclerViewScrollListener(gridLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
@@ -97,8 +96,6 @@ public class FragmentPopular extends Fragment {
                 sendJsonRequest(page);
                 Snackbar.make(listMovieHits, "Loading page " + page, Snackbar.LENGTH_LONG)
                         .show();
-
-
             }
         });
 
@@ -110,8 +107,6 @@ public class FragmentPopular extends Fragment {
         } else {
             sendJsonRequest(1);
         }
-
-
         return view;
     }
 
@@ -119,11 +114,9 @@ public class FragmentPopular extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(STATE_MOVIE, ListMovies);
-
     }
 
     private void sendJsonRequest(int page) {
-
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
                 TmdbUrls.MOVIE_BASE_URL + TmdbUrls.SORT_POPULAR + TmdbUrls.API_KEY + TmdbUrls.PAGE + page,
                 null
@@ -133,8 +126,6 @@ public class FragmentPopular extends Fragment {
                 try {
                     ListMovies.addAll(parseJSONResponse(response));
                     adapter.setMoviesList(ListMovies);
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -146,7 +137,6 @@ public class FragmentPopular extends Fragment {
             }
         });
         requestQueue.add(request);
-
     }
 
     public ArrayList<Movie> parseJSONResponse(JSONObject response) throws JSONException {

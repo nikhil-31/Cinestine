@@ -52,8 +52,8 @@ public class DetailsActivityFragment extends Fragment {
     public DetailsActivityFragment() {
     }
 
-    Movie movie;
-    Toolbar toolbar;
+    private Movie movie;
+    private Toolbar toolbar;
 
     private VolleySingleton volleySingleton;
     private RequestQueue requestQueue;
@@ -65,7 +65,7 @@ public class DetailsActivityFragment extends Fragment {
     private ArrayList<Trailer> trailersArrayList = new ArrayList<Trailer>();
     private ArrayList<Review> reviewArrayList = new ArrayList<Review>();
 
-    Realm mRealm;
+    private Realm mRealm;
     private String trailerURL;
     private String reviewURL;
 
@@ -127,10 +127,9 @@ public class DetailsActivityFragment extends Fragment {
             }
         });
 
-        if(isMovieinDatabase()){
+        if (isMovieinDatabase()) {
             fab.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.mipmap.ic_like));
-        }
-        else {
+        } else {
             fab.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.mipmap.ic_like_outline));
 
         }
@@ -148,6 +147,7 @@ public class DetailsActivityFragment extends Fragment {
         LinearLayoutManager layoutManagerreview = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerReview.setLayoutManager(layoutManagerreview);
         recyclerReview.setAdapter(reviewAdapter);
+        recyclerReview.setNestedScrollingEnabled(false);
 
         poster = (ImageView) v.findViewById(R.id.poster_details);
         releaseDate = (TextView) v.findViewById(R.id.Release_write);
@@ -194,23 +194,19 @@ public class DetailsActivityFragment extends Fragment {
             sendTrailerJsonRequest(trailerURL);
             sendReviewJsonRequest(reviewURL);
 
-
         } catch (NullPointerException e) {
             Toast.makeText(getActivity(), "Please select a movie", Toast.LENGTH_LONG).show();
         }
 
     }
-    private boolean isMovieinDatabase(){
-        mRealm = Realm.getDefaultInstance();
-        RealmResults<Favourite> saved = mRealm.where(Favourite.class).contains("mId",movie.getmId()).findAll();
 
-        if(saved.size() != 0){
+    private boolean isMovieinDatabase() {
+        mRealm = Realm.getDefaultInstance();
+        RealmResults<Favourite> saved = mRealm.where(Favourite.class).contains("mId", movie.getmId()).findAll();
+        if (saved.size() != 0) {
             Favourite fav = saved.get(0);
-            Toast.makeText(getActivity(),"IT is present in database"+fav.getmId().toString(), Toast.LENGTH_LONG).show();
             return true;
-        }
-        else {
-            Toast.makeText(getActivity(),"Not present", Toast.LENGTH_LONG).show();
+        } else {
             return false;
         }
 
@@ -236,7 +232,6 @@ public class DetailsActivityFragment extends Fragment {
         realm.commitTransaction();
         realm.close();
         fab.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.mipmap.ic_like));
-
     }
 
 
@@ -259,11 +254,10 @@ public class DetailsActivityFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(getActivity(), "Error", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Error, Unable to fetch trailers", Toast.LENGTH_LONG).show();
             }
         });
         requestQueue.add(request);
-
     }
 
     public ArrayList<Trailer> parseTrailerJSONResponse(JSONObject response) throws JSONException {
