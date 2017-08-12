@@ -1,8 +1,8 @@
 # Cinestine
 
 ##Playstore
-Click here to <a href="https://play.google.com/store/apps/details?id=comnikhil_31.httpsgithub.cinestine&hl=en">Download</a>.
 
+<a href='https://play.google.com/store/apps/details?id=comnikhil_31.httpsgithub.cinestine&hl=en&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width="250" height="100"/></a>
 ## Overview
 
 An application that allows the user to discover new and exiciting movies. It was a part of the udacity nanodegree project P2. The main screen displays movies in three tabs the first 2 tabs are sort movies on most popular and top rated. Clicking on a movie will display more information about the movie is displayed like trailers, reviews, The movie can be saved to a database for future viewing which will be displayed in the favouritites tab, The movie trailer url can be shared using the share button at the top right.
