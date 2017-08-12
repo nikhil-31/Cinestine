@@ -64,8 +64,6 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavV
                 }
             }
         });
-
-
     }
 
     @Override
@@ -81,9 +79,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavV
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.popular_image);
             text = (TextView) itemView.findViewById(R.id.popular_text);
-
         }
-
     }
 
     public interface OnAdapterItemSelectedListener {

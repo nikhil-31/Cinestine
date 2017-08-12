@@ -112,7 +112,7 @@ public class Movie implements Parcelable {
     }
 
     public String getPosterPath() {
-        String url = "http://image.tmdb.org/t/p/w185/" + mPosterPath;
+        String url = "http://image.tmdb.org/t/p/w500/" + mPosterPath;
         return url;
     }
 
