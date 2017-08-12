@@ -43,7 +43,9 @@ public class MainActivity extends AppCompatActivity implements PopularAdapter.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mTabs = (SlidingTabLayout) findViewById(R.id.tabs);
@@ -121,7 +123,6 @@ public class MainActivity extends AppCompatActivity implements PopularAdapter.On
         movie.setmAdult(fav.getmAdult());
 
         if (detailsActivityFragment == null) {
-
             Intent mMovieDetailIntent = new Intent(MainActivity.this, DetailsActivity.class);
             mMovieDetailIntent.putExtra("Movie", movie);
             startActivity(mMovieDetailIntent);
@@ -137,8 +138,6 @@ public class MainActivity extends AppCompatActivity implements PopularAdapter.On
     //If we were using the FragmentPagerAdapter the onsave instance will have never been called in the
     //Fragments
     public class MyPagerAdapter extends FragmentStatePagerAdapter {
-
-
         String[] tabs = getResources().getStringArray(R.array.tabs);
 
         public MyPagerAdapter(FragmentManager fm) {

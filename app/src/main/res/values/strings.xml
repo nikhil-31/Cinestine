@@ -10,10 +10,7 @@
     <string-array name="tabs">
         <item>POPULAR</item>
         <item>TOP RATED</item>
-        <item>FAVOURITES</item>
-        <item>TAB 4</item>
-        <item>TAB 5</item>
-        <item>TAB 6</item>
+        <item>SAVED</item>
     </string-array>
     <string name="title_activity_details">DetailsActivity</string>
 
