@@ -94,12 +94,11 @@ public class FragmentPopular extends Fragment {
                 // Triggered only when new data needs to be appended to the list
                 // Add whatever code is needed to append new items to the bottom of the list
                 sendJsonRequest(page);
-                Snackbar.make(listMovieHits, "Loading page " + page, Snackbar.LENGTH_LONG)
-                        .show();
+//                Snackbar.make(listMovieHits, "Loading page " + page, Snackbar.LENGTH_LONG).show();
             }
         });
 
-        adapter = new PopularAdapter(getActivity(),getActivity());
+        adapter = new PopularAdapter(getActivity(), getActivity());
         listMovieHits.setAdapter(adapter);
         if (savedInstanceState != null) {
             ListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIE);
@@ -187,7 +186,6 @@ public class FragmentPopular extends Fragment {
         return data;
 
     }
-
 
 
 }

@@ -1,7 +1,6 @@
 package in.nikhil.cinestine.Fragments;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,7 +30,7 @@ import in.nikhil.cinestine.Network.VolleySingleton;
 import in.nikhil.cinestine.R;
 
 
-public class FragmentTopRated extends Fragment  {
+public class FragmentTopRated extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -88,16 +87,11 @@ public class FragmentTopRated extends Fragment  {
                 // Triggered only when new data needs to be appended to the list
                 // Add whatever code is needed to append new items to the bottom of the list
                 sendJsonRequest(page);
-                Snackbar.make(listMovieHits, "Loading page " + page, Snackbar.LENGTH_LONG)
-                        .show();
-
-
+//                Snackbar.make(listMovieHits, "Loading page " + page, Snackbar.LENGTH_LONG).show();
             }
         });
 
-
-
-        adapter = new PopularAdapter(getActivity(),getActivity());
+        adapter = new PopularAdapter(getActivity(), getActivity());
 
         listMovieHits.setAdapter(adapter);
         if (savedInstanceState != null) {
@@ -119,7 +113,7 @@ public class FragmentTopRated extends Fragment  {
 
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
-                TmdbUrls.MOVIE_BASE_URL + TmdbUrls.SORT_TOP_RATED + TmdbUrls.API_KEY+ TmdbUrls.PAGE + page,
+                TmdbUrls.MOVIE_BASE_URL + TmdbUrls.SORT_TOP_RATED + TmdbUrls.API_KEY + TmdbUrls.PAGE + page,
                 null
                 , new Response.Listener<JSONObject>() {
             @Override
