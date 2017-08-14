@@ -13,6 +13,7 @@
         <item>SAVED</item>
     </string-array>
     <string name="title_activity_details">DetailsActivity</string>
+    <string name="main_activity">MainActivity</string>
 
 
 </resources>
