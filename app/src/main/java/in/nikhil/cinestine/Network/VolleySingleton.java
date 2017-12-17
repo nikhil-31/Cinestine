@@ -14,36 +14,39 @@ import com.android.volley.toolbox.Volley;
 
 public class VolleySingleton {
 
-    private static VolleySingleton sInstance = null;
-    private RequestQueue mRequestQueue;
-    private ImageLoader mImageLoader;
-    private VolleySingleton(){
-        mRequestQueue = Volley.newRequestQueue(MyApplication.getAppContext());
-        mImageLoader=new ImageLoader(mRequestQueue, new ImageLoader.ImageCache() {
-            LruCache<String,Bitmap> cache = new LruCache<>((int)(Runtime.getRuntime().maxMemory()/1024/8));
+  private static VolleySingleton sInstance = null;
+  private RequestQueue mRequestQueue;
+  private ImageLoader mImageLoader;
 
-            @Override
-            public Bitmap getBitmap(String url) {
-                return cache.get(url);
-            }
+  private VolleySingleton() {
+    mRequestQueue = Volley.newRequestQueue(MyApplication.getAppContext());
+    mImageLoader = new ImageLoader(mRequestQueue, new ImageLoader.ImageCache() {
+      LruCache<String, Bitmap> cache = new LruCache<>((int) (Runtime.getRuntime().maxMemory() / 1024 / 8));
 
-            @Override
-            public void putBitmap(String url, Bitmap bitmap) {
-                cache.put(url,bitmap);
-            }
-        });
-    }
+      @Override
+      public Bitmap getBitmap(String url) {
+        return cache.get(url);
+      }
 
-    public static VolleySingleton getInstance(){
-        if(sInstance == null){
-            sInstance = new VolleySingleton();
-        }
-        return sInstance;
+      @Override
+      public void putBitmap(String url, Bitmap bitmap) {
+        cache.put(url, bitmap);
+      }
+    });
+  }
+
+  public static VolleySingleton getInstance() {
+    if (sInstance == null) {
+      sInstance = new VolleySingleton();
     }
-    public RequestQueue getRequestQueue(){
-        return mRequestQueue;
-    }
-    public ImageLoader getImageLoader(){
-        return mImageLoader;
-    }
+    return sInstance;
+  }
+
+  public RequestQueue getRequestQueue() {
+    return mRequestQueue;
+  }
+
+  public ImageLoader getImageLoader() {
+    return mImageLoader;
+  }
 }

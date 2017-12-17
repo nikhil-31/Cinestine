@@ -14,6 +14,7 @@
     </string-array>
     <string name="title_activity_details">DetailsActivity</string>
     <string name="main_activity">MainActivity</string>
+    <string name="author">Author-</string>
 
 
 </resources>
