@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements PopularAdapter.On
 
     if (getSupportActionBar() != null) {
       getSupportActionBar().setDisplayShowHomeEnabled(true);
+      getSupportActionBar().setTitle(getString(R.string.app_name));
     }
 
     ViewPager viewPager = findViewById(R.id.pager);
