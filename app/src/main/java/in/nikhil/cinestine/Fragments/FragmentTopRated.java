@@ -164,18 +164,18 @@ public class FragmentTopRated extends Fragment {
 
       JSONObject jsonObject = results.getJSONObject(i);
 
-      current.setPosterPath(jsonObject.getString(POSTER_PATH));
+      current.setPosterPath("http://image.tmdb.org/t/p/w500/" + jsonObject.getString(POSTER_PATH));
       current.setOverview(jsonObject.optString(OVERVIEW));
       current.setOriginalTitle(jsonObject.optString(ORIGINAL_TITLE));
       current.setReleaseDate(jsonObject.optString(RELEASE_DATE));
       current.setVoteAverage(Float.parseFloat(jsonObject.optString(VOTE_AVERAGE)));
-      current.setBackdrop(jsonObject.optString(BACKDROP_PATH));
-      current.setmId(jsonObject.getString(ID));
-      current.setmPopularity(jsonObject.getString(POPULARITY));
-      current.setmVoteCount(jsonObject.getString(VOTE_COUNT));
-      current.setmOriginalLanguage(jsonObject.getString(ORIGINAL_LANGUAGE));
-      current.setmTitle(jsonObject.getString(TITLE));
-      current.setmAdult(jsonObject.getString(ADULT));
+      current.setBackdrop("http://image.tmdb.org/t/p/w500/" + jsonObject.optString(BACKDROP_PATH));
+      current.setId(jsonObject.getString(ID));
+      current.setPopularity(jsonObject.getString(POPULARITY));
+      current.setVoteCount(jsonObject.getString(VOTE_COUNT));
+      current.setOriginalLanguage(jsonObject.getString(ORIGINAL_LANGUAGE));
+      current.setTitle(jsonObject.getString(TITLE));
+      current.setAdult(jsonObject.getString(ADULT));
 
       movieArrayList.add(current);
     }

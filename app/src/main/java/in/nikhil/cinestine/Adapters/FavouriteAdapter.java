@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -53,10 +54,10 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavV
   @Override
   public void onBindViewHolder(@NonNull FavViewHolder holder, int position) {
     final Favourite fav = mItems.get(position);
+
+    Picasso.with(context).load(fav.getmPosterPath()).into(holder.image);
+
     holder.text.setText(fav.getmOriginalTitle());
-    Picasso.with(context)
-        .load(fav.getmPosterPath())
-        .into(holder.image);
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -78,8 +79,8 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavV
 
     FavViewHolder(View itemView) {
       super(itemView);
-      image = (ImageView) itemView.findViewById(R.id.popular_image);
-      text = (TextView) itemView.findViewById(R.id.popular_text);
+      image = itemView.findViewById(R.id.popular_image);
+      text = itemView.findViewById(R.id.popular_text);
     }
   }
 

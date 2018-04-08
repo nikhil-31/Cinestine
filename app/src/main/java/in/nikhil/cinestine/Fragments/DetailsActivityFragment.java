@@ -111,7 +111,8 @@ public class DetailsActivityFragment extends Fragment {
 
         if (item.getItemId() == R.id.action_share) {
           String data = trailersArrayList.get(0).getTrailer();
-          startActivity(Intent.createChooser(shareIntent(TmdbUrls.YOUTUBE_URL + data), "Share Via"));
+          startActivity(Intent.createChooser(shareIntent(TmdbUrls.YOUTUBE_URL + data),
+              "Share Via"));
           return true;
         }
         return true;
@@ -133,14 +134,16 @@ public class DetailsActivityFragment extends Fragment {
     trailerAdapter = new TrailerAdapter(mActivity);
 
     RecyclerView recyclerTrailer = v.findViewById(R.id.recycler_trailer);
-    LinearLayoutManager layoutManagerTrailer = new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false);
+    LinearLayoutManager layoutManagerTrailer = new LinearLayoutManager(mActivity
+        , LinearLayoutManager.HORIZONTAL, false);
     recyclerTrailer.setLayoutManager(layoutManagerTrailer);
     recyclerTrailer.setAdapter(trailerAdapter);
 
     reviewAdapter = new ReviewAdapter(mActivity);
 
     RecyclerView recyclerReview = v.findViewById(R.id.recycler_review);
-    LinearLayoutManager layoutManagerReview = new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false);
+    LinearLayoutManager layoutManagerReview = new LinearLayoutManager(mActivity
+        , LinearLayoutManager.VERTICAL, false);
     recyclerReview.setLayoutManager(layoutManagerReview);
     recyclerReview.setAdapter(reviewAdapter);
     recyclerReview.setNestedScrollingEnabled(false);
@@ -198,14 +201,15 @@ public class DetailsActivityFragment extends Fragment {
       sendReviewJsonRequest(reviewURL);
 
     } catch (NullPointerException e) {
-      Toast.makeText(mActivity, "Please select a movie", Toast.LENGTH_LONG).show();
+      e.printStackTrace();
     }
   }
 
   private boolean isMovieInDatabase() {
     mRealm = Realm.getDefaultInstance();
     if (movie != null) {
-      RealmResults<Favourite> saved = mRealm.where(Favourite.class).contains("mId", movie.getmId()).findAll();
+      RealmResults<Favourite> saved = mRealm.where(Favourite.class).contains("mId"
+          , movie.getmId()).findAll();
       return saved.size() != 0;
     }
     return false;

@@ -25,7 +25,7 @@ public class Movie implements Parcelable {
 
   }
 
-  public void setmAdult(String adult) {
+  public void setAdult(String adult) {
     mAdult = adult;
   }
 
@@ -33,7 +33,7 @@ public class Movie implements Parcelable {
     return mAdult;
   }
 
-  public void setmTitle(String Title) {
+  public void setTitle(String Title) {
     mTitle = Title;
   }
 
@@ -41,7 +41,7 @@ public class Movie implements Parcelable {
     return mTitle;
   }
 
-  public void setmOriginalLanguage(String language) {
+  public void setOriginalLanguage(String language) {
     mOriginalLanguage = language;
   }
 
@@ -49,7 +49,7 @@ public class Movie implements Parcelable {
     return mOriginalLanguage;
   }
 
-  public void setmVoteCount(String voteCount) {
+  public void setVoteCount(String voteCount) {
     mVoteCount = voteCount;
   }
 
@@ -57,7 +57,7 @@ public class Movie implements Parcelable {
     return mVoteCount;
   }
 
-  public void setmPopularity(String popularity) {
+  public void setPopularity(String popularity) {
     mPopularity = popularity;
   }
 
@@ -65,7 +65,7 @@ public class Movie implements Parcelable {
     return mPopularity;
   }
 
-  public void setmId(String id) {
+  public void setId(String id) {
     mId = id;
   }
 
@@ -98,8 +98,7 @@ public class Movie implements Parcelable {
   }
 
   public String getBackdrop() {
-    String back = "http://image.tmdb.org/t/p/w500/" + mBackdrop;
-    return back;
+    return mBackdrop;
   }
 
   public String getOriginalTitle() {
@@ -107,8 +106,7 @@ public class Movie implements Parcelable {
   }
 
   public String getPosterPath() {
-    String url = "http://image.tmdb.org/t/p/w500/" + mPosterPath;
-    return url;
+    return mPosterPath;
   }
 
   public String getOverview() {
