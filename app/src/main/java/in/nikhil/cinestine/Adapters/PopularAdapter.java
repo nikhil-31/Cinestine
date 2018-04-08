@@ -2,6 +2,7 @@ package in.nikhil.cinestine.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,14 +42,15 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
     notifyItemRangeChanged(0, listmovies.size());
   }
 
+  @NonNull
   @Override
-  public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View v = inflater.inflate(R.layout.custom_grid_popular, parent, false);
     return new MyViewHolder(v);
   }
 
   @Override
-  public void onBindViewHolder(MyViewHolder holder, final int position) {
+  public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
     final Movie currentMovie = mMovie.get(position);
     holder.text.setText(currentMovie.getOriginalTitle());
     Picasso.with(context).load(currentMovie.getPosterPath()).into(holder.image);
@@ -71,7 +73,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
     ImageView image;
     TextView text;
 
-    public MyViewHolder(View itemview) {
+    MyViewHolder(View itemview) {
       super(itemview);
       image = itemview.findViewById(R.id.popular_image);
       text = itemview.findViewById(R.id.popular_text);

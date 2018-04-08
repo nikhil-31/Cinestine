@@ -3,6 +3,7 @@ package in.nikhil.cinestine.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -60,12 +61,12 @@ public class FragmentFavourities extends Fragment {
   }
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+  public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View v = inflater.inflate(R.layout.fragment_favourities, container, false);
 
-    mRecyclerView = (RecyclerView) v.findViewById(R.id.recycler_favourite);
+    mRecyclerView = v.findViewById(R.id.recycler_favourite);
     GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
     mRecyclerView.setLayoutManager(gridLayoutManager);
     mRealm = Realm.getDefaultInstance();
@@ -85,7 +86,6 @@ public class FragmentFavourities extends Fragment {
     mRecyclerView.setAdapter(mAdapter);
 
     results.addChangeListener(realmChangeListener);
-
   }
 
   private RealmChangeListener realmChangeListener = new RealmChangeListener() {
@@ -93,11 +93,8 @@ public class FragmentFavourities extends Fragment {
     public void onChange() {
       Log.v("Listener", " Change in data ");
       mAdapter.update(results);
-
-
     }
   };
-
 
   @Override
   public void onStart() {

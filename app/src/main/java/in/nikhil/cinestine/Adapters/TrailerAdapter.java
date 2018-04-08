@@ -3,6 +3,7 @@ package in.nikhil.cinestine.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,14 +38,15 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.MyViewHo
     notifyDataSetChanged();
   }
 
+  @NonNull
   @Override
-  public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View v = inflater.inflate(R.layout.recycler_trailer_single_row, parent, false);
     return new MyViewHolder(v);
   }
 
   @Override
-  public void onBindViewHolder(MyViewHolder holder, int position) {
+  public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
     final Trailer current = trailers.get(position);
 
     Picasso.with(context).load(current.getKey()).into(holder.imageView);
@@ -67,7 +69,7 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.MyViewHo
     ImageView imageView;
     TextView textView;
 
-    public MyViewHolder(View itemView) {
+    MyViewHolder(View itemView) {
       super(itemView);
       imageView = itemView.findViewById(R.id.trailer_single_row_image);
       textView = itemView.findViewById(R.id.trailer_single_row_text);

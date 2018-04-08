@@ -2,6 +2,7 @@ package in.nikhil.cinestine.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,15 +43,15 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavV
     notifyDataSetChanged();
   }
 
+  @NonNull
   @Override
-  public FavViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  public FavViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View v = inflater.inflate(R.layout.custom_grid_popular, parent, false);
-    FavViewHolder holder = new FavViewHolder(v);
-    return holder;
+    return new FavViewHolder(v);
   }
 
   @Override
-  public void onBindViewHolder(FavViewHolder holder, int position) {
+  public void onBindViewHolder(@NonNull FavViewHolder holder, int position) {
     final Favourite fav = mItems.get(position);
     holder.text.setText(fav.getmOriginalTitle());
     Picasso.with(context)
@@ -71,11 +72,11 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavV
     return mItems.size();
   }
 
-  public class FavViewHolder extends RecyclerView.ViewHolder {
+  class FavViewHolder extends RecyclerView.ViewHolder {
     ImageView image;
     TextView text;
 
-    public FavViewHolder(View itemView) {
+    FavViewHolder(View itemView) {
       super(itemView);
       image = (ImageView) itemView.findViewById(R.id.popular_image);
       text = (TextView) itemView.findViewById(R.id.popular_text);

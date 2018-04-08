@@ -4,9 +4,9 @@ package in.nikhil.cinestine.Model;
  * Created by nikhil on 27-08-2016.
  */
 public class Review {
-  String id;
-  String author;
-  String content;
+  private String id;
+  private String author;
+  private String content;
 
   public Review() {
 

@@ -10,6 +10,7 @@ import io.realm.RealmConfiguration;
  * Created by nikhil on 20-08-2016.
  */
 public class MyApplication extends Application {
+
   private static MyApplication sInstance;
 
   @Override
@@ -18,8 +19,6 @@ public class MyApplication extends Application {
     sInstance = this;
     RealmConfiguration configuration = new RealmConfiguration.Builder(this).build();
     Realm.setDefaultConfiguration(configuration);
-
-
   }
 
   public static MyApplication getsInstance() {

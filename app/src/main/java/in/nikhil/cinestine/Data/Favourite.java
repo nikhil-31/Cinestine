@@ -9,19 +9,20 @@ import io.realm.internal.SharedGroup;
  */
 public class Favourite extends RealmObject {
 
+  @PrimaryKey
+  private String mId;
+
+  private String mPopularity;
+  private String mVoteCount;
+  private String mOriginalLanguage;
+  private String mTitle;
+  private String mAdult;
   private String mOriginalTitle;
   private String mPosterPath;
   private String mOverview;
   private Float mVoteAverage;
   private String mReleaseDate;
   private String mBackdrop;
-  @PrimaryKey
-  private String mId;
-  private String mPopularity;
-  private String mVoteCount;
-  private String mOriginalLanguage;
-  private String mTitle;
-  private String mAdult;
 
   public Favourite(String mOriginalTitle, String mPosterPath, String mOverview, Float mVoteAverage, String mReleaseDate, String mBackdrop, String mId, String mPopularity, String mVoteCount, String mOriginalLanguage, String mTitle, String mAdult) {
     this.mOriginalTitle = mOriginalTitle;
@@ -40,7 +41,6 @@ public class Favourite extends RealmObject {
 
   public Favourite() {
   }
-
 
   public String getmOriginalTitle() {
     return mOriginalTitle;

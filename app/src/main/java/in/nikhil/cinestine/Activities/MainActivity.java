@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements PopularAdapter.On
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
     if (getSupportActionBar() != null) {

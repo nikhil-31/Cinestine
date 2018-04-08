@@ -6,14 +6,14 @@ import in.nikhil.cinestine.Extras.TmdbUrls;
  * Created by nikhil on 27-08-2016.
  */
 public class Trailer {
-  String id;
-  String key;
-  String name;
-  String site;
-  String size;
-  String type;
-  String language;
-  String country;
+  private String id;
+  private String key;
+  private String name;
+  private String site;
+  private String size;
+  private String type;
+  private String language;
+  private String country;
 
   public Trailer() {
   }

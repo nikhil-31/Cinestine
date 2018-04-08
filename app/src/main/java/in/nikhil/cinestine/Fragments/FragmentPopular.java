@@ -1,6 +1,7 @@
 package in.nikhil.cinestine.Fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -71,20 +72,20 @@ public class FragmentPopular extends Fragment {
       mParam2 = getArguments().getString(ARG_PARAM2);
     }
 
-    volleySingleton = volleySingleton.getInstance();
+    volleySingleton = VolleySingleton.getInstance();
     requestQueue = volleySingleton.getRequestQueue();
 
 
   }
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+  public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_popular, container, false);
 
 
-    listMovieHits = (RecyclerView) view.findViewById(R.id.recycler_popular);
+    listMovieHits = view.findViewById(R.id.recycler_popular);
     GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
     listMovieHits.setLayoutManager(gridLayoutManager);
 

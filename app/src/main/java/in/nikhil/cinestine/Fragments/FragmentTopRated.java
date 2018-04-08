@@ -1,6 +1,7 @@
 package in.nikhil.cinestine.Fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,11 +37,9 @@ public class FragmentTopRated extends Fragment {
   private static final String ARG_PARAM2 = "param2";
   private String STATE_MOVIE = "state_movies";
 
-
   private String mParam1;
   private String mParam2;
 
-  private VolleySingleton volleySingleton;
   private ImageLoader imageLoader;
   private RequestQueue requestQueue;
   private RecyclerView listMovieHits;
@@ -50,7 +49,6 @@ public class FragmentTopRated extends Fragment {
   public FragmentTopRated() {
     // Required empty public constructor
   }
-
 
   public static FragmentTopRated newInstance(String param1, String param2) {
     FragmentTopRated fragment = new FragmentTopRated();
@@ -68,12 +66,12 @@ public class FragmentTopRated extends Fragment {
       mParam1 = getArguments().getString(ARG_PARAM1);
       mParam2 = getArguments().getString(ARG_PARAM2);
     }
-    volleySingleton = volleySingleton.getInstance();
+    VolleySingleton volleySingleton = VolleySingleton.getInstance();
     requestQueue = volleySingleton.getRequestQueue();
   }
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+  public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_top_rated, container, false);
@@ -104,7 +102,7 @@ public class FragmentTopRated extends Fragment {
   }
 
   @Override
-  public void onSaveInstanceState(Bundle outState) {
+  public void onSaveInstanceState(@NonNull Bundle outState) {
     super.onSaveInstanceState(outState);
     outState.putParcelableArrayList(STATE_MOVIE, ListMovies);
   }
