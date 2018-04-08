@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements PopularAdapter.On
     FavouriteAdapter.OnAdapterItemSelectedListener {
 
   private static final int MOVIE_POPULAR = 0;
-  private static final int MOVIE_TOPRATED = 1;
+  private static final int MOVIE_TOP_RATED = 1;
   private static final int MOVIE_FAVOURITE = 2;
 
   @Override
@@ -56,9 +56,9 @@ public class MainActivity extends AppCompatActivity implements PopularAdapter.On
       // DisplayFragment (Fragment B) is not in the layout (handset layout),
       // so start DisplayActivity (Activity B)
       // and pass it the info about the selected item
-      Intent mMovieDetailIntent = new Intent(MainActivity.this, DetailsActivity.class);
-      mMovieDetailIntent.putExtra("Movie", id);
-      startActivity(mMovieDetailIntent);
+      Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+      intent.putExtra("Movie", id);
+      startActivity(intent);
     } else {
       // DisplayFragment (Fragment B) is in the layout (tablet layout),
       // so tell the fragment to update its data
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements PopularAdapter.On
         case MOVIE_POPULAR:
           fragment = FragmentPopular.newInstance("", "");
           break;
-        case MOVIE_TOPRATED:
+        case MOVIE_TOP_RATED:
           fragment = FragmentTopRated.newInstance("", "");
           break;
         case MOVIE_FAVOURITE:

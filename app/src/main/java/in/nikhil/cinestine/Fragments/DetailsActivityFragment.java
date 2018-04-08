@@ -1,7 +1,9 @@
 package in.nikhil.cinestine.Fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -54,11 +56,8 @@ public class DetailsActivityFragment extends Fragment {
   }
 
   private Movie movie;
-  private Toolbar toolbar;
 
-  private VolleySingleton volleySingleton;
   private RequestQueue requestQueue;
-
 
   private TrailerAdapter trailerAdapter;
   private ReviewAdapter reviewAdapter;
@@ -70,30 +69,37 @@ public class DetailsActivityFragment extends Fragment {
   private String trailerURL;
   private String reviewURL;
 
-  CollapsingToolbarLayout collapsingToolbar;
-  ImageView poster;
-  TextView releaseDate;
-  TextView rating;
-  TextView title;
-  TextView overview;
-  ImageView backdrop;
-  FloatingActionButton fab;
+  private CollapsingToolbarLayout collapsingToolbar;
+  private ImageView poster;
+  private TextView releaseDate;
+  private TextView rating;
+  private TextView title;
+  private TextView overview;
+  private ImageView backdrop;
+  private FloatingActionButton fab;
 
+  private Activity mActivity;
+
+  @Override
+  public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    mActivity = getActivity();
+  }
 
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     View v = inflater.inflate(R.layout.fragment_details, container, false);
 
-    movie = getActivity().getIntent().getParcelableExtra("Movie");
+    movie = mActivity.getIntent().getParcelableExtra("Movie");
 
-    toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+    Toolbar toolbar = v.findViewById(R.id.toolbar);
 
-    toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.mipmap.ic_back));
+    toolbar.setNavigationIcon(ContextCompat.getDrawable(mActivity, R.mipmap.ic_back));
     toolbar.setNavigationOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        getActivity().finish();
+        mActivity.finish();
 
       }
     });
@@ -112,75 +118,75 @@ public class DetailsActivityFragment extends Fragment {
       }
     });
 
-    collapsingToolbar = (CollapsingToolbarLayout) v.findViewById(R.id.collapsing_toolbar);
+    collapsingToolbar = v.findViewById(R.id.collapsing_toolbar);
     collapsingToolbar.setExpandedTitleColor(getResources().getColor(R.color.transperent));
 
-    fab = (FloatingActionButton) v.findViewById(R.id.fab);
+    fab = v.findViewById(R.id.fab);
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Snackbar.make(view, "Movie Saved", Snackbar.LENGTH_LONG)
-            .setAction("Action", null).show();
+        Snackbar.make(view, "Movie Saved", Snackbar.LENGTH_LONG).show();
         addMovie();
       }
     });
 
-    if (isMovieinDatabase()) {
-      fab.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.mipmap.ic_like));
-    } else {
-      fab.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.mipmap.ic_like_outline));
-    }
+    trailerAdapter = new TrailerAdapter(mActivity);
 
-    trailerAdapter = new TrailerAdapter(getActivity());
+    RecyclerView recyclerTrailer = v.findViewById(R.id.recycler_trailer);
+    LinearLayoutManager layoutManagerTrailer = new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false);
+    recyclerTrailer.setLayoutManager(layoutManagerTrailer);
+    recyclerTrailer.setAdapter(trailerAdapter);
 
-    RecyclerView recyclertrailer = (RecyclerView) v.findViewById(R.id.recycler_trailer);
-    LinearLayoutManager layoutManagertrailer = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-    recyclertrailer.setLayoutManager(layoutManagertrailer);
-    recyclertrailer.setAdapter(trailerAdapter);
+    reviewAdapter = new ReviewAdapter(mActivity);
 
-    reviewAdapter = new ReviewAdapter(getActivity());
-
-    RecyclerView recyclerReview = (RecyclerView) v.findViewById(R.id.recycler_review);
-    LinearLayoutManager layoutManagerreview = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-    recyclerReview.setLayoutManager(layoutManagerreview);
+    RecyclerView recyclerReview = v.findViewById(R.id.recycler_review);
+    LinearLayoutManager layoutManagerReview = new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false);
+    recyclerReview.setLayoutManager(layoutManagerReview);
     recyclerReview.setAdapter(reviewAdapter);
     recyclerReview.setNestedScrollingEnabled(false);
 
-    poster = (ImageView) v.findViewById(R.id.poster_details);
-    releaseDate = (TextView) v.findViewById(R.id.Release_write);
-    rating = (TextView) v.findViewById(R.id.Rating_write);
-    title = (TextView) v.findViewById(R.id.Title_write);
-    overview = (TextView) v.findViewById(R.id.overview_new);
-    backdrop = (ImageView) v.findViewById(R.id.backdrop1);
+    poster = v.findViewById(R.id.poster_details);
+    releaseDate = v.findViewById(R.id.Release_write);
+    rating = v.findViewById(R.id.Rating_write);
+    title = v.findViewById(R.id.Title_write);
+    overview = v.findViewById(R.id.overview_new);
+    backdrop = v.findViewById(R.id.backdrop1);
 
-    volleySingleton = volleySingleton.getInstance();
+    VolleySingleton volleySingleton = VolleySingleton.getInstance();
     requestQueue = volleySingleton.getRequestQueue();
     setData(movie);
 
-//        isMovieinDatabase();
+//        isMovieInDatabase();
     return v;
   }
 
   public void updateContent(Movie movie) {
-    setData(movie);
     this.movie = movie;
+    setData(movie);
   }
-
 
   public void setData(Movie movie) {
     try {
       collapsingToolbar.setTitle(movie.getOriginalTitle());
-      Picasso.with(getActivity())
+
+      if (isMovieInDatabase()) {
+        fab.setImageDrawable(ContextCompat.getDrawable(mActivity, R.mipmap.ic_like));
+      } else {
+        fab.setImageDrawable(ContextCompat.getDrawable(mActivity, R.mipmap.ic_like_outline));
+      }
+
+      Picasso.with(mActivity)
           .load(movie.getPosterPath())
           .into(poster);
 
-      Picasso.with(getActivity())
+      Picasso.with(mActivity)
           .load(movie.getBackdrop())
           .into(backdrop);
 
       releaseDate.setText(movie.getReleaseDate());
 
-      rating.setText(movie.getVoteAverage().toString() + "/10");
+      String rate = movie.getVoteAverage().toString() + "/10";
+      rating.setText(rate);
 
       title.setText(movie.getOriginalTitle());
 
@@ -192,21 +198,17 @@ public class DetailsActivityFragment extends Fragment {
       sendReviewJsonRequest(reviewURL);
 
     } catch (NullPointerException e) {
-      Toast.makeText(getActivity(), "Please select a movie", Toast.LENGTH_LONG).show();
+      Toast.makeText(mActivity, "Please select a movie", Toast.LENGTH_LONG).show();
     }
-
   }
 
-  private boolean isMovieinDatabase() {
+  private boolean isMovieInDatabase() {
     mRealm = Realm.getDefaultInstance();
-    RealmResults<Favourite> saved = mRealm.where(Favourite.class).contains("mId", movie.getmId()).findAll();
-    if (saved.size() != 0) {
-      Favourite fav = saved.get(0);
-      return true;
-    } else {
-      return false;
+    if (movie != null) {
+      RealmResults<Favourite> saved = mRealm.where(Favourite.class).contains("mId", movie.getmId()).findAll();
+      return saved.size() != 0;
     }
-
+    return false;
   }
 
   private void addMovie() {
@@ -228,15 +230,14 @@ public class DetailsActivityFragment extends Fragment {
     realm.copyToRealmOrUpdate(favourite);
     realm.commitTransaction();
     realm.close();
-    fab.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.mipmap.ic_like));
+    fab.setImageDrawable(ContextCompat.getDrawable(mActivity, R.mipmap.ic_like));
   }
-
 
   private void sendTrailerJsonRequest(String trailerURL) {
 
-    JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
-        trailerURL,
-        null
+    JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET
+        , trailerURL
+        , null
         , new Response.Listener<JSONObject>() {
       @Override
       public void onResponse(JSONObject response) {
@@ -251,7 +252,7 @@ public class DetailsActivityFragment extends Fragment {
     }, new Response.ErrorListener() {
       @Override
       public void onErrorResponse(VolleyError error) {
-        Toast.makeText(getActivity(), "Error, Unable to fetch trailers", Toast.LENGTH_LONG).show();
+        Toast.makeText(mActivity, "Error, Unable to fetch trailers", Toast.LENGTH_LONG).show();
       }
     });
     requestQueue.add(request);
@@ -276,7 +277,6 @@ public class DetailsActivityFragment extends Fragment {
     }
 
     JSONArray results = response.getJSONArray(RESULTS);
-    StringBuilder builder = new StringBuilder();
     for (int i = 0; i < results.length(); i++) {
 
       Trailer current = new Trailer();
@@ -292,7 +292,6 @@ public class DetailsActivityFragment extends Fragment {
       current.setLanguage(jsonObject.getString(LANGUAGE));
       current.setCountry(jsonObject.getString(COUNTRY));
 
-      builder.append("Name " + jsonObject.optString(NAME) + "\n");
       data.add(current);
     }
     return data;
@@ -300,9 +299,9 @@ public class DetailsActivityFragment extends Fragment {
 
   private void sendReviewJsonRequest(String reviewURL) {
 
-    JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
-        reviewURL,
-        null
+    JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET
+        , reviewURL
+        , null
         , new Response.Listener<JSONObject>() {
       @Override
       public void onResponse(JSONObject response) {
@@ -317,7 +316,7 @@ public class DetailsActivityFragment extends Fragment {
     }, new Response.ErrorListener() {
       @Override
       public void onErrorResponse(VolleyError error) {
-        Toast.makeText(getActivity(), "Error getting reviews", Toast.LENGTH_LONG).show();
+        Toast.makeText(mActivity, "Error getting reviews", Toast.LENGTH_LONG).show();
       }
     });
     requestQueue.add(request);
@@ -357,10 +356,8 @@ public class DetailsActivityFragment extends Fragment {
   public Intent shareIntent(String data) {
     Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
     sharingIntent.setType("text/plain");
-    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Sent from Cinestine, Check this out");
+    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Sent from Cinestine");
     sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, data);
     return sharingIntent;
   }
-
-
 }
