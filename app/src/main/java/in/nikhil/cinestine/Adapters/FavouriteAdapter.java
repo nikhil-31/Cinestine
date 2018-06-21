@@ -23,20 +23,16 @@ import io.realm.RealmResults;
  */
 public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavViewHolder> {
 
-  private Context context;
-
   private LayoutInflater inflater;
   private RealmResults<Favourite> mItems;
-
   private Activity mAct;
   private OnAdapterItemSelectedListener mAdapterCallback;
 
-  public FavouriteAdapter(Context context, RealmResults<Favourite> results, Activity activity) {
+  public FavouriteAdapter(Activity activity, RealmResults<Favourite> results) {
     mItems = results;
-    this.context = context;
-    this.mAct = activity;
-    mAdapterCallback = (OnAdapterItemSelectedListener) mAct;
-    inflater = LayoutInflater.from(context);
+    mAdapterCallback = (OnAdapterItemSelectedListener) activity;
+    mAct = activity;
+    inflater = LayoutInflater.from(activity);
   }
 
   public void update(RealmResults<Favourite> results) {
@@ -55,7 +51,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavV
   public void onBindViewHolder(@NonNull FavViewHolder holder, int position) {
     final Favourite fav = mItems.get(position);
 
-    Picasso.with(context).load(fav.getmPosterPath()).into(holder.image);
+    Picasso.with(mAct).load(fav.getmPosterPath()).into(holder.image);
 
     holder.text.setText(fav.getmOriginalTitle());
     holder.itemView.setOnClickListener(new View.OnClickListener() {

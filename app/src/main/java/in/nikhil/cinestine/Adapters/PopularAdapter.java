@@ -23,18 +23,16 @@ import in.nikhil.cinestine.R;
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHolder> {
 
   private ArrayList<Movie> mMovie = new ArrayList<Movie>();
-  private Context context;
 
   private LayoutInflater inflater;
+  private Activity mActivity;
 
-  private Activity mAct;
   private OnAdapterItemSelectedListener mAdapterCallback;
 
-  public PopularAdapter(Context context, Activity activity) {
-    this.context = context;
-    this.mAct = activity;
-    mAdapterCallback = (OnAdapterItemSelectedListener) mAct;
-    inflater = LayoutInflater.from(context);
+  public PopularAdapter(Activity activity) {
+    mAdapterCallback = (OnAdapterItemSelectedListener) activity;
+    inflater = LayoutInflater.from(activity);
+    mActivity = activity;
   }
 
   public void setMoviesList(ArrayList<Movie> listmovies) {
@@ -50,18 +48,10 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
   }
 
   @Override
-  public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-    final Movie currentMovie = mMovie.get(position);
+  public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    Movie currentMovie = mMovie.get(position);
     holder.text.setText(currentMovie.getOriginalTitle());
-    Picasso.with(context).load(currentMovie.getPosterPath()).into(holder.image);
-    holder.itemView.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        if (mAdapterCallback != null) {
-          mAdapterCallback.onItemSelected(currentMovie);
-        }
-      }
-    });
+    Picasso.with(mActivity).load(currentMovie.getPosterPath()).into(holder.image);
   }
 
   @Override
@@ -77,6 +67,14 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
       super(itemview);
       image = itemview.findViewById(R.id.popular_image);
       text = itemview.findViewById(R.id.popular_text);
+      itemview.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          if (mAdapterCallback != null) {
+            mAdapterCallback.onItemSelected(mMovie.get(getAdapterPosition()));
+          }
+        }
+      });
     }
   }
 

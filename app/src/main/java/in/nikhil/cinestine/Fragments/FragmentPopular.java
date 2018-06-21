@@ -98,7 +98,7 @@ public class FragmentPopular extends Fragment {
       }
     });
 
-    adapter = new PopularAdapter(getActivity(), getActivity());
+    adapter = new PopularAdapter(getActivity());
     listMovieHits.setAdapter(adapter);
     if (savedInstanceState != null) {
       ListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIE);
@@ -168,12 +168,12 @@ public class FragmentPopular extends Fragment {
 
       JSONObject jsonObject = results.getJSONObject(i);
 
-      current.setPosterPath( "http://image.tmdb.org/t/p/w500/" + jsonObject.getString(POSTER_PATH));
+      current.setPosterPath("http://image.tmdb.org/t/p/w500/" + jsonObject.getString(POSTER_PATH));
       current.setOverview(jsonObject.optString(OVERVIEW));
       current.setOriginalTitle(jsonObject.optString(ORIGINAL_TITLE));
       current.setReleaseDate(jsonObject.optString(RELEASE_DATE));
       current.setVoteAverage(Float.parseFloat(jsonObject.optString(VOTE_AVERAGE)));
-      current.setBackdrop( "http://image.tmdb.org/t/p/w500/" + jsonObject.optString(BACKDROP_PATH));
+      current.setBackdrop("http://image.tmdb.org/t/p/w500/" + jsonObject.optString(BACKDROP_PATH));
       current.setId(jsonObject.getString(ID));
       current.setPopularity(jsonObject.getString(POPULARITY));
       current.setVoteCount(jsonObject.getString(VOTE_COUNT));

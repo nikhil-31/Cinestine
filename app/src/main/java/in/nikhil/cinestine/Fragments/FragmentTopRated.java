@@ -89,7 +89,7 @@ public class FragmentTopRated extends Fragment {
       }
     });
 
-    adapter = new PopularAdapter(getActivity(), getActivity());
+    adapter = new PopularAdapter(getActivity());
 
     listMovieHits.setAdapter(adapter);
     if (savedInstanceState != null) {

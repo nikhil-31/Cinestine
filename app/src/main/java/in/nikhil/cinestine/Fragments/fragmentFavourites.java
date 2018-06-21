@@ -66,7 +66,7 @@ public class fragmentFavourites extends Fragment {
     mRealm = Realm.getDefaultInstance();
     results = mRealm.where(Favourite.class).findAllAsync();
 
-    mAdapter = new FavouriteAdapter(getActivity(), results, getActivity());
+    mAdapter = new FavouriteAdapter(getActivity(), results);
     mRecyclerView.setAdapter(mAdapter);
 
     return v;
@@ -77,7 +77,7 @@ public class fragmentFavourites extends Fragment {
     super.onResume();
     mRealm = Realm.getDefaultInstance();
     results = mRealm.where(Favourite.class).findAllAsync();
-    mAdapter = new FavouriteAdapter(getActivity(), results, getActivity());
+    mAdapter = new FavouriteAdapter(getActivity(), results);
     mRecyclerView.setAdapter(mAdapter);
 
     results.addChangeListener(realmChangeListener);
