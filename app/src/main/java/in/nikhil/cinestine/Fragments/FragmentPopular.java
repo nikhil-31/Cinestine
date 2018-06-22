@@ -37,7 +37,6 @@ public class FragmentPopular extends Fragment {
   private static final String ARG_PARAM2 = "param2";
   public String STATE_MOVIE = "state_movies";
 
-
   private String mParam1;
   private String mParam2;
 
@@ -62,7 +61,6 @@ public class FragmentPopular extends Fragment {
     return fragment;
   }
 
-
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -73,8 +71,6 @@ public class FragmentPopular extends Fragment {
 
     volleySingleton = VolleySingleton.getInstance();
     requestQueue = volleySingleton.getRequestQueue();
-
-
   }
 
   @Override
@@ -82,7 +78,6 @@ public class FragmentPopular extends Fragment {
                            Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_popular, container, false);
-
 
     listMovieHits = view.findViewById(R.id.recycler_popular);
     GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
@@ -94,7 +89,6 @@ public class FragmentPopular extends Fragment {
         // Triggered only when new data needs to be appended to the list
         // Add whatever code is needed to append new items to the bottom of the list
         sendJsonRequest(page);
-//                Snackbar.make(listMovieHits, "Loading page " + page, Snackbar.LENGTH_LONG).show();
       }
     });
 
@@ -110,7 +104,7 @@ public class FragmentPopular extends Fragment {
   }
 
   @Override
-  public void onSaveInstanceState(Bundle outState) {
+  public void onSaveInstanceState(@NonNull Bundle outState) {
     super.onSaveInstanceState(outState);
     outState.putParcelableArrayList(STATE_MOVIE, ListMovies);
   }
@@ -184,8 +178,5 @@ public class FragmentPopular extends Fragment {
       data.add(current);
     }
     return data;
-
   }
-
-
 }

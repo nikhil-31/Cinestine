@@ -98,10 +98,10 @@ public class MainActivity extends AppCompatActivity implements PopularAdapter.On
   }
 
   //Using Fragment state pager adapter because it will save the state and not discard it
-  //If we were using the FragmentPagerAdapter the onsave instance will have never been called in the
+  //If we were using the FragmentPagerAdapter the onSaveInstance will have never been called in the
   //Fragments
   private class MyPagerAdapter extends FragmentStatePagerAdapter {
-    String[] tabs = getResources().getStringArray(R.array.tabs);
+    String[] tabs;
 
     MyPagerAdapter(FragmentManager fm) {
       super(fm);

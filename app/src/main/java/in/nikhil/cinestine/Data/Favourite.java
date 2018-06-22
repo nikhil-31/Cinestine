@@ -24,7 +24,10 @@ public class Favourite extends RealmObject {
   private String mReleaseDate;
   private String mBackdrop;
 
-  public Favourite(String mOriginalTitle, String mPosterPath, String mOverview, Float mVoteAverage, String mReleaseDate, String mBackdrop, String mId, String mPopularity, String mVoteCount, String mOriginalLanguage, String mTitle, String mAdult) {
+  public Favourite(String mOriginalTitle, String mPosterPath, String mOverview,
+                   Float mVoteAverage, String mReleaseDate, String mBackdrop, String mId,
+                   String mPopularity, String mVoteCount, String mOriginalLanguage,
+                   String mTitle, String mAdult) {
     this.mOriginalTitle = mOriginalTitle;
     this.mPosterPath = mPosterPath;
     this.mOverview = mOverview;

@@ -85,7 +85,6 @@ public class FragmentTopRated extends Fragment {
         // Triggered only when new data needs to be appended to the list
         // Add whatever code is needed to append new items to the bottom of the list
         sendJsonRequest(page);
-//                Snackbar.make(listMovieHits, "Loading page " + page, Snackbar.LENGTH_LONG).show();
       }
     });
 
@@ -110,9 +109,9 @@ public class FragmentTopRated extends Fragment {
   private void sendJsonRequest(int page) {
 
 
-    JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
-        TmdbUrls.MOVIE_BASE_URL + TmdbUrls.SORT_TOP_RATED + TmdbUrls.API_KEY + TmdbUrls.PAGE + page,
-        null
+    JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET
+        ,TmdbUrls.MOVIE_BASE_URL + TmdbUrls.SORT_TOP_RATED + TmdbUrls.API_KEY + TmdbUrls.PAGE + page
+        , null
         , new Response.Listener<JSONObject>() {
       @Override
       public void onResponse(JSONObject response) {
