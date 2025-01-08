@@ -2,7 +2,7 @@ package in.nikhil.cinestine.Data;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import io.realm.internal.SharedGroup;
+//import io.realm.internal.SharedGroup;
 
 /**
  * Created by nikhil on 01-09-2016.

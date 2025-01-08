@@ -178,11 +178,11 @@ public class DetailsActivityFragment extends Fragment {
         fab.setImageDrawable(ContextCompat.getDrawable(mActivity, R.mipmap.ic_like_outline));
       }
 
-      Picasso.with(mActivity)
+      Picasso.get()
           .load(movie.getPosterPath())
           .into(poster);
 
-      Picasso.with(mActivity)
+      Picasso.get()
           .load(movie.getBackdrop())
           .into(backdrop);
 

@@ -49,7 +49,7 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.MyViewHo
   public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
     final Trailer current = trailers.get(position);
 
-    Picasso.with(context).load(current.getKey()).into(holder.imageView);
+    Picasso.get().load(current.getKey()).into(holder.imageView);
     holder.textView.setText(current.getName());
     holder.imageView.setOnClickListener(new ImageView.OnClickListener() {
       @Override

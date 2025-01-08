@@ -51,7 +51,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
   public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
     Movie currentMovie = mMovie.get(position);
     holder.text.setText(currentMovie.getOriginalTitle());
-    Picasso.with(mActivity).load(currentMovie.getPosterPath()).into(holder.image);
+    Picasso.get().load(currentMovie.getPosterPath()).into(holder.image);
   }
 
   @Override

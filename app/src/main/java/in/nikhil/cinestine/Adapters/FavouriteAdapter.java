@@ -51,7 +51,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.FavV
   public void onBindViewHolder(@NonNull FavViewHolder holder, int position) {
     final Favourite fav = mItems.get(position);
 
-    Picasso.with(mAct).load(fav.getmPosterPath()).into(holder.image);
+    Picasso.get().load(fav.getmPosterPath()).into(holder.image);
 
     holder.text.setText(fav.getmOriginalTitle());
     holder.itemView.setOnClickListener(new View.OnClickListener() {

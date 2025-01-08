@@ -11,23 +11,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import in.nikhil.cinestine.Adapters.FavouriteAdapter;
-import in.nikhil.cinestine.Data.Favourite;
 import in.nikhil.cinestine.R;
-import io.realm.Realm;
-import io.realm.RealmChangeListener;
-import io.realm.RealmResults;
+//import io.realm.Realm;
+//import io.realm.RealmChangeListener;
+//import io.realm.RealmResults;
 
 public class fragmentFavourites extends Fragment {
   private static final String ARG_PARAM1 = "param1";
   private static final String ARG_PARAM2 = "param2";
 
-  private String mParam1;
-  private String mParam2;
-
   private RecyclerView mRecyclerView;
 
-  Realm mRealm;
-  RealmResults<Favourite> results;
+//  Realm mRealm;
+//  RealmResults<Favourite> results;
   private FavouriteAdapter mAdapter;
 
   public fragmentFavourites() {
@@ -46,10 +42,6 @@ public class fragmentFavourites extends Fragment {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    if (getArguments() != null) {
-      mParam1 = getArguments().getString(ARG_PARAM1);
-      mParam2 = getArguments().getString(ARG_PARAM2);
-    }
   }
 
   @Override
@@ -63,11 +55,11 @@ public class fragmentFavourites extends Fragment {
     GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
     mRecyclerView.setLayoutManager(gridLayoutManager);
 
-    mRealm = Realm.getDefaultInstance();
-    results = mRealm.where(Favourite.class).findAllAsync();
+//    mRealm = Realm.getDefaultInstance();
+//    results = mRealm.where(Favourite.class).findAllAsync();
 
-    mAdapter = new FavouriteAdapter(getActivity(), results);
-    mRecyclerView.setAdapter(mAdapter);
+//    mAdapter = new FavouriteAdapter(getActivity(), results);
+//    mRecyclerView.setAdapter(mAdapter);
 
     return v;
   }
@@ -75,31 +67,31 @@ public class fragmentFavourites extends Fragment {
   @Override
   public void onResume() {
     super.onResume();
-    mRealm = Realm.getDefaultInstance();
-    results = mRealm.where(Favourite.class).findAllAsync();
-    mAdapter = new FavouriteAdapter(getActivity(), results);
-    mRecyclerView.setAdapter(mAdapter);
+//    mRealm = Realm.getDefaultInstance();
+//    results = mRealm.where(Favourite.class).findAllAsync();
+//    mAdapter = new FavouriteAdapter(getActivity(), results);
+//    mRecyclerView.setAdapter(mAdapter);
 
-    results.addChangeListener(realmChangeListener);
+//    results.addChangeListener(realmChangeListener);
   }
 
-  private RealmChangeListener realmChangeListener = new RealmChangeListener() {
-    @Override
-    public void onChange() {
-      mAdapter.update(results);
-    }
-  };
+//  private RealmChangeListener realmChangeListener = new RealmChangeListener() {
+//    @Override
+//    public void onChange() {
+//      mAdapter.update(results);
+//    }
+//  };
 
   @Override
   public void onStart() {
     super.onStart();
-    results.addChangeListener(realmChangeListener);
+//    results.addChangeListener(realmChangeListener);
   }
 
   @Override
   public void onStop() {
     super.onStop();
-    results.removeChangeListener(realmChangeListener);
+//    results.removeChangeListener(realmChangeListener);
   }
 
 }
