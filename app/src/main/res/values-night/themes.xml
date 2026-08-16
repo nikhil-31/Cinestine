@@ -1,0 +1,30 @@
+<resources>
+  <style name="Theme.Cinestine" parent="Theme.Material3.DayNight.NoActionBar">
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorOnPrimary">@color/colorOnPrimary</item>
+    <item name="colorPrimaryContainer">@color/colorPrimaryContainer</item>
+    <item name="colorOnPrimaryContainer">@color/colorOnPrimaryContainer</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+    <item name="colorSecondary">@color/colorSecondary</item>
+    <item name="colorOnSecondary">@color/colorOnSecondary</item>
+    <item name="colorSurface">@color/surface</item>
+    <item name="colorOnSurface">@color/on_surface</item>
+    <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
+    <item name="colorSurfaceContainer">@color/surface_container</item>
+    <item name="colorSurfaceVariant">@color/surface_variant</item>
+    <item name="colorOutline">@color/outline</item>
+    <item name="android:colorBackground">@color/background</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:navigationBarColor">@android:color/transparent</item>
+    <item name="android:windowLightStatusBar">false</item>
+    <item name="android:windowLightNavigationBar">false</item>
+    <item name="android:windowBackground">@color/background</item>
+    <item name="toolbarStyle">@style/Widget.Cinestine.Toolbar</item>
+    <item name="materialCardViewStyle">@style/Widget.Cinestine.Card</item>
+    <item name="floatingActionButtonStyle">@style/Widget.Cinestine.Fab</item>
+    <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Cinestine.Small</item>
+    <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Cinestine.Medium</item>
+    <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Cinestine.Large</item>
+  </style>
+</resources>

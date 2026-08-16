@@ -1,0 +1,7 @@
+<resources>
+  <dimen name="detail_backdrop_height">240dp</dimen>
+  <dimen name="detail_poster_width">96dp</dimen>
+  <dimen name="detail_poster_height">144dp</dimen>
+  <dimen name="trailer_width">260dp</dimen>
+  <dimen name="trailer_height">146dp</dimen>
+</resources>

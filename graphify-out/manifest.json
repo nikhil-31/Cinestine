@@ -1,0 +1,282 @@
+{
+  "app/build.gradle.kts": {
+    "mtime": 1786879329.7373388,
+    "ast_hash": "07f3e86371cc75b2bc00e274e625481d",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/CinestineApp.kt": {
+    "mtime": 1786885669.4877293,
+    "ast_hash": "06f895c957aa94789feb8f44a5d91c0e",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/data/MovieRepository.kt": {
+    "mtime": 1786898058.7603366,
+    "ast_hash": "d08d4f364649a66b78b1069abd66c98b",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/data/local/AppDatabase.kt": {
+    "mtime": 1786874778.622607,
+    "ast_hash": "30c22ca701c0cc241cc8281c886d3685",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/data/local/FavouriteDao.kt": {
+    "mtime": 1786874778.6111164,
+    "ast_hash": "aecdc4ba31f035d3addb3c6c66003175",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/data/local/FavouriteEntity.kt": {
+    "mtime": 1786874778.618822,
+    "ast_hash": "6b95985e6f5850488a6ac1ebb81c5b73",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/data/remote/TmdbApi.kt": {
+    "mtime": 1786898058.3820376,
+    "ast_hash": "fe76902e9c27a9b13172740709ab198c",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/data/remote/TmdbDtos.kt": {
+    "mtime": 1786874778.5913103,
+    "ast_hash": "8267f69efc07c4758067c958d2072c93",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/model/Movie.kt": {
+    "mtime": 1786874778.6151412,
+    "ast_hash": "f9f6906275e28f631534bb3c524798f3",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/details/DetailsActivity.kt": {
+    "mtime": 1786883085.2119694,
+    "ast_hash": "4c7dd9142b5e4efe1d2585c3f40c65d1",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/details/DetailsFragment.kt": {
+    "mtime": 1786883107.1871357,
+    "ast_hash": "74665ecea58a44f341e6d589f9d1dbdc",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/details/DetailsViewModel.kt": {
+    "mtime": 1786874778.672095,
+    "ast_hash": "31ac5d83a97dae6b0c72f174fe3632cb",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/details/ReviewAdapter.kt": {
+    "mtime": 1786879331.899002,
+    "ast_hash": "ee16eff58a5342b5b6624e17aae47772",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/details/TrailerAdapter.kt": {
+    "mtime": 1786874778.6774406,
+    "ast_hash": "9088344085a8e005d1297c3d6bd43513",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/favourites/FavouritesFragment.kt": {
+    "mtime": 1786886303.2439587,
+    "ast_hash": "a8196d2fb2730ecdba353414bcd613ac",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/favourites/FavouritesViewModel.kt": {
+    "mtime": 1786874778.653923,
+    "ast_hash": "b7431a37a5b1f3c8855eead25a97fc8a",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/main/MainActivity.kt": {
+    "mtime": 1786898156.1092546,
+    "ast_hash": "c678eb1e0f97e73e5f5829f5624ed3db",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/main/MoviePagerAdapter.kt": {
+    "mtime": 1786874778.6264243,
+    "ast_hash": "797a53f0479a11eef4fdda37e0b5cfc7",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/main/MovieSelectionListener.kt": {
+    "mtime": 1786886300.657092,
+    "ast_hash": "f4a48155b6b8c1353dd68fb3bdfa0353",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/movie/MovieAdapter.kt": {
+    "mtime": 1786883089.6621234,
+    "ast_hash": "ae9eb119521234a96f58d0c362c6bd2c",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/movie/MovieListFragment.kt": {
+    "mtime": 1786886302.731196,
+    "ast_hash": "357431eeb13362e4a9f07d83daa91879",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/movie/MovieListViewModel.kt": {
+    "mtime": 1786882001.4985309,
+    "ast_hash": "6cd1e2f5ca06d43aa97b24ef721723ce",
+    "semantic_hash": ""
+  },
+  "app/src/test/java/nikhil/cinestine/ExampleUnitTest.java": {
+    "mtime": 1786874778.6018925,
+    "ast_hash": "e14ce32a72a16aa6b7c8d560ba6fb3ff",
+    "semantic_hash": ""
+  },
+  "build.gradle.kts": {
+    "mtime": 1786874553.5194447,
+    "ast_hash": "d88179a01a72e18892537be952c79ffd",
+    "semantic_hash": ""
+  },
+  "gradlew": {
+    "mtime": 1736264493.9390757,
+    "ast_hash": "7f1cd7eb3f75a1dc85cd37753972a6e2",
+    "semantic_hash": ""
+  },
+  "settings.gradle.kts": {
+    "mtime": 1786874553.3124056,
+    "ast_hash": "d1926f37d502e9eb3f3e9773ebf89a9c",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1736264493.9272897,
+    "ast_hash": "38e24032be915c0dfd80d031a007a201",
+    "semantic_hash": ""
+  },
+  "app/src/main/ic_launcher-web.png": {
+    "mtime": 1736264493.9286,
+    "ast_hash": "487a7f4b86bcf885f3afe67741bf4595",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-hdpi/ic_back.png": {
+    "mtime": 1736264493.9343529,
+    "ast_hash": "1c15740b3f43bf3477696c84e0cf4f8b",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-hdpi/ic_launcher.png": {
+    "mtime": 1736264493.934474,
+    "ast_hash": "1c806d911c8013271aca63b2b4acf200",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-hdpi/ic_like.png": {
+    "mtime": 1736264493.934603,
+    "ast_hash": "9f50a467e469cc18885adda8cb3ec86a",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-hdpi/ic_like_outline.png": {
+    "mtime": 1736264493.934704,
+    "ast_hash": "a9b1a614ab28933e351f90221c559b2c",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-hdpi/ic_share.png": {
+    "mtime": 1736264493.9348092,
+    "ast_hash": "a04eef4b1764922d68622b7e2a033abb",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-mdpi/ic_back.png": {
+    "mtime": 1736264493.93497,
+    "ast_hash": "1c15740b3f43bf3477696c84e0cf4f8b",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-mdpi/ic_launcher.png": {
+    "mtime": 1736264493.9350789,
+    "ast_hash": "98f9deaeeb39e155da95f2cb7cc24e37",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-mdpi/ic_like.png": {
+    "mtime": 1736264493.9351969,
+    "ast_hash": "c3ec750d7697711e180501d55b604318",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-mdpi/ic_like_outline.png": {
+    "mtime": 1736264493.935304,
+    "ast_hash": "2850c4d6120e6f3c7413f2fd0c3e25c2",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-mdpi/ic_share.png": {
+    "mtime": 1736264493.9354043,
+    "ast_hash": "67b75f66d71ceb62135f8a453cc4e7dc",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-xhdpi/ic_back.png": {
+    "mtime": 1736264493.9355812,
+    "ast_hash": "155054d16046a9dd641fcfa957b5866c",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-xhdpi/ic_launcher.png": {
+    "mtime": 1736264493.9356778,
+    "ast_hash": "0cf421f6558955fe45946e7caf606308",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-xhdpi/ic_like.png": {
+    "mtime": 1736264493.9357944,
+    "ast_hash": "bf27b45dd82764e61ec163cc5ab4bc92",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-xhdpi/ic_like_outline.png": {
+    "mtime": 1736264493.9358993,
+    "ast_hash": "4e867ce0f737ee8b00868397666af457",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-xhdpi/ic_share.png": {
+    "mtime": 1736264493.9359977,
+    "ast_hash": "5b1468f10c8166d93c6ce66b666120e4",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-xxhdpi/ic_back.png": {
+    "mtime": 1736264493.9361467,
+    "ast_hash": "38c0a56776d7625d6b883ff336c6cad7",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-xxhdpi/ic_launcher.png": {
+    "mtime": 1736264493.9362416,
+    "ast_hash": "8e823dc03f64a5fd2006633016667050",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-xxhdpi/ic_like.png": {
+    "mtime": 1736264493.936345,
+    "ast_hash": "c217b1dc9f7210ad9b74dd195171fe55",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-xxhdpi/ic_like_outline.png": {
+    "mtime": 1736264493.9364548,
+    "ast_hash": "42f3474d745b36d4ddf0b768da9130f6",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-xxhdpi/ic_share.png": {
+    "mtime": 1736264493.936565,
+    "ast_hash": "6ffaf615b8f6b3dfb5ca84c237758d09",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-xxxhdpi/ic_back.png": {
+    "mtime": 1736264493.936726,
+    "ast_hash": "15b67e302072d50c53a08e16d202a013",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-xxxhdpi/ic_launcher.png": {
+    "mtime": 1736264493.9369235,
+    "ast_hash": "95b64cfbb484560c21c26c5d401a06b1",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-xxxhdpi/ic_like.png": {
+    "mtime": 1736264493.9370575,
+    "ast_hash": "b3adda175db4f92e3d4b8b91b9da2651",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-xxxhdpi/ic_like_outline.png": {
+    "mtime": 1736264493.937159,
+    "ast_hash": "a9b1a614ab28933e351f90221c559b2c",
+    "semantic_hash": ""
+  },
+  "app/src/main/res/mipmap-xxxhdpi/ic_share.png": {
+    "mtime": 1736264493.93727,
+    "ast_hash": "51409b99d0de9c4356cdf48fec0857dd",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/ThemePreferences.kt": {
+    "mtime": 1786885667.3562484,
+    "ast_hash": "9bee5b74b6b2f3aea80b6ce157b5ccb0",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/search/SearchFragment.kt": {
+    "mtime": 1786898071.7718213,
+    "ast_hash": "c3d39313311dbb90cfbf448e5faf528d",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/search/SearchViewModel.kt": {
+    "mtime": 1786898071.5377114,
+    "ast_hash": "4e0ce32801908a9d3d47ba098d35440a",
+    "semantic_hash": ""
+  }
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="colorPrimary">#FF8A80</color>
+  <color name="colorPrimaryDark">#141010</color>
+  <color name="colorPrimaryContainer">#5C1612</color>
+  <color name="colorOnPrimary">#3B0604</color>
+  <color name="colorOnPrimaryContainer">#FFDAD6</color>
+  <color name="colorAccent">#FF8A80</color>
+  <color name="colorSecondary">#E8C36A</color>
+  <color name="colorOnSecondary">#3F2E00</color>
+  <color name="colorHighlight">#3A2E2B</color>
+  <color name="background">#100E0D</color>
+  <color name="surface">#1A1614</color>
+  <color name="surface_container">#221C1A</color>
+  <color name="surface_variant">#2A2320</color>
+  <color name="on_surface">#F5EBE6</color>
+  <color name="on_surface_variant">#C9B8B2</color>
+  <color name="outline">#4A3E3A</color>
+  <color name="gold">#E8C36A</color>
+  <color name="gold_container">#3F2E00</color>
+  <color name="on_gold_container">#FFE08A</color>
+  <color name="scrim">#B3000000</color>
+  <color name="scrim_toolbar">#F2100E0D</color>
+  <color name="poster_scrim_start">#F2000000</color>
+  <color name="tab_unselected">#99C9B8B2</color>
+  <color name="ripple">#33FF8A80</color>
+</resources>
