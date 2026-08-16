@@ -8,27 +8,32 @@
   android:background="@color/background"
   tools:context=".ui.main.MainActivity">
 
-  <LinearLayout
+  <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/app_bar"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:background="@color/surface"
+    android:minHeight="0dp"
+    android:theme="@style/Theme.Cinestine.AppBarOverlay"
+    app:elevation="0dp"
+    app:liftOnScroll="false">
 
-    <com.google.android.material.appbar.AppBarLayout
-      android:id="@+id/app_bar"
+    <com.google.android.material.appbar.MaterialToolbar
+      android:id="@+id/toolbar"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="@color/surface"
-      android:theme="@style/Theme.Cinestine.AppBarOverlay"
-      app:elevation="0dp">
+      android:minHeight="?attr/actionBarSize"
+      app:layout_scrollFlags="scroll|enterAlways|snap"
+      app:popupTheme="@style/Theme.Cinestine.PopupOverlay"
+      app:titleTextAppearance="@style/TextAppearance.Cinestine.Toolbar" />
+  </com.google.android.material.appbar.AppBarLayout>
 
-      <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/surface"
-        app:popupTheme="@style/Theme.Cinestine.PopupOverlay"
-        app:titleTextAppearance="@style/TextAppearance.Cinestine.Toolbar" />
-    </com.google.android.material.appbar.AppBarLayout>
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <androidx.viewpager2.widget.ViewPager2
       android:id="@+id/pager"

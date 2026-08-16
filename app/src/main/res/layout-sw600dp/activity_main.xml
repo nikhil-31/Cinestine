@@ -1,41 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/main"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:background="@color/background"
+  android:baselineAligned="false"
+  android:orientation="horizontal"
   tools:context=".ui.main.MainActivity">
 
-  <LinearLayout
-    android:layout_width="match_parent"
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="0dp"
     android:layout_height="match_parent"
-    android:baselineAligned="false"
-    android:orientation="horizontal">
+    android:layout_weight="0.46">
 
-    <LinearLayout
-      android:layout_width="0dp"
-      android:layout_height="match_parent"
-      android:layout_weight="0.46"
-      android:orientation="vertical">
+    <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/app_bar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/surface"
+      android:minHeight="0dp"
+      android:theme="@style/Theme.Cinestine.AppBarOverlay"
+      app:elevation="0dp"
+      app:liftOnScroll="false">
 
-      <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+      <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/surface"
-        android:theme="@style/Theme.Cinestine.AppBarOverlay"
-        app:elevation="0dp">
+        android:minHeight="?attr/actionBarSize"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
+        app:popupTheme="@style/Theme.Cinestine.PopupOverlay"
+        app:titleTextAppearance="@style/TextAppearance.Cinestine.Toolbar" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <com.google.android.material.appbar.MaterialToolbar
-          android:id="@+id/toolbar"
-          android:layout_width="match_parent"
-          android:layout_height="?attr/actionBarSize"
-          android:background="@color/surface"
-          app:popupTheme="@style/Theme.Cinestine.PopupOverlay"
-          app:titleTextAppearance="@style/TextAppearance.Cinestine.Toolbar" />
-      </com.google.android.material.appbar.AppBarLayout>
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
       <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"
@@ -55,19 +60,18 @@
         app:labelVisibilityMode="labeled"
         app:menu="@menu/menu_bottom_nav" />
     </LinearLayout>
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <View
-      android:layout_width="1dp"
-      android:layout_height="match_parent"
-      android:background="@color/outline" />
+  <View
+    android:layout_width="1dp"
+    android:layout_height="match_parent"
+    android:background="@color/outline" />
 
-    <androidx.fragment.app.FragmentContainerView
-      android:id="@+id/fragment"
-      android:name="nikhil.cinestine.ui.details.DetailsFragment"
-      android:layout_width="0dp"
-      android:layout_height="match_parent"
-      android:layout_weight="0.54"
-      tools:layout="@layout/fragment_details" />
-  </LinearLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+  <androidx.fragment.app.FragmentContainerView
+    android:id="@+id/fragment"
+    android:name="nikhil.cinestine.ui.details.DetailsFragment"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="0.54"
+    tools:layout="@layout/fragment_details" />
+</LinearLayout>
