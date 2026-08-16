@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#C92228</color>
-  <color name="colorPrimaryDark">#b71c1c</color>
-  <color name="colorAccent">#FFFFFF</color>
-  <color name="colorHighlight">#b6b6b6</color>
+  <color name="colorPrimary">#B42318</color>
+  <color name="colorPrimaryDark">#7F1D1D</color>
+  <color name="colorPrimaryContainer">#FDECEC</color>
+  <color name="colorOnPrimary">#FFFFFF</color>
+  <color name="colorOnPrimaryContainer">#410002</color>
+  <color name="colorAccent">#B42318</color>
+  <color name="colorSecondary">#9A7410</color>
+  <color name="colorOnSecondary">#FFFFFF</color>
+  <color name="colorHighlight">#E8D6D3</color>
   <color name="white">#FFFFFF</color>
-  <color name="black">#000000</color>
-  <color name="background">#E0E0E0</color>
+  <color name="black">#1C1412</color>
+  <color name="background">#F4EFEA</color>
+  <color name="surface">#FFFCF9</color>
+  <color name="surface_container">#FFFFFF</color>
+  <color name="surface_variant">#EDE4DC</color>
+  <color name="on_surface">#1C1412</color>
+  <color name="on_surface_variant">#5C4A46</color>
+  <color name="outline">#D9C7C1</color>
+  <color name="gold">#C9A227</color>
+  <color name="gold_container">#FFF3C4</color>
+  <color name="on_gold_container">#3F2E00</color>
+  <color name="scrim">#99000000</color>
+  <color name="scrim_toolbar">#F2100E0D</color>
+  <color name="poster_scrim_start">#E6000000</color>
+  <color name="poster_scrim_end">#00000000</color>
+  <color name="tab_unselected">#8A5C4A46</color>
   <color name="transperent">@android:color/transparent</color>
+  <color name="ripple">#33B42318</color>
 </resources>

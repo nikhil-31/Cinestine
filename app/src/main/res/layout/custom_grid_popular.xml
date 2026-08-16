@@ -1,45 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="350dp"
-  android:layout_margin="2dp"
-  app:cardElevation="5dp">
+  android:layout_height="wrap_content"
+  android:layout_margin="@dimen/grid_item_gap"
+  android:clickable="true"
+  android:focusable="true"
+  app:cardBackgroundColor="@color/surface_container"
+  app:cardCornerRadius="@dimen/poster_corner"
+  app:cardElevation="0dp"
+  app:rippleColor="@color/ripple"
+  app:strokeWidth="0dp">
 
-  <LinearLayout
+  <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
     <ImageView
       android:id="@+id/popular_image"
-      android:layout_width="match_parent"
-      android:layout_height="300dp"
-      android:scaleType="centerCrop" />
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:contentDescription="@string/content_desc_poster"
+      android:scaleType="centerCrop"
+      app:layout_constraintDimensionRatio="2:3"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:src="@drawable/ic_poster_placeholder" />
 
-    <RelativeLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
+    <View
+      android:layout_width="0dp"
+      android:layout_height="96dp"
+      android:background="@drawable/poster_scrim"
+      app:layout_constraintBottom_toBottomOf="@id/popular_image"
+      app:layout_constraintEnd_toEndOf="@id/popular_image"
+      app:layout_constraintStart_toStartOf="@id/popular_image" />
 
-      <android.support.v7.widget.Toolbar
-        android:id="@+id/card_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/transparent" />
+    <ImageButton
+      android:id="@+id/save_button"
+      android:layout_width="32dp"
+      android:layout_height="32dp"
+      android:layout_margin="8dp"
+      android:background="@drawable/rating_badge_bg"
+      android:contentDescription="@string/save_movie"
+      android:padding="6dp"
+      android:scaleType="centerInside"
+      android:src="@drawable/ic_favorite_border"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+      android:id="@+id/popular_rating_badge"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="8dp"
+      android:background="@drawable/rating_badge_bg"
+      android:gravity="center_vertical"
+      android:orientation="horizontal"
+      android:paddingHorizontal="8dp"
+      android:paddingVertical="4dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+      <ImageView
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_star" />
 
       <TextView
-        android:id="@+id/popular_text"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:ellipsize="end"
-        android:gravity="center_vertical"
-        android:maxLines="2"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:textStyle="bold" />
-    </RelativeLayout>
-  </LinearLayout>
-</android.support.v7.widget.CardView>
+        android:id="@+id/popular_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+        android:textColor="@color/white"
+        tools:text="8.4" />
+    </LinearLayout>
+
+    <TextView
+      android:id="@+id/popular_text"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:ellipsize="end"
+      android:maxLines="2"
+      android:paddingHorizontal="10dp"
+      android:paddingBottom="10dp"
+      android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+      android:textColor="@color/white"
+      app:layout_constraintBottom_toBottomOf="@id/popular_image"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      tools:text="The Grand Budapest Hotel" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

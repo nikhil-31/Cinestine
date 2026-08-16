@@ -1,227 +1,357 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/main_content"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:background="@color/background"
   android:fitsSystemWindows="true"
-  tools:context=".Fragments.DetailsActivityFragment"
-  tools:showIn="@layout/activity_details">
+  tools:context=".ui.details.DetailsFragment">
 
-  <android.support.design.widget.AppBarLayout
+  <com.google.android.material.appbar.AppBarLayout
     android:id="@+id/appbar"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/detail_backdrop_height"
+    android:layout_height="wrap_content"
+    android:background="@color/black"
     android:fitsSystemWindows="true"
-    android:theme="@style/AppTheme.AppBarOverlay">
+    app:elevation="0dp">
 
-    <android.support.design.widget.CollapsingToolbarLayout
+    <com.google.android.material.appbar.CollapsingToolbarLayout
       android:id="@+id/collapsing_toolbar"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_height="wrap_content"
       android:fitsSystemWindows="true"
-      app:contentScrim="?attr/colorPrimary"
-      app:expandedTitleMarginEnd="64dp"
-      app:expandedTitleMarginStart="48dp"
-      app:layout_scrollFlags="scroll|exitUntilCollapsed">
+      app:collapsedTitleTextAppearance="@style/TextAppearance.Material3.TitleLarge"
+      app:collapsedTitleTextColor="@color/white"
+      app:contentScrim="@color/scrim_toolbar"
+      app:expandedTitleTextColor="@android:color/transparent"
+      app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+      app:statusBarScrim="@color/scrim_toolbar">
 
       <ImageView
-        android:id="@+id/backdrop1"
+        android:id="@+id/backdrop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark"
+        android:layout_height="@dimen/detail_backdrop_height"
+        android:contentDescription="@string/content_desc_poster"
         android:fitsSystemWindows="true"
         android:scaleType="centerCrop"
         app:layout_collapseMode="parallax"
-        app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed" />
+        app:layout_collapseParallaxMultiplier="0.25"
+        tools:src="@drawable/ic_poster_placeholder" />
 
-      <android.support.v7.widget.Toolbar
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@drawable/details_hero_top_scrim"
+        android:fitsSystemWindows="true"
+        app:layout_collapseMode="pin" />
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_backdrop_height"
+        android:background="@drawable/details_hero_scrim"
+        android:fitsSystemWindows="true"
+        app:layout_collapseMode="parallax" />
+
+      <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent"
         app:layout_collapseMode="pin"
-        app:popupTheme="@style/AppTheme.PopupOverlay" />
+        app:navigationIconTint="@color/white"
+        app:popupTheme="@style/Theme.Cinestine.PopupOverlay"
+        app:titleTextColor="@color/white" />
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+  </com.google.android.material.appbar.AppBarLayout>
 
-    </android.support.design.widget.CollapsingToolbarLayout>
-  </android.support.design.widget.AppBarLayout>
-
-  <android.support.v4.widget.NestedScrollView
+  <androidx.core.widget.NestedScrollView
+    android:id="@+id/details_scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:overScrollMode="never"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:orientation="vertical">
+      android:layout_height="wrap_content"
+      android:background="@drawable/details_sheet_bg"
+      android:orientation="vertical"
+      android:paddingTop="20dp"
+      android:paddingBottom="40dp">
 
-      <RelativeLayout
-        android:id="@+id/relative"
+      <TextView
+        android:id="@+id/title_write"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/card_margin">
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:paddingHorizontal="20dp"
+        android:text="@string/Select"
+        android:textAppearance="@style/TextAppearance.Cinestine.DetailsTitle"
+        tools:text="The Grand Budapest Hotel" />
 
-        <ImageView
-          android:id="@+id/poster_details"
-          android:layout_width="138dp"
-          android:layout_height="200dp"
-          android:contentDescription="@string/content_desc_poster" />
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/play_trailer"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:minWidth="0dp"
+        android:paddingHorizontal="16dp"
+        android:text="@string/watch_trailer"
+        android:textColor="@color/colorOnPrimary"
+        android:visibility="gone"
+        app:cornerRadius="100dp"
+        app:icon="@drawable/ic_play"
+        app:iconPadding="8dp"
+        app:iconSize="16dp"
+        app:iconTint="@color/colorOnPrimary"
+        tools:visibility="visible" />
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/meta_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="16dp">
+
+        <com.google.android.material.card.MaterialCardView
+          android:id="@+id/poster_card"
+          android:layout_width="@dimen/detail_poster_width"
+          android:layout_height="@dimen/detail_poster_height"
+          app:cardCornerRadius="14dp"
+          app:cardElevation="4dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:strokeWidth="0dp">
+
+          <ImageView
+            android:id="@+id/poster_details"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/content_desc_poster"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/ic_poster_placeholder" />
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
-          android:id="@+id/Title_write"
+          android:id="@+id/release_write"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_toRightOf="@+id/poster_details"
-          android:paddingLeft="10dp"
-          android:paddingTop="20dp"
-          android:text="@string/Select"
-          android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+          android:background="@drawable/bg_meta_pill"
+          android:paddingHorizontal="12dp"
+          android:paddingVertical="6dp"
+          android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+          android:textColor="@color/on_surface"
+          tools:text="2014" />
 
         <TextView
-          android:id="@+id/Release_text"
+          android:id="@+id/meta_language"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_below="@id/Title_write"
-          android:layout_toRightOf="@+id/poster_details"
-          android:paddingLeft="10dp"
-          android:paddingTop="10dp"
+          android:background="@drawable/bg_meta_pill"
+          android:paddingHorizontal="12dp"
+          android:paddingVertical="6dp"
+          android:textAllCaps="true"
+          android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+          android:textColor="@color/on_surface"
+          tools:text="EN" />
+
+        <TextView
+          android:id="@+id/meta_votes"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/bg_meta_pill"
+          android:paddingHorizontal="12dp"
+          android:paddingVertical="6dp"
+          android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+          android:textColor="@color/on_surface"
+          tools:text="12.4K" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+          android:id="@+id/meta_pills"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:layout_marginEnd="12dp"
+          app:constraint_referenced_ids="release_write,meta_language,meta_votes"
+          app:flow_horizontalBias="0"
+          app:flow_horizontalGap="8dp"
+          app:flow_horizontalStyle="packed"
+          app:flow_verticalGap="8dp"
+          app:flow_wrapMode="chain"
+          app:layout_constraintEnd_toStartOf="@id/score_cluster"
+          app:layout_constraintStart_toEndOf="@id/poster_card"
+          app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+          android:id="@+id/release_label"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:layout_marginTop="4dp"
           android:text="@string/releaseDate"
-          android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-
-        <TextView
-          android:id="@+id/Release_write"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_below="@+id/Release_text"
-          android:layout_toRightOf="@+id/poster_details"
-          android:paddingLeft="10dp"
-          android:paddingTop="5dp"
-          android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-        <TextView
-          android:id="@+id/rating"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_below="@+id/Release_write"
-          android:layout_toRightOf="@+id/poster_details"
-          android:paddingLeft="10dp"
-          android:paddingTop="5dp"
-          android:text="@string/Rating"
-          android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-
-        <TextView
-          android:id="@+id/Rating_write"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_below="@+id/rating"
-          android:layout_toRightOf="@+id/poster_details"
-          android:paddingLeft="10dp"
-          android:paddingTop="5dp"
-          android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-      </RelativeLayout>
-
-      <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/card_margin_5"
-        android:layout_marginLeft="@dimen/card_margin_5"
-        android:layout_marginRight="@dimen/card_margin_5">
+          android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+          android:textColor="@color/on_surface_variant"
+          android:visibility="gone"
+          app:layout_constraintEnd_toStartOf="@id/score_cluster"
+          app:layout_constraintStart_toEndOf="@id/poster_card"
+          app:layout_constraintTop_toBottomOf="@id/meta_pills" />
 
         <LinearLayout
-          android:layout_width="match_parent"
+          android:id="@+id/score_cluster"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:gravity="center"
           android:orientation="vertical"
-          android:padding="16dp">
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="parent">
 
-          <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="Overview"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+          <FrameLayout
+            android:layout_width="72dp"
+            android:layout_height="72dp">
 
-          <TextView
-            android:id="@+id/overview_new"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-        </LinearLayout>
-      </android.support.v7.widget.CardView>
-
-      <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <android.support.v7.widget.CardView
-          android:layout_width="match_parent"
-          android:layout_height="240dp"
-          android:layout_marginBottom="@dimen/card_margin_5"
-          android:layout_marginLeft="@dimen/card_margin_5"
-          android:layout_marginRight="@dimen/card_margin_5">
-
-          <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+              android:id="@+id/rating_ring"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:max="100"
+              android:progress="80"
+              app:indicatorColor="@color/gold"
+              app:indicatorSize="68dp"
+              app:trackColor="@color/outline"
+              app:trackCornerRadius="100dp"
+              app:trackThickness="5dp" />
 
             <TextView
-              android:layout_width="match_parent"
+              android:id="@+id/rating_write"
+              android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:padding="16dp"
-              android:text="Trailers"
-              android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-          </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.RecyclerView
-          android:id="@+id/recycler_trailer"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="50dp"
-          android:clipToPadding="false"
-          android:elevation="10dp"
-          android:paddingBottom="16dp"
-          android:paddingLeft="10dp"
-          android:paddingRight="10dp" />
-      </RelativeLayout>
-
-      <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/card_margin_5"
-        android:layout_marginLeft="@dimen/card_margin_5"
-        android:layout_marginRight="@dimen/card_margin_5">
-
-        <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical"
-          android:padding="16dp">
+              android:layout_gravity="center"
+              android:textAppearance="@style/TextAppearance.Cinestine.Score"
+              tools:text="8.1" />
+          </FrameLayout>
 
           <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Review"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-          <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_review"
+            android:id="@+id/rating_label"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/Rating"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+            android:textColor="@color/on_surface_variant" />
         </LinearLayout>
-      </android.support.v7.widget.CardView>
-    </LinearLayout>
-  </android.support.v4.widget.NestedScrollView>
+      </androidx.constraintlayout.widget.ConstraintLayout>
 
-  <android.support.design.widget.FloatingActionButton
+      <LinearLayout
+        android:id="@+id/overview_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="28dp">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/overview"
+          android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+
+        <TextView
+          android:id="@+id/overview_new"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:lineSpacingExtra="6dp"
+          android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+          android:textColor="@color/on_surface"
+          tools:text="A legendary concierge and his lobby boy become wrapped up in a murder mystery at a famous European hotel." />
+
+        <TextView
+          android:id="@+id/overview_toggle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:paddingVertical="4dp"
+          android:text="@string/show_more"
+          android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+          android:textColor="@color/colorPrimary"
+          android:visibility="gone"
+          tools:visibility="visible" />
+      </LinearLayout>
+
+      <LinearLayout
+        android:id="@+id/trailers_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="28dp">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingHorizontal="20dp"
+          android:text="@string/trailers"
+          android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/recycler_trailer"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:clipToPadding="false"
+          android:overScrollMode="never"
+          android:paddingStart="16dp"
+          android:paddingTop="14dp"
+          android:paddingEnd="8dp"
+          android:paddingBottom="4dp" />
+      </LinearLayout>
+
+      <LinearLayout
+        android:id="@+id/reviews_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="28dp">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/reviews"
+          android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/recycler_review"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:nestedScrollingEnabled="false"
+          android:overScrollMode="never"
+          android:paddingTop="8dp" />
+      </LinearLayout>
+    </LinearLayout>
+  </androidx.core.widget.NestedScrollView>
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
     android:id="@+id/fab"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/fab_margin"
-    android:clickable="true"
+    android:contentDescription="@string/save_movie"
     app:backgroundTint="@color/colorPrimary"
+    app:borderWidth="0dp"
+    app:elevation="8dp"
     app:layout_anchor="@id/appbar"
-    app:layout_anchorGravity="bottom|right|end" />
+    app:layout_anchorGravity="bottom|end"
+    app:srcCompat="@drawable/ic_favorite_border"
+    app:tint="@color/colorOnPrimary" />
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
