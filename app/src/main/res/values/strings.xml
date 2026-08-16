@@ -33,6 +33,9 @@
   <string name="nav_popular">Popular</string>
   <string name="nav_top_rated">Top rated</string>
   <string name="nav_saved">Saved</string>
+  <string name="title_popular">Popular</string>
+  <string name="title_top_rated">Top rated</string>
+  <string name="title_saved">Saved</string>
   <string-array name="tabs">
     <item>@string/nav_popular</item>
     <item>@string/nav_top_rated</item>
