@@ -8,32 +8,10 @@
   android:background="@color/background"
   tools:context=".ui.main.MainActivity">
 
-  <com.google.android.material.appbar.AppBarLayout
-    android:id="@+id/app_bar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/surface"
-    android:minHeight="0dp"
-    android:theme="@style/Theme.Cinestine.AppBarOverlay"
-    app:elevation="0dp"
-    app:liftOnScroll="false">
-
-    <com.google.android.material.appbar.MaterialToolbar
-      android:id="@+id/toolbar"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="@color/surface"
-      android:minHeight="?attr/actionBarSize"
-      app:layout_scrollFlags="scroll|enterAlways|snap"
-      app:popupTheme="@style/Theme.Cinestine.PopupOverlay"
-      app:titleTextAppearance="@style/TextAppearance.Cinestine.Toolbar" />
-  </com.google.android.material.appbar.AppBarLayout>
-
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    android:orientation="vertical">
 
     <androidx.viewpager2.widget.ViewPager2
       android:id="@+id/pager"
@@ -53,5 +31,25 @@
       app:labelVisibilityMode="labeled"
       app:menu="@menu/menu_bottom_nav" />
   </LinearLayout>
+
+  <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/app_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/surface"
+    android:minHeight="0dp"
+    android:theme="@style/Theme.Cinestine.AppBarOverlay"
+    app:elevation="0dp"
+    app:liftOnScroll="false">
+
+    <com.google.android.material.appbar.MaterialToolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/surface"
+      android:minHeight="?attr/actionBarSize"
+      app:popupTheme="@style/Theme.Cinestine.PopupOverlay"
+      app:titleTextAppearance="@style/TextAppearance.Cinestine.Toolbar" />
+  </com.google.android.material.appbar.AppBarLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
