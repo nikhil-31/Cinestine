@@ -4,8 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import nikhil.cinestine.data.MovieRepository
+import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
 import nikhil.cinestine.model.MovieCategory
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -13,10 +15,12 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.coroutines.cancellation.CancellationException
 
 data class MovieListUiState(
     val movies: List<Movie> = emptyList(),
-    val favouriteIds: Set<String> = emptySet(),
+    val favouriteKeys: Set<String> = emptySet(),
+    val mediaType: MediaType = MediaType.MOVIE,
     val isLoading: Boolean = false,
     val error: String? = null,
     val page: Int = 0,
@@ -29,16 +33,26 @@ class MovieListViewModel(
 ) : ViewModel() {
 
     private val listState = MutableStateFlow(MovieListUiState())
+    private var loadJob: Job? = null
+    private var mediaType: MediaType = MediaType.MOVIE
+
+    val currentMediaType: MediaType get() = mediaType
 
     val uiState: StateFlow<MovieListUiState> = combine(
         listState,
-        repository.observeFavouriteIds()
-    ) { list, ids ->
-        list.copy(favouriteIds = ids)
+        repository.observeFavouriteKeys()
+    ) { list, keys ->
+        list.copy(favouriteKeys = keys)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), MovieListUiState())
 
     init {
         refresh()
+    }
+
+    fun setMediaType(mediaType: MediaType) {
+        if (this.mediaType == mediaType) return
+        this.mediaType = mediaType
+        loadPage(page = 1, reset = true)
     }
 
     fun refresh() {
@@ -53,15 +67,23 @@ class MovieListViewModel(
 
     fun toggleFavourite(movie: Movie) {
         viewModelScope.launch {
-            val currentlyFavourite = uiState.value.favouriteIds.contains(movie.id)
+            val currentlyFavourite = uiState.value.favouriteKeys.contains(movie.favouriteKey)
             repository.toggleFavourite(movie, currentlyFavourite)
         }
     }
 
     private fun loadPage(page: Int, reset: Boolean) {
-        viewModelScope.launch {
-            listState.update { it.copy(isLoading = true, error = null) }
-            runCatching { repository.movies(category, page) }
+        loadJob?.cancel()
+        loadJob = viewModelScope.launch {
+            listState.update {
+                it.copy(
+                    mediaType = mediaType,
+                    isLoading = true,
+                    error = null,
+                    movies = if (reset) emptyList() else it.movies
+                )
+            }
+            runCatching { repository.titles(mediaType, category, page) }
                 .onSuccess { movies ->
                     listState.update { current ->
                         val combined = if (reset) movies else current.movies + movies
@@ -69,13 +91,15 @@ class MovieListViewModel(
                             movies = combined,
                             isLoading = false,
                             page = page,
-                            endReached = movies.isEmpty()
+                            endReached = movies.isEmpty(),
+                            mediaType = mediaType
                         )
                     }
                 }
                 .onFailure { error ->
+                    if (error is CancellationException) throw error
                     listState.update {
-                        it.copy(isLoading = false, error = error.message ?: "Unable to load movies")
+                        it.copy(isLoading = false, error = error.message ?: "Unable to load titles")
                     }
                 }
         }

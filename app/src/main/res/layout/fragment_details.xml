@@ -85,6 +85,18 @@
         android:textAppearance="@style/TextAppearance.Cinestine.DetailsTitle"
         tools:text="The Grand Budapest Hotel" />
 
+      <TextView
+        android:id="@+id/tagline_write"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="6dp"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        android:textColor="@color/on_surface_variant"
+        android:visibility="gone"
+        tools:text="A long time ago in a galaxy far, far away..."
+        tools:visibility="visible" />
+
       <com.google.android.material.button.MaterialButton
         android:id="@+id/play_trailer"
         style="@style/Widget.Material3.Button.TonalButton"
@@ -167,13 +179,52 @@
           android:textColor="@color/on_surface"
           tools:text="12.4K" />
 
+        <TextView
+          android:id="@+id/meta_runtime"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/bg_meta_pill"
+          android:paddingHorizontal="12dp"
+          android:paddingVertical="6dp"
+          android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+          android:textColor="@color/on_surface"
+          android:visibility="gone"
+          tools:text="2h 1m"
+          tools:visibility="visible" />
+
+        <TextView
+          android:id="@+id/meta_seasons"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/bg_meta_pill"
+          android:paddingHorizontal="12dp"
+          android:paddingVertical="6dp"
+          android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+          android:textColor="@color/on_surface"
+          android:visibility="gone"
+          tools:text="8 seasons"
+          tools:visibility="visible" />
+
+        <TextView
+          android:id="@+id/meta_episodes"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/bg_meta_pill"
+          android:paddingHorizontal="12dp"
+          android:paddingVertical="6dp"
+          android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+          android:textColor="@color/on_surface"
+          android:visibility="gone"
+          tools:text="73 episodes"
+          tools:visibility="visible" />
+
         <androidx.constraintlayout.helper.widget.Flow
           android:id="@+id/meta_pills"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_marginStart="16dp"
           android:layout_marginEnd="12dp"
-          app:constraint_referenced_ids="release_write,meta_language,meta_votes"
+          app:constraint_referenced_ids="release_write,meta_language,meta_votes,meta_runtime,meta_seasons,meta_episodes"
           app:flow_horizontalBias="0"
           app:flow_horizontalGap="8dp"
           app:flow_horizontalStyle="packed"
@@ -244,6 +295,74 @@
         </LinearLayout>
       </androidx.constraintlayout.widget.ConstraintLayout>
 
+      <com.google.android.material.chip.ChipGroup
+        android:id="@+id/genre_chips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="14dp"
+        android:visibility="gone"
+        app:chipSpacingHorizontal="8dp"
+        app:chipSpacingVertical="8dp" />
+
+      <TextView
+        android:id="@+id/networks_write"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="10dp"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        android:textColor="@color/on_surface_variant"
+        android:visibility="gone"
+        tools:text="On HBO"
+        tools:visibility="visible" />
+
+      <com.google.android.material.card.MaterialCardView
+        android:id="@+id/next_episode_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/surface_container"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:strokeWidth="0dp"
+        tools:visibility="visible">
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:padding="16dp">
+
+          <TextView
+            android:id="@+id/next_episode_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next_episode"
+            android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+
+          <TextView
+            android:id="@+id/next_episode_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+            android:textColor="@color/on_surface"
+            tools:text="S9 E1  ·  The Long Night" />
+
+          <TextView
+            android:id="@+id/next_episode_meta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:textColor="@color/on_surface_variant"
+            tools:text="2026-04-12" />
+        </LinearLayout>
+      </com.google.android.material.card.MaterialCardView>
+
       <LinearLayout
         android:id="@+id/overview_card"
         android:layout_width="match_parent"
@@ -279,6 +398,69 @@
           android:textColor="@color/colorPrimary"
           android:visibility="gone"
           tools:visibility="visible" />
+      </LinearLayout>
+
+      <LinearLayout
+        android:id="@+id/seasons_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="28dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingHorizontal="20dp"
+          android:text="@string/seasons"
+          android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/recycler_seasons"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:clipToPadding="false"
+          android:overScrollMode="never"
+          android:paddingStart="16dp"
+          android:paddingTop="14dp"
+          android:paddingEnd="8dp"
+          android:paddingBottom="4dp" />
+      </LinearLayout>
+
+      <LinearLayout
+        android:id="@+id/episodes_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="20dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/episodes"
+          android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+          android:id="@+id/episodes_progress"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:layout_marginTop="16dp"
+          android:indeterminate="true"
+          android:visibility="gone"
+          app:indicatorColor="@color/colorPrimary" />
+
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/recycler_episodes"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:nestedScrollingEnabled="false"
+          android:overScrollMode="never"
+          android:paddingTop="4dp" />
       </LinearLayout>
 
       <LinearLayout

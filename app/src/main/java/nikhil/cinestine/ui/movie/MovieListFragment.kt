@@ -15,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView
 import nikhil.cinestine.R
 import nikhil.cinestine.cinestineApp
 import nikhil.cinestine.databinding.FragmentMovieListBinding
+import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
 import nikhil.cinestine.model.MovieCategory
 import nikhil.cinestine.ui.main.BrowseScrollHost
+import nikhil.cinestine.ui.main.MediaTypeHost
 import nikhil.cinestine.ui.main.MovieSelectionListener
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
@@ -37,6 +39,8 @@ class MovieListFragment : Fragment() {
 
     private val adapter = MovieAdapter(::onMovieSelected, ::onSaveClicked)
 
+    val currentMediaType: MediaType get() = viewModel.currentMediaType
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentMovieListBinding.inflate(inflater, container, false)
         return binding.root
@@ -47,6 +51,18 @@ class MovieListFragment : Fragment() {
         val layoutManager = GridLayoutManager(requireContext(), spanCount)
         binding.recyclerMovies.layoutManager = layoutManager
         binding.recyclerMovies.adapter = adapter
+        binding.categoryToggle.isVisible = true
+        val checkedId = if (viewModel.uiState.value.mediaType == MediaType.TV) {
+            R.id.chip_tv
+        } else {
+            R.id.chip_movies
+        }
+        binding.categoryToggle.check(checkedId)
+        binding.categoryToggle.setOnCheckedStateChangeListener { _, checkedIds ->
+            val id = checkedIds.firstOrNull() ?: return@setOnCheckedStateChangeListener
+            viewModel.setMediaType(if (id == R.id.chip_tv) MediaType.TV else MediaType.MOVIE)
+            (activity as? MediaTypeHost)?.onBrowseMediaTypeChanged(viewModel.currentMediaType)
+        }
         binding.recyclerMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 (activity as? BrowseScrollHost)?.onBrowseListScrolled(dy)
@@ -69,7 +85,7 @@ class MovieListFragment : Fragment() {
                 viewModel.uiState.collect { state ->
                     adapter.submitList(
                         state.movies.map { movie ->
-                            MovieListItem(movie, movie.id in state.favouriteIds)
+                            MovieListItem(movie, movie.favouriteKey in state.favouriteKeys)
                         }
                     )
                     binding.progress.isVisible = state.isLoading && state.movies.isEmpty()
@@ -85,7 +101,7 @@ class MovieListFragment : Fragment() {
     }
 
     private fun onSaveClicked(movie: Movie) {
-        val alreadySaved = viewModel.uiState.value.favouriteIds.contains(movie.id)
+        val alreadySaved = viewModel.uiState.value.favouriteKeys.contains(movie.favouriteKey)
         viewModel.toggleFavourite(movie)
         Snackbar.make(
             binding.root,

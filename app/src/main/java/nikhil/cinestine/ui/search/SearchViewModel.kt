@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import nikhil.cinestine.data.MovieRepository
+import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
@@ -22,7 +23,8 @@ import kotlin.coroutines.cancellation.CancellationException
 data class SearchUiState(
     val query: String = "",
     val movies: List<Movie> = emptyList(),
-    val favouriteIds: Set<String> = emptySet(),
+    val favouriteKeys: Set<String> = emptySet(),
+    val mediaType: MediaType? = MediaType.MOVIE,
     val isLoading: Boolean = false,
     val error: String? = null,
     val page: Int = 0,
@@ -30,6 +32,7 @@ data class SearchUiState(
 ) {
     val isIdle: Boolean get() = query.isBlank() && !isLoading && error == null
     val isEmpty: Boolean get() = query.isNotBlank() && movies.isEmpty() && !isLoading && error == null
+    val showTypeBadge: Boolean get() = mediaType == null
 }
 
 @OptIn(FlowPreview::class)
@@ -38,6 +41,7 @@ class SearchViewModel(
 ) : ViewModel() {
 
     private val query = MutableStateFlow("")
+    private val mediaType = MutableStateFlow<MediaType?>(MediaType.MOVIE)
     private val listState = MutableStateFlow(SearchUiState())
     private var loadJob: Job? = null
 
@@ -45,23 +49,23 @@ class SearchViewModel(
 
     val uiState: StateFlow<SearchUiState> = combine(
         listState,
-        repository.observeFavouriteIds()
-    ) { list, ids ->
-        list.copy(favouriteIds = ids)
+        repository.observeFavouriteKeys()
+    ) { list, keys ->
+        list.copy(favouriteKeys = keys)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), SearchUiState())
 
     init {
         viewModelScope.launch {
-            query
-                .map { it.trim() }
-                .debounce(QUERY_DEBOUNCE_MS)
-                .distinctUntilChanged()
-                .collect { value ->
+            combine(
+                query.map { it.trim() }.debounce(QUERY_DEBOUNCE_MS).distinctUntilChanged(),
+                mediaType
+            ) { value, type -> value to type }
+                .collect { (value, type) ->
                     if (value.isBlank()) {
                         loadJob?.cancel()
-                        listState.value = SearchUiState()
+                        listState.value = SearchUiState(mediaType = type)
                     } else {
-                        loadPage(query = value, page = 1, reset = true)
+                        loadPage(query = value, page = 1, reset = true, type = type)
                     }
                 }
         }
@@ -71,6 +75,10 @@ class SearchViewModel(
         query.value = value
     }
 
+    fun setMediaType(type: MediaType?) {
+        mediaType.value = type
+    }
+
     fun clear() {
         query.value = ""
     }
@@ -78,33 +86,35 @@ class SearchViewModel(
     fun loadNextPage() {
         val state = listState.value
         if (state.query.isBlank() || state.isLoading || state.endReached) return
-        loadPage(query = state.query, page = state.page + 1, reset = false)
+        loadPage(query = state.query, page = state.page + 1, reset = false, type = mediaType.value)
     }
 
     fun toggleFavourite(movie: Movie) {
         viewModelScope.launch {
-            val currentlyFavourite = uiState.value.favouriteIds.contains(movie.id)
+            val currentlyFavourite = uiState.value.favouriteKeys.contains(movie.favouriteKey)
             repository.toggleFavourite(movie, currentlyFavourite)
         }
     }
 
-    private fun loadPage(query: String, page: Int, reset: Boolean) {
+    private fun loadPage(query: String, page: Int, reset: Boolean, type: MediaType?) {
         loadJob?.cancel()
         loadJob = viewModelScope.launch {
             listState.update {
                 it.copy(
                     query = query,
+                    mediaType = type,
                     isLoading = true,
                     error = null,
                     movies = if (reset) emptyList() else it.movies
                 )
             }
-            runCatching { repository.search(query, page) }
+            runCatching { repository.search(query, page, type) }
                 .onSuccess { movies ->
                     listState.update { current ->
                         val combined = if (reset) movies else current.movies + movies
                         current.copy(
                             query = query,
+                            mediaType = type,
                             movies = combined,
                             isLoading = false,
                             page = page,
@@ -117,8 +127,9 @@ class SearchViewModel(
                     listState.update {
                         it.copy(
                             query = query,
+                            mediaType = type,
                             isLoading = false,
-                            error = error.message ?: "Unable to search movies"
+                            error = error.message ?: "Unable to search titles"
                         )
                     }
                 }

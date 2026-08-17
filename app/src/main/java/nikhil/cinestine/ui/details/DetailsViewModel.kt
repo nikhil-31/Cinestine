@@ -4,10 +4,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import nikhil.cinestine.data.MovieRepository
+import nikhil.cinestine.model.Episode
+import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
 import nikhil.cinestine.model.Review
+import nikhil.cinestine.model.Season
+import nikhil.cinestine.model.TitleDetails
 import nikhil.cinestine.model.Trailer
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -17,11 +24,17 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.coroutines.cancellation.CancellationException
 
 data class DetailsUiState(
     val movie: Movie? = null,
+    val details: TitleDetails? = null,
     val trailers: List<Trailer> = emptyList(),
     val reviews: List<Review> = emptyList(),
+    val seasons: List<Season> = emptyList(),
+    val selectedSeason: Int? = null,
+    val episodes: List<Episode> = emptyList(),
+    val episodesLoading: Boolean = false,
     val isFavourite: Boolean = false
 )
 
@@ -31,30 +44,82 @@ class DetailsViewModel(
 
     private val movie = MutableStateFlow<Movie?>(null)
     private val extras = MutableStateFlow(Extras())
+    private var loadJob: Job? = null
+    private var seasonJob: Job? = null
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val uiState: StateFlow<DetailsUiState> = combine(
         movie,
         extras,
         movie.flatMapLatest { current ->
-            if (current == null) flowOf(false) else repository.observeIsFavourite(current.id)
+            if (current == null) {
+                flowOf(false)
+            } else {
+                repository.observeIsFavourite(current.id, current.mediaType)
+            }
         }
     ) { currentMovie, extra, favourite ->
         DetailsUiState(
             movie = currentMovie,
+            details = extra.details,
             trailers = extra.trailers,
             reviews = extra.reviews,
+            seasons = extra.details?.seasons.orEmpty(),
+            selectedSeason = extra.selectedSeason,
+            episodes = extra.episodes,
+            episodesLoading = extra.episodesLoading,
             isFavourite = favourite
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), DetailsUiState())
 
     fun show(movie: Movie) {
+        if (this.movie.value?.favouriteKey == movie.favouriteKey && extras.value.details != null) return
+        loadJob?.cancel()
+        seasonJob?.cancel()
         this.movie.value = movie
         extras.value = Extras()
-        viewModelScope.launch {
-            val trailers = runCatching { repository.trailers(movie.id) }.getOrDefault(emptyList())
-            val reviews = runCatching { repository.reviews(movie.id) }.getOrDefault(emptyList())
-            extras.update { Extras(trailers, reviews) }
+        loadJob = viewModelScope.launch {
+            coroutineScope {
+                val detailsDeferred = async {
+                    runCatching { repository.details(movie.id, movie.mediaType) }
+                }
+                val trailersDeferred = async {
+                    runCatching { repository.trailers(movie.id, movie.mediaType) }
+                }
+                val reviewsDeferred = async {
+                    runCatching { repository.reviews(movie.id, movie.mediaType) }
+                }
+                val details = detailsDeferred.await().onFailure { if (it is CancellationException) throw it }.getOrNull()
+                val trailers = trailersDeferred.await().onFailure { if (it is CancellationException) throw it }.getOrDefault(emptyList())
+                val reviews = reviewsDeferred.await().onFailure { if (it is CancellationException) throw it }.getOrDefault(emptyList())
+                extras.update {
+                    it.copy(details = details, trailers = trailers, reviews = reviews)
+                }
+                if (movie.mediaType == MediaType.TV) {
+                    val defaultSeason = details?.nextEpisode?.seasonNumber
+                        ?: details?.seasons?.firstOrNull { it.seasonNumber > 0 }?.seasonNumber
+                        ?: details?.seasons?.firstOrNull()?.seasonNumber
+                    if (defaultSeason != null) selectSeason(defaultSeason)
+                }
+            }
+        }
+    }
+
+    fun selectSeason(seasonNumber: Int) {
+        val current = movie.value ?: return
+        if (current.mediaType != MediaType.TV) return
+        if (extras.value.selectedSeason == seasonNumber && extras.value.episodes.isNotEmpty()) return
+        seasonJob?.cancel()
+        extras.update { it.copy(selectedSeason = seasonNumber, episodes = emptyList(), episodesLoading = true) }
+        seasonJob = viewModelScope.launch {
+            runCatching { repository.seasonEpisodes(current.id, seasonNumber) }
+                .onSuccess { episodes ->
+                    extras.update { it.copy(episodes = episodes, episodesLoading = false) }
+                }
+                .onFailure { error ->
+                    if (error is CancellationException) throw error
+                    extras.update { it.copy(episodesLoading = false) }
+                }
         }
     }
 
@@ -66,8 +131,12 @@ class DetailsViewModel(
     }
 
     private data class Extras(
+        val details: TitleDetails? = null,
         val trailers: List<Trailer> = emptyList(),
-        val reviews: List<Review> = emptyList()
+        val reviews: List<Review> = emptyList(),
+        val selectedSeason: Int? = null,
+        val episodes: List<Episode> = emptyList(),
+        val episodesLoading: Boolean = false
     )
 
     class Factory(

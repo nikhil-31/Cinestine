@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import nikhil.cinestine.R
 import nikhil.cinestine.databinding.CustomGridPopularBinding
+import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
 
 data class MovieListItem(
     val movie: Movie,
-    val isFavourite: Boolean = false
+    val isFavourite: Boolean = false,
+    val showTypeBadge: Boolean = false
 )
 
 class MovieAdapter(
@@ -57,13 +59,19 @@ class MovieAdapter(
                 )
                 binding.saveButton.setOnClickListener { onSaveClicked.invoke(movie) }
             }
+            binding.mediaTypeBadge.isVisible = item.showTypeBadge
+            if (item.showTypeBadge) {
+                binding.mediaTypeBadge.setText(
+                    if (movie.mediaType == MediaType.TV) R.string.type_tv else R.string.type_movie
+                )
+            }
         }
     }
 
     private companion object {
         val Diff = object : DiffUtil.ItemCallback<MovieListItem>() {
             override fun areItemsTheSame(oldItem: MovieListItem, newItem: MovieListItem) =
-                oldItem.movie.id == newItem.movie.id
+                oldItem.movie.favouriteKey == newItem.movie.favouriteKey
 
             override fun areContentsTheSame(oldItem: MovieListItem, newItem: MovieListItem) = oldItem == newItem
         }

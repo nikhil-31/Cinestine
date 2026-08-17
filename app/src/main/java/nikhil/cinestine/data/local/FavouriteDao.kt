@@ -11,12 +11,12 @@ interface FavouriteDao {
     @Query("SELECT * FROM favourites")
     fun observeAll(): Flow<List<FavouriteEntity>>
 
-    @Query("SELECT EXISTS(SELECT 1 FROM favourites WHERE id = :id)")
-    fun observeIsFavourite(id: String): Flow<Boolean>
+    @Query("SELECT EXISTS(SELECT 1 FROM favourites WHERE id = :id AND mediaType = :mediaType)")
+    fun observeIsFavourite(id: String, mediaType: String): Flow<Boolean>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(entity: FavouriteEntity)
 
-    @Query("DELETE FROM favourites WHERE id = :id")
-    suspend fun delete(id: String)
+    @Query("DELETE FROM favourites WHERE id = :id AND mediaType = :mediaType")
+    suspend fun delete(id: String, mediaType: String)
 }

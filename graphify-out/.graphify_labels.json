@@ -5,7 +5,7 @@
   "3": "MainActivity",
   "4": "DetailsFragment",
   "5": "FavouriteDao",
-  "6": "TmdbApi",
+  "6": "TmdbDtos.kt",
   "7": "ReviewAdapter",
   "8": "TrailerAdapter",
   "9": "ThemePreferences",
@@ -18,8 +18,8 @@
   "16": "app/build.gradle.kts",
   "17": "build.gradle.kts",
   "18": "settings.gradle.kts",
-  "19": "FavouritesViewModel",
-  "20": "DetailsViewModel",
+  "19": "SeasonAdapter",
+  "20": "Episode",
   "21": "SearchFragment",
-  "22": "SearchViewModel"
+  "22": "MediaType"
 }

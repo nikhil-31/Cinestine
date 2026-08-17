@@ -21,7 +21,9 @@ class CinestineApp : Application() {
     override fun onCreate() {
         super.onCreate()
         ThemePreferences.apply(this)
-        val database = Room.databaseBuilder(this, AppDatabase::class.java, "cinestine.db").build()
+        val database = Room.databaseBuilder(this, AppDatabase::class.java, "cinestine.db")
+            .addMigrations(AppDatabase.MIGRATION_1_2)
+            .build()
         val json = Json { ignoreUnknownKeys = true }
         val client = OkHttpClient.Builder()
             .addInterceptor { chain ->

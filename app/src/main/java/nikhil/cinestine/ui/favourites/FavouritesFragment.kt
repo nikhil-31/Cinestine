@@ -59,7 +59,7 @@ class FavouritesFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.favourites.collect { movies ->
-                    adapter.submitList(movies.map { MovieListItem(it, isFavourite = true) })
+                    adapter.submitList(movies.map { MovieListItem(it, isFavourite = true, showTypeBadge = true) })
                     binding.emptyState.isVisible = movies.isEmpty()
                     binding.emptyText.setText(R.string.empty_favourites)
                 }

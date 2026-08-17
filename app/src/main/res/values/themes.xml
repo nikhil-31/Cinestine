@@ -111,4 +111,11 @@
     <item name="cornerFamily">rounded</item>
     <item name="cornerSize">24dp</item>
   </style>
+
+  <style name="Widget.Cinestine.Chip.Filter" parent="Widget.Material3.Chip.Filter">
+    <item name="checkedIconVisible">false</item>
+    <item name="chipCornerRadius">100dp</item>
+    <item name="chipMinHeight">36dp</item>
+    <item name="android:textAppearance">@style/TextAppearance.Material3.LabelLarge</item>
+  </style>
 </resources>

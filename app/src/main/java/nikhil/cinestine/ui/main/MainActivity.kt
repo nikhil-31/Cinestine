@@ -21,19 +21,22 @@ import androidx.viewpager2.widget.ViewPager2
 import nikhil.cinestine.R
 import nikhil.cinestine.cinestineApp
 import nikhil.cinestine.databinding.ActivityMainBinding
+import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
 import nikhil.cinestine.ui.ThemePreferences
 import nikhil.cinestine.ui.details.DetailsActivity
 import nikhil.cinestine.ui.details.DetailsFragment
+import nikhil.cinestine.ui.movie.MovieListFragment
 import nikhil.cinestine.ui.search.SearchFragment
 import nikhil.cinestine.ui.search.SearchViewModel
 
-class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHost {
+class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHost, MediaTypeHost {
 
     private lateinit var binding: ActivityMainBinding
     private var appBarOffset = 0
     private var searchExpanded = false
     private var searchMenuItem: MenuItem? = null
+    private var searchView: SearchView? = null
 
     private val searchViewModel: SearchViewModel by viewModels {
         SearchViewModel.Factory(cinestineApp.repository)
@@ -88,8 +91,10 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
                 binding.bottomNav.selectedItemId = position.toNavId()
                 updateToolbarTitle(position)
                 setAppBarFullyExpanded(true)
+                syncSearchScope()
             }
         })
+        syncSearchScope()
 
         searchExpanded = savedInstanceState?.getBoolean(STATE_SEARCH_EXPANDED) == true
         if (searchExpanded) {
@@ -136,7 +141,8 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
         val searchItem = menu.findItem(R.id.action_search)
         searchMenuItem = searchItem
         val searchView = searchItem.actionView as SearchView
-        searchView.queryHint = getString(R.string.search_hint)
+        this.searchView = searchView
+        searchView.queryHint = searchHintFor(currentBrowseMediaType())
         searchView.maxWidth = Int.MAX_VALUE
         searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)?.apply {
             setTextColor(ContextCompat.getColor(this@MainActivity, R.color.on_surface))
@@ -201,6 +207,7 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
         binding.pager.isVisible = false
         binding.bottomNav.isVisible = false
         binding.searchContainer.isVisible = true
+        syncSearchScope()
         if (supportFragmentManager.findFragmentById(R.id.search_container) == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.search_container, SearchFragment())
@@ -217,6 +224,10 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
         binding.pager.isVisible = true
         binding.bottomNav.isVisible = true
         applyAppBarOffset()
+    }
+
+    override fun onBrowseMediaTypeChanged(mediaType: MediaType) {
+        syncSearchScope()
     }
 
     private fun updateToolbarTitle(position: Int) {
@@ -250,7 +261,29 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
         else -> R.id.nav_saved
     }
 
+    private fun currentBrowseMediaType(): MediaType? {
+        val position = binding.pager.currentItem
+        if (position == SAVED_PAGE) return null
+        val fragment = supportFragmentManager.findFragmentByTag("f$position") as? MovieListFragment
+        return fragment?.currentMediaType ?: MediaType.MOVIE
+    }
+
+    private fun syncSearchScope() {
+        val mediaType = currentBrowseMediaType()
+        searchViewModel.setMediaType(mediaType)
+        searchView?.queryHint = searchHintFor(mediaType)
+    }
+
+    private fun searchHintFor(mediaType: MediaType?): String = getString(
+        when (mediaType) {
+            MediaType.MOVIE -> R.string.search_hint_movies
+            MediaType.TV -> R.string.search_hint_tv
+            null -> R.string.search_hint_all
+        }
+    )
+
     private companion object {
         const val STATE_SEARCH_EXPANDED = "search_expanded"
+        const val SAVED_PAGE = 2
     }
 }

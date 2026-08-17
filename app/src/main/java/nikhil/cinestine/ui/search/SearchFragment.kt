@@ -66,7 +66,11 @@ class SearchFragment : Fragment() {
                 viewModel.uiState.collect { state ->
                     adapter.submitList(
                         state.movies.map { movie ->
-                            MovieListItem(movie, movie.id in state.favouriteIds)
+                            MovieListItem(
+                                movie,
+                                movie.favouriteKey in state.favouriteKeys,
+                                showTypeBadge = state.showTypeBadge
+                            )
                         }
                     )
                     binding.progress.isVisible = state.isLoading && state.movies.isEmpty()
@@ -90,7 +94,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun onSaveClicked(movie: Movie) {
-        val alreadySaved = viewModel.uiState.value.favouriteIds.contains(movie.id)
+        val alreadySaved = viewModel.uiState.value.favouriteKeys.contains(movie.favouriteKey)
         viewModel.toggleFavourite(movie)
         Snackbar.make(
             binding.root,

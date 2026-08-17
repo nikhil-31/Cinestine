@@ -1,12 +1,13 @@
 package nikhil.cinestine.data.local
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
+import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
 
-@Entity(tableName = "favourites")
+@Entity(tableName = "favourites", primaryKeys = ["id", "mediaType"])
 data class FavouriteEntity(
-    @PrimaryKey val id: String,
+    val id: String,
+    val mediaType: String,
     val title: String,
     val originalTitle: String,
     val overview: String,
@@ -32,11 +33,13 @@ fun FavouriteEntity.toMovie() = Movie(
     popularity = popularity,
     voteCount = voteCount,
     originalLanguage = originalLanguage,
-    adult = adult
+    adult = adult,
+    mediaType = runCatching { MediaType.valueOf(mediaType) }.getOrDefault(MediaType.MOVIE)
 )
 
 fun Movie.toEntity() = FavouriteEntity(
     id = id,
+    mediaType = mediaType.name,
     title = title,
     originalTitle = originalTitle,
     overview = overview,
