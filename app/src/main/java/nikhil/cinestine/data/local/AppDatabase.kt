@@ -5,9 +5,10 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [FavouriteEntity::class], version = 3, exportSchema = false)
+@Database(entities = [FavouriteEntity::class, RecentEntity::class], version = 4, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun favouriteDao(): FavouriteDao
+    abstract fun recentDao(): RecentDao
 
     companion object {
         val MIGRATION_1_2 = object : Migration(1, 2) {
@@ -53,6 +54,32 @@ abstract class AppDatabase : RoomDatabase() {
             override fun migrate(db: SupportSQLiteDatabase) {
                 db.execSQL(
                     "ALTER TABLE favourites ADD COLUMN savedAt INTEGER NOT NULL DEFAULT ${System.currentTimeMillis()}"
+                )
+            }
+        }
+
+        val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    """
+                    CREATE TABLE IF NOT EXISTS recently_viewed (
+                        id TEXT NOT NULL,
+                        mediaType TEXT NOT NULL,
+                        title TEXT NOT NULL,
+                        originalTitle TEXT NOT NULL,
+                        overview TEXT NOT NULL,
+                        posterPath TEXT NOT NULL,
+                        backdropPath TEXT NOT NULL,
+                        voteAverage REAL NOT NULL,
+                        releaseDate TEXT NOT NULL,
+                        popularity TEXT NOT NULL,
+                        voteCount TEXT NOT NULL,
+                        originalLanguage TEXT NOT NULL,
+                        adult TEXT NOT NULL,
+                        viewedAt INTEGER NOT NULL,
+                        PRIMARY KEY(id, mediaType)
+                    )
+                    """.trimIndent()
                 )
             }
         }

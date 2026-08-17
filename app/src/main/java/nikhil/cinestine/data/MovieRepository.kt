@@ -1,8 +1,10 @@
 package nikhil.cinestine.data
 
 import nikhil.cinestine.data.local.FavouriteDao
+import nikhil.cinestine.data.local.RecentDao
 import nikhil.cinestine.data.local.toEntity
 import nikhil.cinestine.data.local.toMovie
+import nikhil.cinestine.data.local.toRecentEntity
 import nikhil.cinestine.data.remote.AggregateCreditsDto
 import nikhil.cinestine.data.remote.CastDto
 import nikhil.cinestine.data.remote.CollectionDto
@@ -52,6 +54,7 @@ import java.util.Locale
 class MovieRepository(
     private val api: TmdbApi,
     private val favouriteDao: FavouriteDao,
+    private val recentDao: RecentDao,
     private val regionProvider: () -> String = {
         val country = Locale.getDefault().country
         if (country.length == 2) country else "US"
@@ -299,6 +302,17 @@ class MovieRepository(
             favouriteDao.delete(movie.id, movie.mediaType.name)
         } else {
             favouriteDao.upsert(movie.toEntity())
+        }
+    }
+
+    fun observeRecentlyViewed(): Flow<List<Movie>> {
+        return recentDao.observeNewest(RECENT_LIMIT).map { list -> list.map { it.toMovie() } }
+    }
+
+    suspend fun recordViewed(movie: Movie) {
+        recentDao.upsert(movie.toRecentEntity())
+        recentDao.allNewestFirst().drop(RECENT_LIMIT).forEach { extra ->
+            recentDao.delete(extra.id, extra.mediaType)
         }
     }
 
@@ -567,4 +581,8 @@ class MovieRepository(
     }
 
     fun currentRegion(): String = regionProvider()
+
+    private companion object {
+        const val RECENT_LIMIT = 30
+    }
 }

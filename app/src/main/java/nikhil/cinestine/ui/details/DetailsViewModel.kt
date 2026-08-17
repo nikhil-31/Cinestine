@@ -84,6 +84,9 @@ class DetailsViewModel(
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), DetailsUiState())
 
     fun show(movie: Movie) {
+        viewModelScope.launch {
+            runCatching { repository.recordViewed(movie) }
+        }
         if (this.movie.value?.favouriteKey == movie.favouriteKey && extras.value.details != null) return
         loadJob?.cancel()
         seasonJob?.cancel()

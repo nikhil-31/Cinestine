@@ -78,6 +78,7 @@
   <string name="title_popular">Home</string>
   <string name="title_hot">Hot</string>
   <string name="see_all">See all</string>
+  <string name="rail_recently_viewed">Recently viewed</string>
   <string name="rail_trending_movies">Trending movies</string>
   <string name="rail_trending_tv">Trending TV</string>
   <string name="rail_popular_movies">Popular movies</string>

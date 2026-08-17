@@ -23,7 +23,7 @@ class CinestineApp : Application() {
         super.onCreate()
         ThemePreferences.apply(this)
         val database = Room.databaseBuilder(this, AppDatabase::class.java, "cinestine.db")
-            .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3)
+            .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3, AppDatabase.MIGRATION_3_4)
             .build()
         val json = Json { ignoreUnknownKeys = true }
         val client = OkHttpClient.Builder()
@@ -44,7 +44,7 @@ class CinestineApp : Application() {
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
             .create(TmdbApi::class.java)
-        repository = MovieRepository(api, database.favouriteDao()) {
+        repository = MovieRepository(api, database.favouriteDao(), database.recentDao()) {
             RegionPreferences.region(this)
         }
     }

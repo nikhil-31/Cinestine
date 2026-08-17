@@ -1,7 +1,7 @@
 {
   "0": "FavouritesFragment",
   "1": "MovieListFragment",
-  "2": "MovieRepository",
+  "2": "Movie",
   "3": "MainActivity",
   "4": "DetailsFragment",
   "5": "FavouriteDao",
@@ -21,8 +21,8 @@
   "19": "SeasonAdapter",
   "20": "CastMember",
   "21": "EpisodeFragment",
-  "22": "SearchFragment",
-  "23": "MovieListViewModel",
+  "22": "SearchViewModel",
+  "23": "DiscoverFilterFragment",
   "24": "ImagePagerAdapter",
   "25": "HotViewModel",
   "26": "ProviderAdapter",
@@ -43,7 +43,7 @@
   "41": ".tvCredits",
   "42": ".tvDetails",
   "43": ".tvSeason",
-  "44": "SearchViewModel",
+  "44": "Trailer",
   "45": "SearchAdapter",
   "46": "CollectionActivity",
   "47": "EpisodeActivity",
@@ -55,9 +55,8 @@
   "53": ".searchPeople",
   "54": ".tvEpisode",
   "55": "RegionPreferences",
-  "56": "MovieSelectionListener.kt",
-  "57": "SearchScope",
-  "58": ".onCreateOptionsMenu",
-  "59": "MenuItem",
-  "60": "CreditsDto"
+  "56": ".onViewCreated",
+  "57": "TrailerAdapter",
+  "58": "Intent",
+  "59": "Kind"
 }
