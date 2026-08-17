@@ -12,8 +12,8 @@ class MoviePagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activ
     override fun getItemCount(): Int = 4
 
     override fun createFragment(position: Int): Fragment = when (position) {
-        0 -> MovieListFragment.newInstance(MovieCategory.POPULAR)
-        1 -> HotFragment()
+        0 -> HotFragment()
+        1 -> MovieListFragment.newInstance(MovieCategory.POPULAR)
         2 -> MovieListFragment.newInstance(MovieCategory.TOP_RATED)
         else -> FavouritesFragment()
     }

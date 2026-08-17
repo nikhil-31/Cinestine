@@ -145,7 +145,7 @@ class MovieListFragment : Fragment() {
         val tv = viewModel.currentMediaType == MediaType.TV
         return getString(
             when (viewModel.currentCategory) {
-                MovieCategory.POPULAR -> R.string.title_popular
+                MovieCategory.POPULAR -> R.string.title_hot
                 MovieCategory.TOP_RATED -> R.string.title_top_rated
                 MovieCategory.TRENDING -> R.string.title_trending
                 MovieCategory.NOW_PLAYING -> if (tv) R.string.title_airing_today else R.string.title_now_playing
