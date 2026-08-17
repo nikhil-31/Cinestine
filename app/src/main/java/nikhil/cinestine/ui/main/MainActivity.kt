@@ -23,6 +23,7 @@ import nikhil.cinestine.cinestineApp
 import nikhil.cinestine.databinding.ActivityMainBinding
 import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
+import nikhil.cinestine.model.SearchScope
 import nikhil.cinestine.ui.ThemePreferences
 import nikhil.cinestine.ui.details.DetailsActivity
 import nikhil.cinestine.ui.details.DetailsFragment
@@ -31,7 +32,7 @@ import nikhil.cinestine.ui.movie.MovieListFragment
 import nikhil.cinestine.ui.search.SearchFragment
 import nikhil.cinestine.ui.search.SearchViewModel
 
-class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHost, MediaTypeHost, SearchMediaTypeHost {
+class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHost, MediaTypeHost, SearchMediaTypeHost, BrowseTitleHost {
 
     private lateinit var binding: ActivityMainBinding
     private var appBarOffset = 0
@@ -143,7 +144,9 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
         searchMenuItem = searchItem
         val searchView = searchItem.actionView as SearchView
         this.searchView = searchView
-        searchView.queryHint = searchHintFor(currentBrowseMediaType())
+        searchView.queryHint = searchHintFor(
+            if (currentBrowseMediaType() == MediaType.TV) SearchScope.TV else SearchScope.MOVIE
+        )
         searchView.maxWidth = Int.MAX_VALUE
         searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)?.apply {
             setTextColor(ContextCompat.getColor(this@MainActivity, R.color.on_surface))
@@ -233,8 +236,12 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
         }
     }
 
-    override fun onSearchMediaTypeChanged(mediaType: MediaType) {
-        searchView?.queryHint = searchHintFor(mediaType)
+    override fun onSearchMediaTypeChanged(scope: SearchScope) {
+        searchView?.queryHint = searchHintFor(scope)
+    }
+
+    override fun onBrowseTitleChanged(title: String) {
+        supportActionBar?.title = title
     }
 
     private fun updateToolbarTitle(position: Int) {
@@ -280,14 +287,17 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
     private fun syncSearchScope() {
         val mediaType = currentBrowseMediaType()
         searchViewModel.setMediaType(mediaType)
-        searchView?.queryHint = searchHintFor(mediaType)
+        searchView?.queryHint = searchHintFor(
+            if (mediaType == MediaType.TV) SearchScope.TV else SearchScope.MOVIE
+        )
     }
 
-    private fun searchHintFor(mediaType: MediaType?): String = getString(
-        when (mediaType) {
-            MediaType.MOVIE -> R.string.search_hint_movies
-            MediaType.TV -> R.string.search_hint_tv
-            null -> R.string.search_hint_all
+    private fun searchHintFor(scope: SearchScope): String = getString(
+        when (scope) {
+            SearchScope.MOVIE -> R.string.search_hint_movies
+            SearchScope.TV -> R.string.search_hint_tv
+            SearchScope.PERSON -> R.string.search_hint_people
+            SearchScope.COLLECTION -> R.string.search_hint_collections
         }
     )
 

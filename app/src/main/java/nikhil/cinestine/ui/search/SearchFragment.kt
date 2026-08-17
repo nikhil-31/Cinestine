@@ -1,5 +1,6 @@
 package nikhil.cinestine.ui.search
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,13 +16,15 @@ import androidx.recyclerview.widget.RecyclerView
 import nikhil.cinestine.R
 import nikhil.cinestine.cinestineApp
 import nikhil.cinestine.databinding.FragmentMovieListBinding
-import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
+import nikhil.cinestine.model.SearchScope
+import nikhil.cinestine.ui.collection.CollectionActivity
+import nikhil.cinestine.ui.collection.CollectionFragment
 import nikhil.cinestine.ui.main.BrowseScrollHost
 import nikhil.cinestine.ui.main.MovieSelectionListener
 import nikhil.cinestine.ui.main.SearchMediaTypeHost
-import nikhil.cinestine.ui.movie.MovieAdapter
-import nikhil.cinestine.ui.movie.MovieListItem
+import nikhil.cinestine.ui.person.PersonActivity
+import nikhil.cinestine.ui.person.PersonFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
@@ -34,7 +37,7 @@ class SearchFragment : Fragment() {
         SearchViewModel.Factory(requireContext().cinestineApp.repository)
     }
 
-    private val adapter = MovieAdapter(::onMovieSelected, ::onSaveClicked)
+    private val adapter = SearchAdapter(::onMovieSelected, ::onPersonSelected, ::onCollectionSelected, ::onSaveClicked)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentMovieListBinding.inflate(inflater, container, false)
@@ -46,13 +49,21 @@ class SearchFragment : Fragment() {
         val layoutManager = GridLayoutManager(requireContext(), spanCount)
         binding.recyclerMovies.layoutManager = layoutManager
         binding.recyclerMovies.adapter = adapter
+        binding.mediaRow.isVisible = true
         binding.categoryToggle.isVisible = true
-        applySearchChip(viewModel.uiState.value.mediaType)
+        binding.chipPeople.isVisible = true
+        binding.chipCollections.isVisible = true
+        applySearchChip(viewModel.uiState.value.scope)
         binding.categoryToggle.setOnCheckedStateChangeListener { _, checkedIds ->
             val id = checkedIds.firstOrNull() ?: return@setOnCheckedStateChangeListener
-            val type = if (id == R.id.chip_tv) MediaType.TV else MediaType.MOVIE
-            viewModel.setMediaType(type)
-            (activity as? SearchMediaTypeHost)?.onSearchMediaTypeChanged(type)
+            val scope = when (id) {
+                R.id.chip_tv -> SearchScope.TV
+                R.id.chip_people -> SearchScope.PERSON
+                R.id.chip_collections -> SearchScope.COLLECTION
+                else -> SearchScope.MOVIE
+            }
+            viewModel.setScope(scope)
+            (activity as? SearchMediaTypeHost)?.onSearchMediaTypeChanged(scope)
         }
         binding.recyclerMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -74,20 +85,13 @@ class SearchFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { state ->
-                    adapter.submitList(
-                        state.movies.map { movie ->
-                            MovieListItem(
-                                movie,
-                                movie.favouriteKey in state.favouriteKeys,
-                                showTypeBadge = state.showTypeBadge
-                            )
-                        }
-                    )
-                    binding.progress.isVisible = state.isLoading && state.movies.isEmpty()
-                    binding.errorState.isVisible = state.error != null && state.movies.isEmpty()
+                    adapter.favouriteKeys = state.favouriteKeys
+                    adapter.submitList(state.hits)
+                    binding.progress.isVisible = state.isLoading && state.hits.isEmpty()
+                    binding.errorState.isVisible = state.error != null && state.hits.isEmpty()
                     binding.errorText.text = state.error
                     binding.emptyState.isVisible = state.isIdle || state.isEmpty
-                    applySearchChip(state.mediaType)
+                    applySearchChip(state.scope)
                     if (state.isIdle) {
                         binding.emptyText.setText(R.string.search_idle)
                         binding.emptyHint.setText(R.string.search_idle_hint)
@@ -100,8 +104,13 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun applySearchChip(mediaType: MediaType?) {
-        val checkedId = if (mediaType == MediaType.TV) R.id.chip_tv else R.id.chip_movies
+    private fun applySearchChip(scope: SearchScope) {
+        val checkedId = when (scope) {
+            SearchScope.TV -> R.id.chip_tv
+            SearchScope.PERSON -> R.id.chip_people
+            SearchScope.COLLECTION -> R.id.chip_collections
+            SearchScope.MOVIE -> R.id.chip_movies
+        }
         if (binding.categoryToggle.checkedChipId != checkedId) {
             binding.categoryToggle.check(checkedId)
         }
@@ -109,6 +118,22 @@ class SearchFragment : Fragment() {
 
     private fun onMovieSelected(movie: Movie) {
         (activity as? MovieSelectionListener)?.onMovieSelected(movie)
+    }
+
+    private fun onPersonSelected(id: String, name: String) {
+        startActivity(
+            Intent(requireContext(), PersonActivity::class.java)
+                .putExtra(PersonFragment.EXTRA_PERSON_ID, id)
+                .putExtra(PersonFragment.EXTRA_PERSON_NAME, name)
+        )
+    }
+
+    private fun onCollectionSelected(id: String, name: String) {
+        startActivity(
+            Intent(requireContext(), CollectionActivity::class.java)
+                .putExtra(CollectionFragment.EXTRA_COLLECTION_ID, id)
+                .putExtra(CollectionFragment.EXTRA_COLLECTION_NAME, name)
+        )
     }
 
     private fun onSaveClicked(movie: Movie) {

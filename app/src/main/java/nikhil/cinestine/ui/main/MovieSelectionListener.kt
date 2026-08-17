@@ -2,6 +2,7 @@ package nikhil.cinestine.ui.main
 
 import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
+import nikhil.cinestine.model.SearchScope
 
 fun interface MovieSelectionListener {
     fun onMovieSelected(movie: Movie)
@@ -17,5 +18,9 @@ fun interface MediaTypeHost {
 }
 
 fun interface SearchMediaTypeHost {
-    fun onSearchMediaTypeChanged(mediaType: MediaType)
+    fun onSearchMediaTypeChanged(scope: SearchScope)
+}
+
+fun interface BrowseTitleHost {
+    fun onBrowseTitleChanged(title: String)
 }

@@ -26,6 +26,30 @@
       android:label="@string/title_activity_details"
       android:parentActivityName=".ui.main.MainActivity"
       android:theme="@style/Theme.Cinestine" />
+    <activity
+      android:name=".ui.person.PersonActivity"
+      android:exported="false"
+      android:label="@string/title_activity_person"
+      android:parentActivityName=".ui.details.DetailsActivity"
+      android:theme="@style/Theme.Cinestine" />
+    <activity
+      android:name=".ui.collection.CollectionActivity"
+      android:exported="false"
+      android:label="@string/title_activity_collection"
+      android:parentActivityName=".ui.details.DetailsActivity"
+      android:theme="@style/Theme.Cinestine" />
+    <activity
+      android:name=".ui.episode.EpisodeActivity"
+      android:exported="false"
+      android:label="@string/title_activity_episode"
+      android:parentActivityName=".ui.details.DetailsActivity"
+      android:theme="@style/Theme.Cinestine" />
+    <activity
+      android:name=".ui.discover.DiscoverResultsActivity"
+      android:exported="false"
+      android:label="@string/title_activity_discover"
+      android:parentActivityName=".ui.details.DetailsActivity"
+      android:theme="@style/Theme.Cinestine" />
   </application>
 
 </manifest>

@@ -19,6 +19,7 @@ import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
 import nikhil.cinestine.model.MovieCategory
 import nikhil.cinestine.ui.main.BrowseScrollHost
+import nikhil.cinestine.ui.main.BrowseTitleHost
 import nikhil.cinestine.ui.main.MediaTypeHost
 import nikhil.cinestine.ui.main.MovieSelectionListener
 import com.google.android.material.snackbar.Snackbar
@@ -51,7 +52,10 @@ class MovieListFragment : Fragment() {
         val layoutManager = GridLayoutManager(requireContext(), spanCount)
         binding.recyclerMovies.layoutManager = layoutManager
         binding.recyclerMovies.adapter = adapter
-        binding.categoryToggle.isVisible = true
+        binding.mediaRow.isVisible = true
+        binding.chipFilter.isVisible = true
+        val showCatalog = requireArguments().getBoolean(ARG_SHOW_CATALOG, category == MovieCategory.POPULAR)
+        binding.catalogScroll.isVisible = showCatalog
         val checkedId = if (viewModel.uiState.value.mediaType == MediaType.TV) {
             R.id.chip_tv
         } else {
@@ -61,7 +65,29 @@ class MovieListFragment : Fragment() {
         binding.categoryToggle.setOnCheckedStateChangeListener { _, checkedIds ->
             val id = checkedIds.firstOrNull() ?: return@setOnCheckedStateChangeListener
             viewModel.setMediaType(if (id == R.id.chip_tv) MediaType.TV else MediaType.MOVIE)
+            applyCatalogLabels(viewModel.currentMediaType)
+            notifyTitle()
             (activity as? MediaTypeHost)?.onBrowseMediaTypeChanged(viewModel.currentMediaType)
+        }
+        if (showCatalog) {
+            binding.catalogToggle.check(catalogChipId(viewModel.currentCategory))
+            binding.catalogToggle.setOnCheckedStateChangeListener { _, checkedIds ->
+                val id = checkedIds.firstOrNull() ?: return@setOnCheckedStateChangeListener
+                viewModel.setCategory(catalogFromChip(id))
+                notifyTitle()
+            }
+        }
+        applyCatalogLabels(viewModel.currentMediaType)
+        binding.chipFilter.isChecked = viewModel.currentFilter.isActive
+        binding.chipFilter.setOnClickListener {
+            binding.chipFilter.isChecked = viewModel.currentFilter.isActive
+            DiscoverFilterFragment.newInstance(viewModel.currentMediaType, viewModel.currentFilter)
+                .show(parentFragmentManager, "discover_filter")
+        }
+        parentFragmentManager.setFragmentResultListener(DiscoverFilterFragment.REQUEST_KEY, viewLifecycleOwner) { _, bundle ->
+            viewModel.setFilter(DiscoverFilterFragment.filterFrom(bundle))
+            binding.chipFilter.isChecked = viewModel.currentFilter.isActive
+            notifyTitle()
         }
         binding.recyclerMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -91,9 +117,51 @@ class MovieListFragment : Fragment() {
                     binding.progress.isVisible = state.isLoading && state.movies.isEmpty()
                     binding.errorState.isVisible = state.error != null && state.movies.isEmpty()
                     binding.errorText.text = state.error
+                    binding.chipFilter.isChecked = state.filter.isActive
                 }
             }
         }
+    }
+
+    private fun applyCatalogLabels(mediaType: MediaType) {
+        binding.chipCatalogNow.setText(
+            if (mediaType == MediaType.TV) R.string.chip_airing_today else R.string.chip_now_playing
+        )
+        binding.chipCatalogUpcoming.setText(
+            if (mediaType == MediaType.TV) R.string.chip_on_the_air else R.string.chip_upcoming
+        )
+    }
+
+    private fun notifyTitle() {
+        (activity as? BrowseTitleHost)?.onBrowseTitleChanged(browseTitle())
+    }
+
+    private fun browseTitle(): String {
+        if (viewModel.currentFilter.isActive) return getString(R.string.action_filter)
+        val tv = viewModel.currentMediaType == MediaType.TV
+        return getString(
+            when (viewModel.currentCategory) {
+                MovieCategory.POPULAR -> R.string.title_popular
+                MovieCategory.TOP_RATED -> R.string.title_top_rated
+                MovieCategory.TRENDING -> R.string.title_trending
+                MovieCategory.NOW_PLAYING -> if (tv) R.string.title_airing_today else R.string.title_now_playing
+                MovieCategory.UPCOMING -> if (tv) R.string.title_on_the_air else R.string.title_upcoming
+            }
+        )
+    }
+
+    private fun catalogChipId(category: MovieCategory): Int = when (category) {
+        MovieCategory.TRENDING -> R.id.chip_catalog_trending
+        MovieCategory.NOW_PLAYING -> R.id.chip_catalog_now
+        MovieCategory.UPCOMING -> R.id.chip_catalog_upcoming
+        else -> R.id.chip_catalog_popular
+    }
+
+    private fun catalogFromChip(id: Int): MovieCategory = when (id) {
+        R.id.chip_catalog_trending -> MovieCategory.TRENDING
+        R.id.chip_catalog_now -> MovieCategory.NOW_PLAYING
+        R.id.chip_catalog_upcoming -> MovieCategory.UPCOMING
+        else -> MovieCategory.POPULAR
     }
 
     private fun onMovieSelected(movie: Movie) {
@@ -117,9 +185,14 @@ class MovieListFragment : Fragment() {
 
     companion object {
         private const val ARG_CATEGORY = "category"
+        private const val ARG_SHOW_CATALOG = "show_catalog"
 
-        fun newInstance(category: MovieCategory) = MovieListFragment().apply {
-            arguments = Bundle().apply { putString(ARG_CATEGORY, category.name) }
-        }
+        fun newInstance(category: MovieCategory, showCatalog: Boolean = category == MovieCategory.POPULAR) =
+            MovieListFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_CATEGORY, category.name)
+                    putBoolean(ARG_SHOW_CATALOG, showCatalog)
+                }
+            }
     }
 }

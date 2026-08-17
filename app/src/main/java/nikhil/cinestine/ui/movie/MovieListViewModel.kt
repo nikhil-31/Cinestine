@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import nikhil.cinestine.data.MovieRepository
+import nikhil.cinestine.model.DiscoverFilter
+import nikhil.cinestine.model.Genre
 import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
 import nikhil.cinestine.model.MovieCategory
@@ -21,6 +23,8 @@ data class MovieListUiState(
     val movies: List<Movie> = emptyList(),
     val favouriteKeys: Set<String> = emptySet(),
     val mediaType: MediaType = MediaType.MOVIE,
+    val category: MovieCategory = MovieCategory.POPULAR,
+    val filter: DiscoverFilter = DiscoverFilter(),
     val isLoading: Boolean = false,
     val error: String? = null,
     val page: Int = 0,
@@ -29,14 +33,18 @@ data class MovieListUiState(
 
 class MovieListViewModel(
     private val repository: MovieRepository,
-    private val category: MovieCategory
+    initialCategory: MovieCategory
 ) : ViewModel() {
 
-    private val listState = MutableStateFlow(MovieListUiState())
+    private val listState = MutableStateFlow(MovieListUiState(category = initialCategory))
     private var loadJob: Job? = null
     private var mediaType: MediaType = MediaType.MOVIE
+    private var category: MovieCategory = initialCategory
+    private var filter: DiscoverFilter = DiscoverFilter()
 
     val currentMediaType: MediaType get() = mediaType
+    val currentCategory: MovieCategory get() = category
+    val currentFilter: DiscoverFilter get() = filter
 
     val uiState: StateFlow<MovieListUiState> = combine(
         listState,
@@ -52,8 +60,23 @@ class MovieListViewModel(
     fun setMediaType(mediaType: MediaType) {
         if (this.mediaType == mediaType) return
         this.mediaType = mediaType
+        filter = filter.copy(genreIds = emptySet())
         loadPage(page = 1, reset = true)
     }
+
+    fun setCategory(category: MovieCategory) {
+        if (this.category == category) return
+        this.category = category
+        loadPage(page = 1, reset = true)
+    }
+
+    fun setFilter(filter: DiscoverFilter) {
+        if (this.filter == filter) return
+        this.filter = filter
+        loadPage(page = 1, reset = true)
+    }
+
+    suspend fun genres(): List<Genre> = repository.genres(mediaType)
 
     fun refresh() {
         loadPage(page = 1, reset = true)
@@ -78,12 +101,25 @@ class MovieListViewModel(
             listState.update {
                 it.copy(
                     mediaType = mediaType,
+                    category = category,
+                    filter = filter,
                     isLoading = true,
                     error = null,
                     movies = if (reset) emptyList() else it.movies
                 )
             }
-            runCatching { repository.titles(mediaType, category, page) }
+            runCatching {
+                if (filter.isActive) {
+                    val sort = if (category == MovieCategory.TOP_RATED) {
+                        "vote_average.desc"
+                    } else {
+                        "popularity.desc"
+                    }
+                    repository.discover(mediaType, filter, sort, page)
+                } else {
+                    repository.titles(mediaType, category, page)
+                }
+            }
                 .onSuccess { movies ->
                     listState.update { current ->
                         val combined = if (reset) movies else current.movies + movies
@@ -92,7 +128,9 @@ class MovieListViewModel(
                             isLoading = false,
                             page = page,
                             endReached = movies.isEmpty(),
-                            mediaType = mediaType
+                            mediaType = mediaType,
+                            category = category,
+                            filter = filter
                         )
                     }
                 }

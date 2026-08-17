@@ -23,11 +23,24 @@ import com.google.android.material.snackbar.Snackbar
 import nikhil.cinestine.R
 import nikhil.cinestine.cinestineApp
 import nikhil.cinestine.databinding.FragmentDetailsBinding
+import nikhil.cinestine.model.CastMember
+import nikhil.cinestine.model.DiscoverFilter
 import nikhil.cinestine.model.Episode
 import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
+import nikhil.cinestine.model.TaggedLink
 import nikhil.cinestine.model.TitleDetails
 import nikhil.cinestine.model.Trailer
+import nikhil.cinestine.model.VideoGroup
+import nikhil.cinestine.ui.collection.CollectionActivity
+import nikhil.cinestine.ui.collection.CollectionFragment
+import nikhil.cinestine.ui.discover.DiscoverResultsActivity
+import nikhil.cinestine.ui.discover.DiscoverResultsFragment
+import nikhil.cinestine.ui.episode.EpisodeActivity
+import nikhil.cinestine.ui.episode.EpisodeFragment
+import nikhil.cinestine.ui.main.MovieSelectionListener
+import nikhil.cinestine.ui.person.PersonActivity
+import nikhil.cinestine.ui.person.PersonFragment
 import kotlinx.coroutines.launch
 import java.util.Locale
 
@@ -43,11 +56,17 @@ class DetailsFragment : Fragment() {
     private val trailerAdapter = TrailerAdapter()
     private val reviewAdapter = ReviewAdapter()
     private val seasonAdapter = SeasonAdapter { season -> viewModel.selectSeason(season.seasonNumber) }
-    private val episodeAdapter = EpisodeAdapter()
+    private val episodeAdapter = EpisodeAdapter { openEpisode(it) }
+    private val castAdapter = CastAdapter(::onCastSelected)
+    private val similarAdapter = PosterAdapter(::onSimilarSelected)
+    private val providerAdapter = ProviderAdapter()
+    private val stillAdapter = StillAdapter(::openGallery)
     private var overviewExpanded = false
     private var overviewText = ""
     private var renderedMovieId: String? = null
     private var renderedGenres: List<String> = emptyList()
+    private var renderedTopics: List<TaggedLink> = emptyList()
+    private var videoGroup: VideoGroup? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
@@ -81,6 +100,23 @@ class DetailsFragment : Fragment() {
         binding.recyclerEpisodes.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerEpisodes.adapter = episodeAdapter
         binding.recyclerEpisodes.isNestedScrollingEnabled = false
+        binding.recyclerCast.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerCast.adapter = castAdapter
+        binding.recyclerSimilar.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerSimilar.adapter = similarAdapter
+        binding.recyclerProviders.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerProviders.adapter = providerAdapter
+        binding.recyclerPhotos.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerPhotos.adapter = stillAdapter
+        binding.videoToggle.setOnCheckedStateChangeListener { _, checkedIds ->
+            videoGroup = when (checkedIds.firstOrNull()) {
+                R.id.chip_video_trailers -> VideoGroup.TRAILER
+                R.id.chip_video_teasers -> VideoGroup.TEASER
+                R.id.chip_video_clips -> VideoGroup.CLIP
+                else -> null
+            }
+            applyVideoFilter(viewModel.uiState.value.trailers)
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.detailsScroll) { scroll, insets ->
             val bars = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
@@ -103,6 +139,25 @@ class DetailsFragment : Fragment() {
         binding.overviewToggle.setOnClickListener {
             overviewExpanded = !overviewExpanded
             applyOverview()
+        }
+        binding.backdrop.setOnClickListener { openGallery(0) }
+        binding.providersCard.setOnClickListener {
+            val link = viewModel.uiState.value.watch?.link?.takeIf { it.isNotBlank() } ?: return@setOnClickListener
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link)))
+        }
+        binding.collectionCard.setOnClickListener {
+            val collection = viewModel.uiState.value.details?.collection ?: return@setOnClickListener
+            startActivity(
+                Intent(requireContext(), CollectionActivity::class.java)
+                    .putExtra(CollectionFragment.EXTRA_COLLECTION_ID, collection.id)
+                    .putExtra(CollectionFragment.EXTRA_COLLECTION_NAME, collection.name)
+            )
+        }
+        binding.nextEpisodeCard.setOnClickListener {
+            val episode = viewModel.uiState.value.details?.nextEpisode
+                ?: viewModel.uiState.value.details?.lastEpisode
+                ?: return@setOnClickListener
+            openEpisode(episode)
         }
 
         movieFromIntent()?.let(viewModel::show)
@@ -142,6 +197,13 @@ class DetailsFragment : Fragment() {
             binding.episodesCard.isVisible = false
             binding.trailersCard.isVisible = false
             binding.reviewsCard.isVisible = false
+            binding.castCard.isVisible = false
+            binding.providersCard.isVisible = false
+            binding.photosCard.isVisible = false
+            binding.similarCard.isVisible = false
+            binding.collectionCard.isVisible = false
+            binding.topicsCard.isVisible = false
+            binding.metaCertification.isVisible = false
             binding.fab.isVisible = false
             binding.toolbar.menu.findItem(R.id.action_share)?.isVisible = false
             return
@@ -152,7 +214,11 @@ class DetailsFragment : Fragment() {
             renderedMovieId = movie.favouriteKey
             overviewExpanded = false
             renderedGenres = emptyList()
+            renderedTopics = emptyList()
+            videoGroup = null
             binding.genreChips.removeAllViews()
+            binding.topicChips.removeAllViews()
+            binding.videoToggle.check(R.id.chip_video_all)
         }
 
         val details = state.details
@@ -184,11 +250,20 @@ class DetailsFragment : Fragment() {
         binding.fab.setImageResource(
             if (state.isFavourite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
         )
-        trailerAdapter.submitList(state.trailers)
+        applyVideoFilter(state.trailers)
         reviewAdapter.submitList(state.reviews)
-        binding.playTrailer.isVisible = state.trailers.isNotEmpty()
+        val playable = state.trailers.firstOrNull { it.group == VideoGroup.TRAILER } ?: state.trailers.firstOrNull()
+        binding.playTrailer.isVisible = playable != null
         binding.trailersCard.isVisible = state.trailers.isNotEmpty()
         binding.reviewsCard.isVisible = state.reviews.isNotEmpty()
+        binding.castCard.isVisible = state.cast.isNotEmpty()
+        castAdapter.submitList(state.cast)
+        binding.similarCard.isVisible = state.recommendations.isNotEmpty()
+        similarAdapter.submitList(state.recommendations)
+        binding.providersCard.isVisible = state.watch?.providers?.isNotEmpty() == true
+        providerAdapter.submitList(state.watch?.providers.orEmpty())
+        binding.photosCard.isVisible = state.images.isNotEmpty()
+        stillAdapter.submitList(state.images)
         binding.toolbar.menu.findItem(R.id.action_share)?.isVisible = state.trailers.isNotEmpty()
         bindTv(state)
     }
@@ -235,10 +310,42 @@ class DetailsFragment : Fragment() {
             }
         }
 
+        val certification = details?.certification.orEmpty()
+        binding.metaCertification.isVisible = certification.isNotBlank()
+        binding.metaCertification.text = certification
+
+        val networkLinks = details?.networkLinks.orEmpty()
         val networks = details?.networks.orEmpty()
-        binding.networksWrite.isVisible = networks.isNotEmpty()
-        if (networks.isNotEmpty()) {
+        binding.networksWrite.isVisible = networks.isNotEmpty() && networkLinks.isEmpty()
+        if (binding.networksWrite.isVisible) {
             binding.networksWrite.text = getString(R.string.networks_format, networks.joinToString(" · "))
+        }
+
+        val collection = details?.collection
+        binding.collectionCard.isVisible = collection != null
+        if (collection != null) {
+            binding.collectionName.text = getString(R.string.part_of_collection, collection.name)
+            binding.collectionPoster.load(collection.posterPath.ifBlank { collection.backdropPath.ifBlank { null } }) {
+                crossfade(true)
+                placeholder(R.drawable.ic_poster_placeholder)
+            }
+        }
+
+        val topics = details?.keywords.orEmpty() + details?.companies.orEmpty() + networkLinks
+        binding.topicsCard.isVisible = topics.isNotEmpty()
+        if (topics != renderedTopics) {
+            renderedTopics = topics
+            binding.topicChips.removeAllViews()
+            topics.forEach { link ->
+                binding.topicChips.addView(
+                    Chip(requireContext()).apply {
+                        text = link.name
+                        isClickable = true
+                        isCheckable = false
+                        setOnClickListener { openDiscover(link) }
+                    }
+                )
+            }
         }
 
         val spotlight = details?.nextEpisode ?: details?.lastEpisode
@@ -304,6 +411,64 @@ class DetailsFragment : Fragment() {
             else -> count.toString()
         }
         return getString(R.string.votes_format, compact)
+    }
+
+    private fun applyVideoFilter(trailers: List<Trailer>) {
+        val filtered = videoGroup?.let { group -> trailers.filter { it.group == group } } ?: trailers
+        trailerAdapter.submitList(filtered)
+        binding.videoToggle.isVisible = trailers.map { it.group }.distinct().size > 1
+    }
+
+    private fun onCastSelected(member: CastMember) {
+        startActivity(
+            Intent(requireContext(), PersonActivity::class.java)
+                .putExtra(PersonFragment.EXTRA_PERSON_ID, member.id)
+                .putExtra(PersonFragment.EXTRA_PERSON_NAME, member.name)
+        )
+    }
+
+    private fun openEpisode(episode: Episode) {
+        val movie = viewModel.uiState.value.movie ?: return
+        if (movie.mediaType != MediaType.TV) return
+        startActivity(
+            Intent(requireContext(), EpisodeActivity::class.java)
+                .putExtra(EpisodeFragment.EXTRA_TV_ID, movie.id)
+                .putExtra(EpisodeFragment.EXTRA_SEASON, episode.seasonNumber)
+                .putExtra(EpisodeFragment.EXTRA_EPISODE, episode.episodeNumber)
+                .putExtra(EpisodeFragment.EXTRA_SHOW_TITLE, movie.originalTitle)
+        )
+    }
+
+    private fun openDiscover(link: TaggedLink) {
+        val movie = viewModel.uiState.value.movie ?: return
+        val mediaType = if (link.kind == TaggedLink.Kind.NETWORK) MediaType.TV else movie.mediaType
+        val filter = when (link.kind) {
+            TaggedLink.Kind.KEYWORD -> DiscoverFilter(keywordIds = setOf(link.id))
+            TaggedLink.Kind.COMPANY -> DiscoverFilter(companyIds = setOf(link.id))
+            TaggedLink.Kind.NETWORK -> DiscoverFilter(networkIds = setOf(link.id))
+        }
+        startActivity(
+            Intent(requireContext(), DiscoverResultsActivity::class.java)
+                .putExtra(DiscoverResultsFragment.EXTRA_TITLE, link.name)
+                .putExtra(DiscoverResultsFragment.EXTRA_MEDIA_TYPE, mediaType.name)
+                .putExtra(DiscoverResultsFragment.EXTRA_FILTER, filter)
+        )
+    }
+
+    private fun onSimilarSelected(movie: Movie) {
+        val host = activity as? MovieSelectionListener
+        if (host != null && activity !is DetailsActivity) {
+            host.onMovieSelected(movie)
+        } else {
+            startActivity(Intent(requireContext(), DetailsActivity::class.java).putExtra(EXTRA_MOVIE, movie))
+        }
+    }
+
+    private fun openGallery(startIndex: Int) {
+        val urls = viewModel.uiState.value.images.map { it.url }.filter { it.isNotBlank() }
+        if (urls.isEmpty()) return
+        GalleryDialogFragment.newInstance(urls, startIndex)
+            .show(parentFragmentManager, "gallery")
     }
 
     private fun shareFirstTrailer() {

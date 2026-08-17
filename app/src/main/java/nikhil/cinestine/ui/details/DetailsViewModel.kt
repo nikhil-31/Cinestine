@@ -4,13 +4,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import nikhil.cinestine.data.MovieRepository
+import nikhil.cinestine.model.CastMember
 import nikhil.cinestine.model.Episode
+import nikhil.cinestine.model.MediaImage
 import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
 import nikhil.cinestine.model.Review
 import nikhil.cinestine.model.Season
 import nikhil.cinestine.model.TitleDetails
 import nikhil.cinestine.model.Trailer
+import nikhil.cinestine.model.WatchAvailability
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
@@ -31,6 +34,10 @@ data class DetailsUiState(
     val details: TitleDetails? = null,
     val trailers: List<Trailer> = emptyList(),
     val reviews: List<Review> = emptyList(),
+    val cast: List<CastMember> = emptyList(),
+    val recommendations: List<Movie> = emptyList(),
+    val watch: WatchAvailability? = null,
+    val images: List<MediaImage> = emptyList(),
     val seasons: List<Season> = emptyList(),
     val selectedSeason: Int? = null,
     val episodes: List<Episode> = emptyList(),
@@ -64,6 +71,10 @@ class DetailsViewModel(
             details = extra.details,
             trailers = extra.trailers,
             reviews = extra.reviews,
+            cast = extra.cast,
+            recommendations = extra.recommendations,
+            watch = extra.watch,
+            images = extra.images,
             seasons = extra.details?.seasons.orEmpty(),
             selectedSeason = extra.selectedSeason,
             episodes = extra.episodes,
@@ -89,11 +100,39 @@ class DetailsViewModel(
                 val reviewsDeferred = async {
                     runCatching { repository.reviews(movie.id, movie.mediaType) }
                 }
-                val details = detailsDeferred.await().onFailure { if (it is CancellationException) throw it }.getOrNull()
-                val trailers = trailersDeferred.await().onFailure { if (it is CancellationException) throw it }.getOrDefault(emptyList())
-                val reviews = reviewsDeferred.await().onFailure { if (it is CancellationException) throw it }.getOrDefault(emptyList())
+                val castDeferred = async {
+                    runCatching { repository.cast(movie.id, movie.mediaType) }
+                }
+                val similarDeferred = async {
+                    runCatching { repository.recommendations(movie.id, movie.mediaType) }
+                }
+                val watchDeferred = async {
+                    runCatching { repository.watchAvailability(movie.id, movie.mediaType) }
+                }
+                val certDeferred = async {
+                    runCatching { repository.certification(movie.id, movie.mediaType) }
+                }
+                val imagesDeferred = async {
+                    runCatching { repository.images(movie.id, movie.mediaType) }
+                }
+                val keywordsDeferred = async {
+                    runCatching { repository.keywords(movie.id, movie.mediaType) }
+                }
+                fun <T> Result<T>.orCancel(): Result<T> =
+                    onFailure { if (it is CancellationException) throw it }
+                val details = detailsDeferred.await().orCancel().getOrNull()
+                val certification = certDeferred.await().orCancel().getOrDefault("")
+                val keywords = keywordsDeferred.await().orCancel().getOrDefault(emptyList())
                 extras.update {
-                    it.copy(details = details, trailers = trailers, reviews = reviews)
+                    it.copy(
+                        details = details?.copy(certification = certification, keywords = keywords),
+                        trailers = trailersDeferred.await().orCancel().getOrDefault(emptyList()),
+                        reviews = reviewsDeferred.await().orCancel().getOrDefault(emptyList()),
+                        cast = castDeferred.await().orCancel().getOrDefault(emptyList()),
+                        recommendations = similarDeferred.await().orCancel().getOrDefault(emptyList()),
+                        watch = watchDeferred.await().orCancel().getOrDefault(null),
+                        images = imagesDeferred.await().orCancel().getOrDefault(emptyList())
+                    )
                 }
                 if (movie.mediaType == MediaType.TV) {
                     val defaultSeason = details?.nextEpisode?.seasonNumber
@@ -134,6 +173,10 @@ class DetailsViewModel(
         val details: TitleDetails? = null,
         val trailers: List<Trailer> = emptyList(),
         val reviews: List<Review> = emptyList(),
+        val cast: List<CastMember> = emptyList(),
+        val recommendations: List<Movie> = emptyList(),
+        val watch: WatchAvailability? = null,
+        val images: List<MediaImage> = emptyList(),
         val selectedSeason: Int? = null,
         val episodes: List<Episode> = emptyList(),
         val episodesLoading: Boolean = false

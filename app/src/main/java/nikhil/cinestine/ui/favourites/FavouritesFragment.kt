@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
 import nikhil.cinestine.R
 import nikhil.cinestine.cinestineApp
 import nikhil.cinestine.databinding.FragmentMovieListBinding
+import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
 import nikhil.cinestine.ui.main.BrowseScrollHost
+import nikhil.cinestine.ui.main.MediaTypeHost
 import nikhil.cinestine.ui.main.MovieSelectionListener
 import nikhil.cinestine.ui.movie.MovieAdapter
 import nikhil.cinestine.ui.movie.MovieListItem
@@ -33,6 +35,8 @@ class FavouritesFragment : Fragment() {
 
     private val adapter = MovieAdapter(::onMovieSelected)
 
+    val currentMediaType: MediaType get() = viewModel.currentMediaType
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentMovieListBinding.inflate(inflater, container, false)
         return binding.root
@@ -44,6 +48,19 @@ class FavouritesFragment : Fragment() {
             resources.getInteger(R.integer.grid_span_count)
         )
         binding.recyclerMovies.adapter = adapter
+        binding.mediaRow.isVisible = true
+        binding.categoryToggle.isVisible = true
+        val checkedId = if (viewModel.currentMediaType == MediaType.TV) {
+            R.id.chip_tv
+        } else {
+            R.id.chip_movies
+        }
+        binding.categoryToggle.check(checkedId)
+        binding.categoryToggle.setOnCheckedStateChangeListener { _, checkedIds ->
+            val id = checkedIds.firstOrNull() ?: return@setOnCheckedStateChangeListener
+            viewModel.setMediaType(if (id == R.id.chip_tv) MediaType.TV else MediaType.MOVIE)
+            (activity as? MediaTypeHost)?.onBrowseMediaTypeChanged(viewModel.currentMediaType)
+        }
         binding.recyclerMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 (activity as? BrowseScrollHost)?.onBrowseListScrolled(dy)
@@ -59,9 +76,15 @@ class FavouritesFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.favourites.collect { movies ->
-                    adapter.submitList(movies.map { MovieListItem(it, isFavourite = true, showTypeBadge = true) })
+                    adapter.submitList(movies.map { MovieListItem(it, isFavourite = true) })
                     binding.emptyState.isVisible = movies.isEmpty()
-                    binding.emptyText.setText(R.string.empty_favourites)
+                    binding.emptyText.setText(
+                        if (viewModel.currentMediaType == MediaType.TV) {
+                            R.string.empty_favourites_tv
+                        } else {
+                            R.string.empty_favourites_movies
+                        }
+                    )
                 }
             }
         }
