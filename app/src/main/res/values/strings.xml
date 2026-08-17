@@ -45,10 +45,12 @@
   <string name="share_subject">Sent from Cinestine</string>
   <string name="share_via">Share via</string>
   <string name="nav_popular">Home</string>
+  <string name="nav_hot">Hot</string>
   <string name="nav_top_rated">Top rated</string>
   <string name="nav_saved">Saved</string>
   <string name="chip_movies">Movies</string>
   <string name="chip_tv">TV</string>
+  <string name="chip_all">All</string>
   <string name="chip_people">People</string>
   <string name="chip_collections">Collections</string>
   <string name="search_hint_people">Search people</string>
@@ -63,6 +65,16 @@
   <string name="title_activity_episode">Episode</string>
   <string name="topics">Explore</string>
   <string name="title_popular">Home</string>
+  <string name="title_hot">Hot</string>
+  <string name="see_all">See all</string>
+  <string name="rail_trending_movies">Trending movies</string>
+  <string name="rail_trending_tv">Trending TV</string>
+  <string name="rail_popular_movies">Popular movies</string>
+  <string name="rail_popular_tv">Popular TV</string>
+  <string name="rail_top_rated_movies">Top rated movies</string>
+  <string name="rail_top_rated_tv">Top rated TV</string>
+  <string name="hot_empty">Nothing hot right now</string>
+  <string name="hot_empty_hint">Try another filter or switch Movies and TV</string>
   <string name="chip_popular">Popular</string>
   <string name="title_top_rated">Top rated</string>
   <string name="title_saved">Saved</string>
@@ -117,6 +129,7 @@
   <string name="collection_parts">%d titles</string>
   <string-array name="tabs">
     <item>@string/nav_popular</item>
+    <item>@string/nav_hot</item>
     <item>@string/nav_top_rated</item>
     <item>@string/nav_saved</item>
   </string-array>

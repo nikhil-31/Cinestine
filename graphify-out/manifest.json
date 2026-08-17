@@ -80,13 +80,13 @@
     "semantic_hash": ""
   },
   "app/src/main/java/nikhil/cinestine/ui/main/MainActivity.kt": {
-    "mtime": 1786929769.8708618,
-    "ast_hash": "048caa6c2d1c9de32fac67cf95ff0f91",
+    "mtime": 1786933201.6123745,
+    "ast_hash": "05fcce09e59b614fc3007aaadd42078d",
     "semantic_hash": ""
   },
   "app/src/main/java/nikhil/cinestine/ui/main/MoviePagerAdapter.kt": {
-    "mtime": 1786923350.6836808,
-    "ast_hash": "797a53f0479a11eef4fdda37e0b5cfc7",
+    "mtime": 1786933153.6351104,
+    "ast_hash": "a1ddb6e3c517b053b30ac9465cc8a985",
     "semantic_hash": ""
   },
   "app/src/main/java/nikhil/cinestine/ui/main/MovieSelectionListener.kt": {
@@ -300,8 +300,8 @@
     "semantic_hash": ""
   },
   "app/src/main/java/nikhil/cinestine/ui/details/PosterAdapter.kt": {
-    "mtime": 1786927956.1079113,
-    "ast_hash": "acb730e5df4d7c23c436e80cdcf7f601",
+    "mtime": 1786935953.3727574,
+    "ast_hash": "983db86923816c12e24bc8360ccbe810",
     "semantic_hash": ""
   },
   "app/src/main/java/nikhil/cinestine/ui/details/ProviderAdapter.kt": {
@@ -355,13 +355,13 @@
     "semantic_hash": ""
   },
   "app/src/main/java/nikhil/cinestine/ui/discover/DiscoverResultsFragment.kt": {
-    "mtime": 1786929586.7400951,
-    "ast_hash": "866e9a32712bb10bbd4e2f7e6d7a91cd",
+    "mtime": 1786933211.71467,
+    "ast_hash": "f571eb3a2a2a641489d0a56e89021801",
     "semantic_hash": ""
   },
   "app/src/main/java/nikhil/cinestine/ui/discover/DiscoverResultsViewModel.kt": {
-    "mtime": 1786929574.2840817,
-    "ast_hash": "540ebe03820637f1f1772f25268ba0ac",
+    "mtime": 1786933208.7492943,
+    "ast_hash": "f9824bfbf478c7ff270e40b6d4334036",
     "semantic_hash": ""
   },
   "app/src/main/java/nikhil/cinestine/ui/episode/EpisodeActivity.kt": {
@@ -382,6 +382,26 @@
   "app/src/main/java/nikhil/cinestine/ui/search/SearchAdapter.kt": {
     "mtime": 1786929462.383052,
     "ast_hash": "cbfa72ccfccddd60fee1b357342cb03b",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/hot/HotFragment.kt": {
+    "mtime": 1786933197.4188151,
+    "ast_hash": "bee90741bba01e5ff58dabfb459e1b70",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/hot/HotRowAdapter.kt": {
+    "mtime": 1786935954.4710271,
+    "ast_hash": "cd27d32e18b5a15d01f0d6a6b23673a6",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/hot/HotViewModel.kt": {
+    "mtime": 1786933187.7289932,
+    "ast_hash": "c65df3f041bbccf064d9c48d8e661c98",
+    "semantic_hash": ""
+  },
+  "app/src/main/java/nikhil/cinestine/ui/main/NestedScrollableHost.kt": {
+    "mtime": 1786934128.2395086,
+    "ast_hash": "1a7151b4d65e76f2db632df10deec00c",
     "semantic_hash": ""
   }
 }

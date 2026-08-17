@@ -5,6 +5,10 @@
     android:icon="@drawable/ic_tab_popular"
     android:title="@string/nav_popular" />
   <item
+    android:id="@+id/nav_hot"
+    android:icon="@drawable/ic_tab_hot"
+    android:title="@string/nav_hot" />
+  <item
     android:id="@+id/nav_top"
     android:icon="@drawable/ic_tab_top"
     android:title="@string/nav_top_rated" />

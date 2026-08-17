@@ -28,6 +28,7 @@ import nikhil.cinestine.ui.ThemePreferences
 import nikhil.cinestine.ui.details.DetailsActivity
 import nikhil.cinestine.ui.details.DetailsFragment
 import nikhil.cinestine.ui.favourites.FavouritesFragment
+import nikhil.cinestine.ui.hot.HotFragment
 import nikhil.cinestine.ui.movie.MovieListFragment
 import nikhil.cinestine.ui.search.SearchFragment
 import nikhil.cinestine.ui.search.SearchViewModel
@@ -248,7 +249,8 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
         supportActionBar?.title = getString(
             when (position) {
                 0 -> R.string.title_popular
-                1 -> R.string.title_top_rated
+                1 -> R.string.title_hot
+                2 -> R.string.title_top_rated
                 else -> R.string.title_saved
             }
         )
@@ -265,13 +267,15 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
 
     private fun Int.toPagerIndex(): Int = when (this) {
         R.id.nav_popular -> 0
-        R.id.nav_top -> 1
-        else -> 2
+        R.id.nav_hot -> 1
+        R.id.nav_top -> 2
+        else -> 3
     }
 
     private fun Int.toNavId(): Int = when (this) {
         0 -> R.id.nav_popular
-        1 -> R.id.nav_top
+        1 -> R.id.nav_hot
+        2 -> R.id.nav_top
         else -> R.id.nav_saved
     }
 
@@ -279,6 +283,7 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
         val fragment = supportFragmentManager.findFragmentByTag("f${binding.pager.currentItem}")
         return when (fragment) {
             is MovieListFragment -> fragment.currentMediaType
+            is HotFragment -> fragment.currentMediaType
             is FavouritesFragment -> fragment.currentMediaType
             else -> MediaType.MOVIE
         }
