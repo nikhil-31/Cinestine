@@ -81,13 +81,14 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
         }
 
         binding.pager.adapter = MoviePagerAdapter(this)
+        binding.pager.isUserInputEnabled = false
         binding.pager.post {
             (binding.pager.getChildAt(0) as? RecyclerView)?.isNestedScrollingEnabled = false
         }
         binding.appBar.post { applyAppBarOffset() }
         updateToolbarTitle(binding.pager.currentItem)
         binding.bottomNav.setOnItemSelectedListener { item ->
-            binding.pager.currentItem = item.itemId.toPagerIndex()
+            binding.pager.setCurrentItem(item.itemId.toPagerIndex(), false)
             true
         }
         binding.pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
