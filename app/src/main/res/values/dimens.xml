@@ -16,7 +16,6 @@
   <dimen name="season_width">132dp</dimen>
   <dimen name="season_poster_height">168dp</dimen>
   <dimen name="hot_poster_width">184dp</dimen>
-  <dimen name="hot_poster_height">276dp</dimen>
   <dimen name="episode_still_width">120dp</dimen>
   <dimen name="episode_still_height">68dp</dimen>
   <dimen name="gallery_still_width">168dp</dimen>
