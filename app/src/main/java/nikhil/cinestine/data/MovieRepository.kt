@@ -51,7 +51,11 @@ import java.util.Locale
 
 class MovieRepository(
     private val api: TmdbApi,
-    private val favouriteDao: FavouriteDao
+    private val favouriteDao: FavouriteDao,
+    private val regionProvider: () -> String = {
+        val country = Locale.getDefault().country
+        if (country.length == 2) country else "US"
+    }
 ) {
     private var cachedMovieGenres: List<Genre>? = null
     private var cachedTvGenres: List<Genre>? = null
@@ -562,8 +566,5 @@ class MovieRepository(
         return "https://image.tmdb.org/t/p/$size$path"
     }
 
-    private fun currentRegion(): String {
-        val country = Locale.getDefault().country
-        return if (country.length == 2) country else "US"
-    }
+    fun currentRegion(): String = regionProvider()
 }

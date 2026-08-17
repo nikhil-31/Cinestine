@@ -481,31 +481,6 @@
       </com.google.android.material.card.MaterialCardView>
 
       <LinearLayout
-        android:id="@+id/topics_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="20dp"
-        android:paddingTop="28dp"
-        android:visibility="gone"
-        tools:visibility="visible">
-
-        <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="@string/topics"
-          android:textAppearance="@style/TextAppearance.Cinestine.Section" />
-
-        <com.google.android.material.chip.ChipGroup
-          android:id="@+id/topic_chips"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:paddingTop="10dp"
-          app:chipSpacingHorizontal="8dp"
-          app:chipSpacingVertical="8dp" />
-      </LinearLayout>
-
-      <LinearLayout
         android:id="@+id/cast_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -541,12 +516,29 @@
         android:visibility="gone"
         tools:visibility="visible">
 
-        <TextView
+        <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:paddingHorizontal="20dp"
-          android:text="@string/where_to_watch"
-          android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          android:paddingHorizontal="20dp">
+
+          <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/where_to_watch"
+            android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+
+          <TextView
+            android:id="@+id/watch_region"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:padding="8dp"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textColor="@color/colorPrimary" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/recycler_providers"
@@ -557,6 +549,17 @@
           android:paddingStart="20dp"
           android:paddingTop="14dp"
           android:paddingEnd="12dp" />
+
+        <TextView
+          android:id="@+id/watch_empty"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingHorizontal="20dp"
+          android:paddingTop="14dp"
+          android:text="@string/watch_empty"
+          android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+          android:textColor="@color/on_surface_variant"
+          android:visibility="gone" />
       </LinearLayout>
 
       <LinearLayout
@@ -763,6 +766,31 @@
           android:nestedScrollingEnabled="false"
           android:overScrollMode="never"
           android:paddingTop="8dp" />
+      </LinearLayout>
+
+      <LinearLayout
+        android:id="@+id/topics_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="28dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/topics"
+          android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+
+        <com.google.android.material.chip.ChipGroup
+          android:id="@+id/topic_chips"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingTop="10dp"
+          app:chipSpacingHorizontal="8dp"
+          app:chipSpacingVertical="8dp" />
       </LinearLayout>
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>

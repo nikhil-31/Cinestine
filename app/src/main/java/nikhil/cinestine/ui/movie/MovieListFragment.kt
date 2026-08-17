@@ -84,6 +84,9 @@ class MovieListFragment : Fragment() {
             DiscoverFilterFragment.newInstance(viewModel.currentMediaType, viewModel.currentFilter)
                 .show(parentFragmentManager, "discover_filter")
         }
+        binding.errorRetry.setOnClickListener { viewModel.refresh() }
+        binding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary)
+        binding.swipeRefresh.setOnRefreshListener { viewModel.refresh() }
         parentFragmentManager.setFragmentResultListener(DiscoverFilterFragment.REQUEST_KEY, viewLifecycleOwner) { _, bundle ->
             viewModel.setFilter(DiscoverFilterFragment.filterFrom(bundle))
             binding.chipFilter.isChecked = viewModel.currentFilter.isActive
@@ -115,6 +118,7 @@ class MovieListFragment : Fragment() {
                         }
                     )
                     binding.progress.isVisible = state.isLoading && state.movies.isEmpty()
+                    binding.swipeRefresh.isRefreshing = state.isRefreshing
                     binding.errorState.isVisible = state.error != null && state.movies.isEmpty()
                     binding.errorText.text = state.error
                     binding.chipFilter.isChecked = state.filter.isActive

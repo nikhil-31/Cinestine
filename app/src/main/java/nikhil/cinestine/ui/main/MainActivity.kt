@@ -24,6 +24,7 @@ import nikhil.cinestine.databinding.ActivityMainBinding
 import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
 import nikhil.cinestine.model.SearchScope
+import nikhil.cinestine.ui.RegionPreferences
 import nikhil.cinestine.ui.ThemePreferences
 import nikhil.cinestine.ui.details.DetailsActivity
 import nikhil.cinestine.ui.details.DetailsFragment
@@ -199,6 +200,10 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
             }
             R.id.action_theme_system -> {
                 ThemePreferences.setNightMode(this, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                true
+            }
+            R.id.action_watch_region -> {
+                RegionPreferences.showPicker(this) {}
                 true
             }
             else -> super.onOptionsItemSelected(item)

@@ -26,6 +26,7 @@ data class MovieListUiState(
     val category: MovieCategory = MovieCategory.POPULAR,
     val filter: DiscoverFilter = DiscoverFilter(),
     val isLoading: Boolean = false,
+    val isRefreshing: Boolean = false,
     val error: String? = null,
     val page: Int = 0,
     val endReached: Boolean = false
@@ -99,13 +100,15 @@ class MovieListViewModel(
         loadJob?.cancel()
         loadJob = viewModelScope.launch {
             listState.update {
+                val keep = reset && it.movies.isNotEmpty()
                 it.copy(
                     mediaType = mediaType,
                     category = category,
                     filter = filter,
-                    isLoading = true,
+                    isLoading = reset && !keep,
+                    isRefreshing = keep,
                     error = null,
-                    movies = if (reset) emptyList() else it.movies
+                    movies = if (reset && !keep) emptyList() else it.movies
                 )
             }
             runCatching {
@@ -126,6 +129,7 @@ class MovieListViewModel(
                         current.copy(
                             movies = combined,
                             isLoading = false,
+                            isRefreshing = false,
                             page = page,
                             endReached = movies.isEmpty(),
                             mediaType = mediaType,
@@ -137,7 +141,15 @@ class MovieListViewModel(
                 .onFailure { error ->
                     if (error is CancellationException) throw error
                     listState.update {
-                        it.copy(isLoading = false, error = error.message ?: "Unable to load titles")
+                        it.copy(
+                            isLoading = false,
+                            isRefreshing = false,
+                            error = if (it.movies.isEmpty()) {
+                                error.message ?: "Unable to load titles"
+                            } else {
+                                null
+                            }
+                        )
                     }
                 }
         }

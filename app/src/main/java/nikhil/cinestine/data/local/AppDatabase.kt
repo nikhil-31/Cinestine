@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [FavouriteEntity::class], version = 2, exportSchema = false)
+@Database(entities = [FavouriteEntity::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun favouriteDao(): FavouriteDao
 
@@ -46,6 +46,14 @@ abstract class AppDatabase : RoomDatabase() {
                 )
                 db.execSQL("DROP TABLE favourites")
                 db.execSQL("ALTER TABLE favourites_new RENAME TO favourites")
+            }
+        }
+
+        val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    "ALTER TABLE favourites ADD COLUMN savedAt INTEGER NOT NULL DEFAULT ${System.currentTimeMillis()}"
+                )
             }
         }
     }

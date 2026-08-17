@@ -40,7 +40,8 @@ data class Movie(
     val voteCount: String,
     val originalLanguage: String,
     val adult: String,
-    val mediaType: MediaType = MediaType.MOVIE
+    val mediaType: MediaType = MediaType.MOVIE,
+    val savedAt: Long = 0L
 ) : Parcelable {
     val favouriteKey: String get() = "${mediaType.name}:$id"
 }

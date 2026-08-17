@@ -41,6 +41,7 @@ import nikhil.cinestine.ui.episode.EpisodeFragment
 import nikhil.cinestine.ui.main.MovieSelectionListener
 import nikhil.cinestine.ui.person.PersonActivity
 import nikhil.cinestine.ui.person.PersonFragment
+import nikhil.cinestine.ui.RegionPreferences
 import kotlinx.coroutines.launch
 import java.util.Locale
 
@@ -82,13 +83,19 @@ class DetailsFragment : Fragment() {
         }
         binding.toolbar.inflateMenu(R.menu.menu_details)
         binding.toolbar.setOnMenuItemClickListener { item ->
-            if (item.itemId == R.id.action_share) {
-                shareFirstTrailer()
-                true
-            } else {
-                false
+            when (item.itemId) {
+                R.id.action_share -> {
+                    shareTitle()
+                    true
+                }
+                R.id.action_watch_region -> {
+                    pickWatchRegion()
+                    true
+                }
+                else -> false
             }
         }
+        binding.watchRegion.setOnClickListener { pickWatchRegion() }
 
         binding.recyclerTrailer.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerTrailer.adapter = trailerAdapter
@@ -206,6 +213,7 @@ class DetailsFragment : Fragment() {
             binding.metaCertification.isVisible = false
             binding.fab.isVisible = false
             binding.toolbar.menu.findItem(R.id.action_share)?.isVisible = false
+            binding.toolbar.menu.findItem(R.id.action_watch_region)?.isVisible = false
             return
         }
 
@@ -260,11 +268,16 @@ class DetailsFragment : Fragment() {
         castAdapter.submitList(state.cast)
         binding.similarCard.isVisible = state.recommendations.isNotEmpty()
         similarAdapter.submitList(state.recommendations)
-        binding.providersCard.isVisible = state.watch?.providers?.isNotEmpty() == true
-        providerAdapter.submitList(state.watch?.providers.orEmpty())
+        binding.providersCard.isVisible = true
+        val providers = state.watch?.providers.orEmpty()
+        providerAdapter.submitList(providers)
+        binding.recyclerProviders.isVisible = state.watch != null && providers.isNotEmpty()
+        binding.watchEmpty.isVisible = state.watch != null && providers.isEmpty()
+        binding.watchRegion.text = requireContext().cinestineApp.repository.currentRegion()
         binding.photosCard.isVisible = state.images.isNotEmpty()
         stillAdapter.submitList(state.images)
-        binding.toolbar.menu.findItem(R.id.action_share)?.isVisible = state.trailers.isNotEmpty()
+        binding.toolbar.menu.findItem(R.id.action_share)?.isVisible = true
+        binding.toolbar.menu.findItem(R.id.action_watch_region)?.isVisible = true
         bindTv(state)
     }
 
@@ -471,18 +484,27 @@ class DetailsFragment : Fragment() {
             .show(parentFragmentManager, "gallery")
     }
 
-    private fun shareFirstTrailer() {
-        val trailer = viewModel.uiState.value.trailers.firstOrNull() ?: return
+    private fun shareTitle() {
+        val movie = viewModel.uiState.value.movie ?: return
+        val path = if (movie.mediaType == MediaType.TV) "tv" else "movie"
+        val url = "https://www.themoviedb.org/$path/${movie.id}"
         startActivity(
             Intent.createChooser(
                 Intent(Intent.ACTION_SEND).apply {
                     type = "text/plain"
-                    putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_subject))
-                    putExtra(Intent.EXTRA_TEXT, trailer.youtubeUrl)
+                    putExtra(Intent.EXTRA_SUBJECT, movie.title)
+                    putExtra(Intent.EXTRA_TEXT, getString(R.string.share_title_text, movie.title, url))
                 },
                 getString(R.string.share_via)
             )
         )
+    }
+
+    private fun pickWatchRegion() {
+        RegionPreferences.showPicker(requireContext()) {
+            binding.watchRegion.text = requireContext().cinestineApp.repository.currentRegion()
+            viewModel.reloadRegionSensitive()
+        }
     }
 
     private fun openTrailer(trailer: Trailer) {

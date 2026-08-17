@@ -18,7 +18,8 @@ data class FavouriteEntity(
     val popularity: String,
     val voteCount: String,
     val originalLanguage: String,
-    val adult: String
+    val adult: String,
+    val savedAt: Long = 0L
 )
 
 fun FavouriteEntity.toMovie() = Movie(
@@ -34,7 +35,8 @@ fun FavouriteEntity.toMovie() = Movie(
     voteCount = voteCount,
     originalLanguage = originalLanguage,
     adult = adult,
-    mediaType = runCatching { MediaType.valueOf(mediaType) }.getOrDefault(MediaType.MOVIE)
+    mediaType = runCatching { MediaType.valueOf(mediaType) }.getOrDefault(MediaType.MOVIE),
+    savedAt = savedAt
 )
 
 fun Movie.toEntity() = FavouriteEntity(
@@ -50,5 +52,6 @@ fun Movie.toEntity() = FavouriteEntity(
     popularity = popularity,
     voteCount = voteCount,
     originalLanguage = originalLanguage,
-    adult = adult
+    adult = adult,
+    savedAt = if (savedAt > 0L) savedAt else System.currentTimeMillis()
 )

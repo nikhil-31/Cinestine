@@ -169,6 +169,24 @@ class DetailsViewModel(
         }
     }
 
+    fun reloadRegionSensitive() {
+        val current = movie.value ?: return
+        viewModelScope.launch {
+            val watch = runCatching { repository.watchAvailability(current.id, current.mediaType) }
+                .onFailure { if (it is CancellationException) throw it }
+                .getOrNull()
+            val certification = runCatching { repository.certification(current.id, current.mediaType) }
+                .onFailure { if (it is CancellationException) throw it }
+                .getOrDefault("")
+            extras.update {
+                it.copy(
+                    watch = watch,
+                    details = it.details?.copy(certification = certification)
+                )
+            }
+        }
+    }
+
     private data class Extras(
         val details: TitleDetails? = null,
         val trailers: List<Trailer> = emptyList(),

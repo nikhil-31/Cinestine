@@ -6,6 +6,7 @@ import androidx.room.Room
 import nikhil.cinestine.data.MovieRepository
 import nikhil.cinestine.data.local.AppDatabase
 import nikhil.cinestine.data.remote.TmdbApi
+import nikhil.cinestine.ui.RegionPreferences
 import nikhil.cinestine.ui.ThemePreferences
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -22,7 +23,7 @@ class CinestineApp : Application() {
         super.onCreate()
         ThemePreferences.apply(this)
         val database = Room.databaseBuilder(this, AppDatabase::class.java, "cinestine.db")
-            .addMigrations(AppDatabase.MIGRATION_1_2)
+            .addMigrations(AppDatabase.MIGRATION_1_2, AppDatabase.MIGRATION_2_3)
             .build()
         val json = Json { ignoreUnknownKeys = true }
         val client = OkHttpClient.Builder()
@@ -43,7 +44,9 @@ class CinestineApp : Application() {
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
             .create(TmdbApi::class.java)
-        repository = MovieRepository(api, database.favouriteDao())
+        repository = MovieRepository(api, database.favouriteDao()) {
+            RegionPreferences.region(this)
+        }
     }
 
     private companion object {

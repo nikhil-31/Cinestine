@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -50,6 +51,9 @@ class FavouritesFragment : Fragment() {
         binding.recyclerMovies.adapter = adapter
         binding.mediaRow.isVisible = true
         binding.categoryToggle.isVisible = true
+        binding.savedSortScroll.isVisible = true
+        binding.savedSearch.isVisible = true
+        binding.swipeRefresh.isEnabled = false
         val checkedId = if (viewModel.currentMediaType == MediaType.TV) {
             R.id.chip_tv
         } else {
@@ -60,6 +64,15 @@ class FavouritesFragment : Fragment() {
             val id = checkedIds.firstOrNull() ?: return@setOnCheckedStateChangeListener
             viewModel.setMediaType(if (id == R.id.chip_tv) MediaType.TV else MediaType.MOVIE)
             (activity as? MediaTypeHost)?.onBrowseMediaTypeChanged(viewModel.currentMediaType)
+        }
+        binding.savedSort.check(sortChipId(viewModel.uiState.value.sort))
+        binding.savedSort.setOnCheckedStateChangeListener { _, checkedIds ->
+            val id = checkedIds.firstOrNull() ?: return@setOnCheckedStateChangeListener
+            viewModel.setSort(sortFromChip(id))
+        }
+        binding.savedSearchInput.setText(viewModel.currentQuery)
+        binding.savedSearchInput.doAfterTextChanged { text ->
+            viewModel.setQuery(text?.toString().orEmpty())
         }
         binding.recyclerMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -75,19 +88,37 @@ class FavouritesFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.favourites.collect { movies ->
-                    adapter.submitList(movies.map { MovieListItem(it, isFavourite = true) })
-                    binding.emptyState.isVisible = movies.isEmpty()
-                    binding.emptyText.setText(
-                        if (viewModel.currentMediaType == MediaType.TV) {
-                            R.string.empty_favourites_tv
-                        } else {
-                            R.string.empty_favourites_movies
-                        }
-                    )
+                viewModel.uiState.collect { state ->
+                    adapter.submitList(state.movies.map { MovieListItem(it, isFavourite = true) })
+                    binding.emptyState.isVisible = state.movies.isEmpty()
+                    if (state.searching) {
+                        binding.emptyText.setText(R.string.empty_saved_search)
+                        binding.emptyHint.setText(R.string.empty_saved_search_hint)
+                    } else {
+                        binding.emptyText.setText(
+                            if (state.mediaType == MediaType.TV) {
+                                R.string.empty_favourites_tv
+                            } else {
+                                R.string.empty_favourites_movies
+                            }
+                        )
+                        binding.emptyHint.setText(R.string.empty_favourites_hint)
+                    }
                 }
             }
         }
+    }
+
+    private fun sortChipId(sort: SavedSort): Int = when (sort) {
+        SavedSort.RECENT -> R.id.chip_sort_recent
+        SavedSort.RATING -> R.id.chip_sort_rating
+        SavedSort.TITLE -> R.id.chip_sort_title
+    }
+
+    private fun sortFromChip(id: Int): SavedSort = when (id) {
+        R.id.chip_sort_rating -> SavedSort.RATING
+        R.id.chip_sort_title -> SavedSort.TITLE
+        else -> SavedSort.RECENT
     }
 
     private fun onMovieSelected(movie: Movie) {
