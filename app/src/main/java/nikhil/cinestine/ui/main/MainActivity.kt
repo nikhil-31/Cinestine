@@ -26,11 +26,12 @@ import nikhil.cinestine.model.Movie
 import nikhil.cinestine.ui.ThemePreferences
 import nikhil.cinestine.ui.details.DetailsActivity
 import nikhil.cinestine.ui.details.DetailsFragment
+import nikhil.cinestine.ui.favourites.FavouritesFragment
 import nikhil.cinestine.ui.movie.MovieListFragment
 import nikhil.cinestine.ui.search.SearchFragment
 import nikhil.cinestine.ui.search.SearchViewModel
 
-class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHost, MediaTypeHost {
+class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHost, MediaTypeHost, SearchMediaTypeHost {
 
     private lateinit var binding: ActivityMainBinding
     private var appBarOffset = 0
@@ -227,7 +228,13 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
     }
 
     override fun onBrowseMediaTypeChanged(mediaType: MediaType) {
-        syncSearchScope()
+        if (!searchExpanded) {
+            syncSearchScope()
+        }
+    }
+
+    override fun onSearchMediaTypeChanged(mediaType: MediaType) {
+        searchView?.queryHint = searchHintFor(mediaType)
     }
 
     private fun updateToolbarTitle(position: Int) {
@@ -261,11 +268,13 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
         else -> R.id.nav_saved
     }
 
-    private fun currentBrowseMediaType(): MediaType? {
-        val position = binding.pager.currentItem
-        if (position == SAVED_PAGE) return null
-        val fragment = supportFragmentManager.findFragmentByTag("f$position") as? MovieListFragment
-        return fragment?.currentMediaType ?: MediaType.MOVIE
+    private fun currentBrowseMediaType(): MediaType {
+        val fragment = supportFragmentManager.findFragmentByTag("f${binding.pager.currentItem}")
+        return when (fragment) {
+            is MovieListFragment -> fragment.currentMediaType
+            is FavouritesFragment -> fragment.currentMediaType
+            else -> MediaType.MOVIE
+        }
     }
 
     private fun syncSearchScope() {
@@ -284,6 +293,5 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
 
     private companion object {
         const val STATE_SEARCH_EXPANDED = "search_expanded"
-        const val SAVED_PAGE = 2
     }
 }

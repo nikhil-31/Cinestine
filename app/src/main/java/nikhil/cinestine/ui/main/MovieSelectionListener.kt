@@ -15,3 +15,7 @@ interface BrowseScrollHost {
 fun interface MediaTypeHost {
     fun onBrowseMediaTypeChanged(mediaType: MediaType)
 }
+
+fun interface SearchMediaTypeHost {
+    fun onSearchMediaTypeChanged(mediaType: MediaType)
+}

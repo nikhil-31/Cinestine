@@ -7,7 +7,7 @@
   <string name="search_hint_tv">Search TV shows</string>
   <string name="search_hint_all">Search movies and TV</string>
   <string name="search_idle">Find a title</string>
-  <string name="search_idle_hint">Type a name to search TMDB</string>
+  <string name="search_idle_hint">Switch Movies or TV, then type a name</string>
   <string name="search_empty">No titles found</string>
   <string name="search_empty_hint">Try a different name or spelling</string>
   <string name="action_dark_mode">Dark mode</string>
@@ -34,6 +34,8 @@
   <string name="content_desc_back">Back</string>
   <string name="title_activity_details">Details</string>
   <string name="empty_favourites">No saved titles yet</string>
+  <string name="empty_favourites_movies">No saved movies yet</string>
+  <string name="empty_favourites_tv">No saved TV shows yet</string>
   <string name="empty_favourites_hint">Tap the heart on a movie or show to keep it here</string>
   <string name="empty_details">Pick a title from the list to see posters, trailers, and reviews</string>
   <string name="movie_saved">Saved to your list</string>

@@ -15,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView
 import nikhil.cinestine.R
 import nikhil.cinestine.cinestineApp
 import nikhil.cinestine.databinding.FragmentMovieListBinding
+import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
 import nikhil.cinestine.ui.main.BrowseScrollHost
 import nikhil.cinestine.ui.main.MovieSelectionListener
+import nikhil.cinestine.ui.main.SearchMediaTypeHost
 import nikhil.cinestine.ui.movie.MovieAdapter
 import nikhil.cinestine.ui.movie.MovieListItem
 import com.google.android.material.snackbar.Snackbar
@@ -44,6 +46,14 @@ class SearchFragment : Fragment() {
         val layoutManager = GridLayoutManager(requireContext(), spanCount)
         binding.recyclerMovies.layoutManager = layoutManager
         binding.recyclerMovies.adapter = adapter
+        binding.categoryToggle.isVisible = true
+        applySearchChip(viewModel.uiState.value.mediaType)
+        binding.categoryToggle.setOnCheckedStateChangeListener { _, checkedIds ->
+            val id = checkedIds.firstOrNull() ?: return@setOnCheckedStateChangeListener
+            val type = if (id == R.id.chip_tv) MediaType.TV else MediaType.MOVIE
+            viewModel.setMediaType(type)
+            (activity as? SearchMediaTypeHost)?.onSearchMediaTypeChanged(type)
+        }
         binding.recyclerMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 (activity as? BrowseScrollHost)?.onBrowseListScrolled(dy)
@@ -77,6 +87,7 @@ class SearchFragment : Fragment() {
                     binding.errorState.isVisible = state.error != null && state.movies.isEmpty()
                     binding.errorText.text = state.error
                     binding.emptyState.isVisible = state.isIdle || state.isEmpty
+                    applySearchChip(state.mediaType)
                     if (state.isIdle) {
                         binding.emptyText.setText(R.string.search_idle)
                         binding.emptyHint.setText(R.string.search_idle_hint)
@@ -86,6 +97,13 @@ class SearchFragment : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    private fun applySearchChip(mediaType: MediaType?) {
+        val checkedId = if (mediaType == MediaType.TV) R.id.chip_tv else R.id.chip_movies
+        if (binding.categoryToggle.checkedChipId != checkedId) {
+            binding.categoryToggle.check(checkedId)
         }
     }
 
