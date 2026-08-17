@@ -302,6 +302,7 @@ class MovieRepository(
             favouriteDao.delete(movie.id, movie.mediaType.name)
         } else {
             favouriteDao.upsert(movie.toEntity())
+            recordViewed(movie)
         }
     }
 
