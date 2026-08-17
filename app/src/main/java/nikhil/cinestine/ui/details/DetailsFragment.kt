@@ -19,7 +19,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.google.android.material.chip.Chip
-import com.google.android.material.snackbar.Snackbar
 import nikhil.cinestine.R
 import nikhil.cinestine.cinestineApp
 import nikhil.cinestine.databinding.FragmentDetailsBinding
@@ -42,6 +41,7 @@ import nikhil.cinestine.ui.main.MovieSelectionListener
 import nikhil.cinestine.ui.person.PersonActivity
 import nikhil.cinestine.ui.person.PersonFragment
 import nikhil.cinestine.ui.RegionPreferences
+import nikhil.cinestine.ui.SaveConfetti
 import kotlinx.coroutines.launch
 import java.util.Locale
 
@@ -132,13 +132,8 @@ class DetailsFragment : Fragment() {
         }
 
         binding.fab.setOnClickListener {
-            val currentlyFavourite = viewModel.uiState.value.isFavourite
+            if (!viewModel.uiState.value.isFavourite) SaveConfetti.burstFrom(binding.fab)
             viewModel.toggleFavourite()
-            Snackbar.make(
-                binding.root,
-                if (currentlyFavourite) R.string.movie_removed else R.string.movie_saved,
-                Snackbar.LENGTH_SHORT
-            ).show()
         }
         binding.playTrailer.setOnClickListener {
             viewModel.uiState.value.trailers.firstOrNull()?.let(::openTrailer)

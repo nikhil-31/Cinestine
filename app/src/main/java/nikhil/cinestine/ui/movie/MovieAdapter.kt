@@ -12,6 +12,7 @@ import nikhil.cinestine.R
 import nikhil.cinestine.databinding.CustomGridPopularBinding
 import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
+import nikhil.cinestine.ui.SaveConfetti
 
 data class MovieListItem(
     val movie: Movie,
@@ -98,7 +99,10 @@ class MovieAdapter(
             binding.saveButton.contentDescription = binding.root.context.getString(
                 if (isFavourite) R.string.unsave_movie else R.string.save_movie
             )
-            binding.saveButton.setOnClickListener { onSaveClicked.invoke(movie) }
+            binding.saveButton.setOnClickListener {
+                if (!isFavourite) SaveConfetti.burstFrom(binding.saveButton)
+                onSaveClicked.invoke(movie)
+            }
         }
     }
 

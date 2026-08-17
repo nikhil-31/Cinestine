@@ -25,7 +25,6 @@ import nikhil.cinestine.ui.main.MovieSelectionListener
 import nikhil.cinestine.ui.main.SearchMediaTypeHost
 import nikhil.cinestine.ui.person.PersonActivity
 import nikhil.cinestine.ui.person.PersonFragment
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
@@ -137,13 +136,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun onSaveClicked(movie: Movie) {
-        val alreadySaved = viewModel.uiState.value.favouriteKeys.contains(movie.favouriteKey)
         viewModel.toggleFavourite(movie)
-        Snackbar.make(
-            binding.root,
-            if (alreadySaved) R.string.movie_removed else R.string.movie_saved,
-            Snackbar.LENGTH_SHORT
-        ).show()
     }
 
     override fun onDestroyView() {
