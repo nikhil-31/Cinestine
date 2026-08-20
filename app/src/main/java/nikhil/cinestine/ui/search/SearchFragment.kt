@@ -33,7 +33,10 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: SearchViewModel by activityViewModels {
-        SearchViewModel.Factory(requireContext().cinestineApp.repository)
+        SearchViewModel.Factory(
+            requireContext().cinestineApp.repository,
+            requireContext().cinestineApp.analytics
+        )
     }
 
     private val adapter = SearchAdapter(::onMovieSelected, ::onPersonSelected, ::onCollectionSelected, ::onSaveClicked)

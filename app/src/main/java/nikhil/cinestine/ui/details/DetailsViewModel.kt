@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import nikhil.cinestine.data.MovieRepository
+import nikhil.cinestine.analytics.AppAnalytics
 import nikhil.cinestine.model.CastMember
 import nikhil.cinestine.model.Episode
 import nikhil.cinestine.model.MediaImage
@@ -46,7 +47,8 @@ data class DetailsUiState(
 )
 
 class DetailsViewModel(
-    private val repository: MovieRepository
+    private val repository: MovieRepository,
+    private val analytics: AppAnalytics
 ) : ViewModel() {
 
     private val movie = MutableStateFlow<Movie?>(null)
@@ -87,6 +89,7 @@ class DetailsViewModel(
         viewModelScope.launch {
             runCatching { repository.recordViewed(movie) }
         }
+        analytics.viewItem(movie)
         if (this.movie.value?.favouriteKey == movie.favouriteKey && extras.value.details != null) return
         loadJob?.cancel()
         seasonJob?.cancel()
@@ -204,11 +207,12 @@ class DetailsViewModel(
     )
 
     class Factory(
-        private val repository: MovieRepository
+        private val repository: MovieRepository,
+        private val analytics: AppAnalytics
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return DetailsViewModel(repository) as T
+            return DetailsViewModel(repository, analytics) as T
         }
     }
 }

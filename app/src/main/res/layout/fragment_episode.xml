@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/background"
+  android:fitsSystemWindows="true"
+  android:orientation="vertical">
+
+  <com.google.android.material.appbar.MaterialToolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/surface"
+    app:navigationIcon="@drawable/ic_arrow_back"
+    app:navigationIconTint="@color/on_surface"
+    app:title="@string/title_activity_episode"
+    app:titleTextColor="@color/on_surface" />
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+      android:id="@+id/episode_scroll"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:clipToPadding="false"
+      android:overScrollMode="never">
+
+      <LinearLayout
+        android:id="@+id/episode_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="32dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+          android:id="@+id/episode_still"
+          android:layout_width="match_parent"
+          android:layout_height="220dp"
+          android:contentDescription="@string/content_desc_poster"
+          android:scaleType="centerCrop"
+          android:visibility="gone"
+          tools:src="@drawable/ic_poster_placeholder"
+          tools:visibility="visible" />
+
+        <TextView
+          android:id="@+id/episode_code"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingHorizontal="20dp"
+          android:paddingTop="20dp"
+          android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+          android:textColor="@color/colorPrimary"
+          tools:text="S1 E1" />
+
+        <TextView
+          android:id="@+id/episode_title"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingHorizontal="20dp"
+          android:paddingTop="6dp"
+          android:textAppearance="@style/TextAppearance.Cinestine.DetailsTitle"
+          tools:text="Winter Is Coming" />
+
+        <TextView
+          android:id="@+id/episode_meta"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingHorizontal="20dp"
+          android:paddingTop="6dp"
+          android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+          android:textColor="@color/on_surface_variant"
+          android:visibility="gone"
+          tools:text="2011-04-17  ·  62m"
+          tools:visibility="visible" />
+
+        <LinearLayout
+          android:id="@+id/overview_card"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:paddingHorizontal="20dp"
+          android:paddingTop="24dp"
+          android:visibility="gone"
+          tools:visibility="visible">
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/overview"
+            android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+
+          <TextView
+            android:id="@+id/episode_overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="6dp"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            android:textColor="@color/on_surface" />
+        </LinearLayout>
+
+        <LinearLayout
+          android:id="@+id/guests_card"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:paddingTop="28dp"
+          android:visibility="gone"
+          tools:visibility="visible">
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:text="@string/guest_stars"
+            android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+
+          <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_guests"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingStart="16dp"
+            android:paddingTop="14dp"
+            android:paddingEnd="8dp" />
+        </LinearLayout>
+
+        <LinearLayout
+          android:id="@+id/videos_card"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:paddingTop="28dp"
+          android:visibility="gone"
+          tools:visibility="visible">
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:text="@string/trailers"
+            android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+
+          <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_videos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingStart="16dp"
+            android:paddingTop="14dp"
+            android:paddingEnd="8dp" />
+        </LinearLayout>
+
+        <LinearLayout
+          android:id="@+id/photos_card"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:paddingTop="28dp"
+          android:visibility="gone"
+          tools:visibility="visible">
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:text="@string/photos"
+            android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+
+          <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_photos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingStart="16dp"
+            android:paddingTop="14dp"
+            android:paddingEnd="8dp" />
+        </LinearLayout>
+      </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+      android:id="@+id/progress"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:indeterminate="true"
+      android:visibility="gone"
+      app:indicatorColor="@color/colorPrimary" />
+
+    <TextView
+      android:id="@+id/error_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:padding="32dp"
+      android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+      android:textColor="@color/on_surface_variant"
+      android:visibility="gone" />
+  </FrameLayout>
+</LinearLayout>

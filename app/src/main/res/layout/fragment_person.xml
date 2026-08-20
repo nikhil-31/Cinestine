@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/background"
+  android:fitsSystemWindows="true"
+  android:orientation="vertical">
+
+  <com.google.android.material.appbar.MaterialToolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/surface"
+    app:navigationIcon="@drawable/ic_arrow_back"
+    app:navigationIconTint="@color/on_surface"
+    app:title="@string/title_activity_person"
+    app:titleTextColor="@color/on_surface" />
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+      android:id="@+id/person_scroll"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:clipToPadding="false"
+      android:overScrollMode="never">
+
+      <LinearLayout
+        android:id="@+id/person_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="32dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          android:padding="20dp">
+
+          <ImageView
+            android:id="@+id/person_photo"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:background="@drawable/avatar_bg"
+            android:contentDescription="@string/content_desc_cast"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/ic_poster_placeholder" />
+
+          <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+              android:id="@+id/person_name"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:textAppearance="@style/TextAppearance.Cinestine.DetailsTitle"
+              tools:text="Timothée Chalamet" />
+
+            <TextView
+              android:id="@+id/person_meta"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="6dp"
+              android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+              android:textColor="@color/on_surface_variant"
+              tools:text="Acting · 1995-12-27" />
+          </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+          android:id="@+id/biography_card"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:paddingHorizontal="20dp"
+          android:visibility="gone"
+          tools:visibility="visible">
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/biography"
+            android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+
+          <TextView
+            android:id="@+id/person_biography"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="6dp"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            android:textColor="@color/on_surface" />
+        </LinearLayout>
+
+        <LinearLayout
+          android:id="@+id/photos_card"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:paddingTop="28dp"
+          android:visibility="gone"
+          tools:visibility="visible">
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:text="@string/photos"
+            android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+
+          <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_photos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingStart="16dp"
+            android:paddingTop="14dp"
+            android:paddingEnd="8dp" />
+        </LinearLayout>
+
+        <com.google.android.material.chip.ChipGroup
+          android:id="@+id/credit_toggle"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingHorizontal="16dp"
+          android:paddingTop="24dp"
+          android:visibility="gone"
+          app:chipSpacingHorizontal="8dp"
+          app:selectionRequired="true"
+          app:singleSelection="true"
+          tools:visibility="visible">
+
+          <com.google.android.material.chip.Chip
+            android:id="@+id/chip_credit_all"
+            style="@style/Widget.Cinestine.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/credit_all" />
+
+          <com.google.android.material.chip.Chip
+            android:id="@+id/chip_credit_acting"
+            style="@style/Widget.Cinestine.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/credit_acting" />
+
+          <com.google.android.material.chip.Chip
+            android:id="@+id/chip_credit_directing"
+            style="@style/Widget.Cinestine.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/credit_directing" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+          android:id="@+id/known_for_label"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingHorizontal="20dp"
+          android:paddingTop="28dp"
+          android:text="@string/known_for"
+          android:textAppearance="@style/TextAppearance.Cinestine.Section"
+          android:visibility="gone"
+          tools:visibility="visible" />
+
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/recycler_credits"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:nestedScrollingEnabled="false"
+          android:paddingHorizontal="@dimen/grid_padding"
+          android:paddingTop="12dp" />
+      </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+      android:id="@+id/progress"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:indeterminate="true"
+      android:visibility="gone"
+      app:indicatorColor="@color/colorPrimary" />
+
+    <TextView
+      android:id="@+id/error_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:padding="32dp"
+      android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+      android:textColor="@color/on_surface_variant"
+      android:visibility="gone" />
+  </FrameLayout>
+</LinearLayout>

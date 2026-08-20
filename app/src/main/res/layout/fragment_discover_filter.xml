@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:paddingHorizontal="20dp"
+  android:paddingTop="16dp"
+  android:paddingBottom="24dp">
+
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/action_filter"
+    android:textAppearance="@style/TextAppearance.Cinestine.DetailsTitle" />
+
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:text="@string/filter_genres"
+    android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+
+  <com.google.android.material.chip.ChipGroup
+    android:id="@+id/genre_group"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    app:chipSpacingHorizontal="8dp"
+    app:chipSpacingVertical="8dp" />
+
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:text="@string/filter_year"
+    android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+
+  <com.google.android.material.chip.ChipGroup
+    android:id="@+id/year_group"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    app:chipSpacingHorizontal="8dp"
+    app:chipSpacingVertical="8dp"
+    app:selectionRequired="true"
+    app:singleSelection="true" />
+
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:text="@string/filter_score"
+    android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+
+  <com.google.android.material.chip.ChipGroup
+    android:id="@+id/score_group"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    app:chipSpacingHorizontal="8dp"
+    app:selectionRequired="true"
+    app:singleSelection="true">
+
+    <com.google.android.material.chip.Chip
+      android:id="@+id/chip_score_any"
+      style="@style/Widget.Cinestine.Chip.Filter"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:checked="true"
+      android:text="@string/filter_any" />
+
+    <com.google.android.material.chip.Chip
+      android:id="@+id/chip_score_6"
+      style="@style/Widget.Cinestine.Chip.Filter"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/filter_score_6" />
+
+    <com.google.android.material.chip.Chip
+      android:id="@+id/chip_score_7"
+      style="@style/Widget.Cinestine.Chip.Filter"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/filter_score_7" />
+
+    <com.google.android.material.chip.Chip
+      android:id="@+id/chip_score_8"
+      style="@style/Widget.Cinestine.Chip.Filter"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/filter_score_8" />
+  </com.google.android.material.chip.ChipGroup>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="24dp"
+    android:gravity="end"
+    android:orientation="horizontal">
+
+    <com.google.android.material.button.MaterialButton
+      android:id="@+id/clear_button"
+      style="@style/Widget.Material3.Button.TextButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/filter_clear" />
+
+    <com.google.android.material.button.MaterialButton
+      android:id="@+id/apply_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:text="@string/filter_apply" />
+  </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/background"
+  android:fitsSystemWindows="true"
+  android:orientation="vertical">
+
+  <com.google.android.material.appbar.MaterialToolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/surface"
+    app:navigationIcon="@drawable/ic_arrow_back"
+    app:navigationIconTint="@color/on_surface"
+    app:title="@string/title_activity_collection"
+    app:titleTextColor="@color/on_surface" />
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+      android:id="@+id/collection_scroll"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:clipToPadding="false"
+      android:overScrollMode="never">
+
+      <LinearLayout
+        android:id="@+id/collection_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="32dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <LinearLayout
+          android:id="@+id/overview_card"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:paddingHorizontal="20dp"
+          android:paddingTop="20dp"
+          android:visibility="gone"
+          tools:visibility="visible">
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/overview"
+            android:textAppearance="@style/TextAppearance.Cinestine.Section" />
+
+          <TextView
+            android:id="@+id/collection_overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="6dp"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            android:textColor="@color/on_surface" />
+        </LinearLayout>
+
+        <TextView
+          android:id="@+id/parts_label"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingHorizontal="20dp"
+          android:paddingTop="28dp"
+          android:text="@string/collection"
+          android:textAppearance="@style/TextAppearance.Cinestine.Section"
+          android:visibility="gone"
+          tools:visibility="visible" />
+
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/recycler_parts"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:nestedScrollingEnabled="false"
+          android:paddingHorizontal="@dimen/grid_padding"
+          android:paddingTop="12dp" />
+      </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+      android:id="@+id/progress"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:indeterminate="true"
+      android:visibility="gone"
+      app:indicatorColor="@color/colorPrimary" />
+
+    <TextView
+      android:id="@+id/error_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:padding="32dp"
+      android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+      android:textColor="@color/on_surface_variant"
+      android:visibility="gone" />
+  </FrameLayout>
+</LinearLayout>

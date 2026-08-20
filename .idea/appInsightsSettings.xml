@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="comnikhil_31.httpsgithub.cinestine" />
+                  <option name="mobileSdkAppId" value="1:801185403831:android:14b7615c2ebcbbe54ace32" />
+                  <option name="projectId" value="cinestine-24aa1" />
+                  <option name="projectNumber" value="801185403831" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

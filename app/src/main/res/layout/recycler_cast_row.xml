@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="88dp"
+  android:layout_height="wrap_content"
+  android:layout_marginEnd="12dp"
+  android:gravity="center_horizontal"
+  android:orientation="vertical"
+  android:paddingBottom="4dp">
+
+  <ImageView
+    android:id="@+id/cast_photo"
+    android:layout_width="72dp"
+    android:layout_height="72dp"
+    android:background="@drawable/avatar_bg"
+    android:contentDescription="@string/content_desc_cast"
+    android:scaleType="centerCrop"
+    tools:src="@drawable/ic_poster_placeholder" />
+
+  <TextView
+    android:id="@+id/cast_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ellipsize="end"
+    android:gravity="center"
+    android:maxLines="2"
+    android:paddingTop="8dp"
+    android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+    android:textColor="@color/on_surface"
+    tools:text="Timothée Chalamet" />
+
+  <TextView
+    android:id="@+id/cast_character"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ellipsize="end"
+    android:gravity="center"
+    android:maxLines="2"
+    android:paddingTop="2dp"
+    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+    android:textColor="@color/on_surface_variant"
+    tools:text="Paul Atreides" />
+</LinearLayout>

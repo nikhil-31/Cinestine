@@ -58,7 +58,8 @@ class MovieRepository(
     private val regionProvider: () -> String = {
         val country = Locale.getDefault().country
         if (country.length == 2) country else "US"
-    }
+    },
+    private val onFavouriteChanged: (Movie, Boolean) -> Unit = { _, _ -> }
 ) {
     private var cachedMovieGenres: List<Genre>? = null
     private var cachedTvGenres: List<Genre>? = null
@@ -300,9 +301,11 @@ class MovieRepository(
     suspend fun toggleFavourite(movie: Movie, currentlyFavourite: Boolean) {
         if (currentlyFavourite) {
             favouriteDao.delete(movie.id, movie.mediaType.name)
+            onFavouriteChanged(movie, false)
         } else {
             favouriteDao.upsert(movie.toEntity())
             recordViewed(movie)
+            onFavouriteChanged(movie, true)
         }
     }
 

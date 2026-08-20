@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import nikhil.cinestine.data.MovieRepository
+import nikhil.cinestine.analytics.AppAnalytics
 import nikhil.cinestine.model.MediaType
 import nikhil.cinestine.model.Movie
 import nikhil.cinestine.model.SearchHit
@@ -39,7 +40,8 @@ data class SearchUiState(
 
 @OptIn(FlowPreview::class)
 class SearchViewModel(
-    private val repository: MovieRepository
+    private val repository: MovieRepository,
+    private val analytics: AppAnalytics
 ) : ViewModel() {
 
     private val query = MutableStateFlow("")
@@ -117,6 +119,7 @@ class SearchViewModel(
             }
             runCatching { repository.search(query, page, type) }
                 .onSuccess { hits ->
+                    if (reset) analytics.search(query, type.name.lowercase(), hits.size)
                     listState.update { current ->
                         val combined = if (reset) hits else current.hits + hits
                         current.copy(
@@ -144,11 +147,12 @@ class SearchViewModel(
     }
 
     class Factory(
-        private val repository: MovieRepository
+        private val repository: MovieRepository,
+        private val analytics: AppAnalytics
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return SearchViewModel(repository) as T
+            return SearchViewModel(repository, analytics) as T
         }
     }
 

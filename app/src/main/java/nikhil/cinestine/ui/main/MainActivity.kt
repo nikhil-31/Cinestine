@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
     private var searchView: SearchView? = null
 
     private val searchViewModel: SearchViewModel by viewModels {
-        SearchViewModel.Factory(cinestineApp.repository)
+        SearchViewModel.Factory(cinestineApp.repository, cinestineApp.analytics)
     }
 
     private val collapseSearchOnBack = object : OnBackPressedCallback(false) {
@@ -97,9 +97,11 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
                 updateToolbarTitle(position)
                 setAppBarFullyExpanded(true)
                 syncSearchScope()
+                logTabScreen(position)
             }
         })
         syncSearchScope()
+        logTabScreen(binding.pager.currentItem)
 
         searchExpanded = savedInstanceState?.getBoolean(STATE_SEARCH_EXPANDED) == true
         if (searchExpanded) {
@@ -225,6 +227,7 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
                 .commitNow()
         }
         applyAppBarOffset()
+        cinestineApp.analytics.screen("search", "SearchFragment")
     }
 
     private fun hideSearchOverlay() {
@@ -311,6 +314,18 @@ class MainActivity : AppCompatActivity(), MovieSelectionListener, BrowseScrollHo
             SearchScope.COLLECTION -> R.string.search_hint_collections
         }
     )
+
+    private fun logTabScreen(position: Int) {
+        cinestineApp.analytics.screen(
+            when (position) {
+                0 -> "popular"
+                1 -> "hot"
+                2 -> "top_rated"
+                else -> "saved"
+            },
+            "MainActivity"
+        )
+    }
 
     private companion object {
         const val STATE_SEARCH_EXPANDED = "search_expanded"

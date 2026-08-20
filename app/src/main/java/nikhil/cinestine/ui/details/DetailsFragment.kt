@@ -51,7 +51,10 @@ class DetailsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: DetailsViewModel by viewModels {
-        DetailsViewModel.Factory(requireContext().cinestineApp.repository)
+        DetailsViewModel.Factory(
+            requireContext().cinestineApp.repository,
+            requireContext().cinestineApp.analytics
+        )
     }
 
     private val trailerAdapter = TrailerAdapter()
@@ -483,6 +486,7 @@ class DetailsFragment : Fragment() {
         val movie = viewModel.uiState.value.movie ?: return
         val path = if (movie.mediaType == MediaType.TV) "tv" else "movie"
         val url = "https://www.themoviedb.org/$path/${movie.id}"
+        requireContext().cinestineApp.analytics.share(movie)
         startActivity(
             Intent.createChooser(
                 Intent(Intent.ACTION_SEND).apply {
