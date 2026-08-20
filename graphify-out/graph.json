@@ -241,8 +241,8 @@
       "source_location": "L153",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_data_movierepository_movierepository_trailers",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 44,
+      "community_name": "Trailer",
       "norm_label": ".trailers()"
     },
     {
@@ -329,8 +329,8 @@
       "source_location": "L236",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_data_movierepository_movierepository_keywords",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 2,
+      "community_name": "MovieRepository",
       "norm_label": ".keywords()"
     },
     {
@@ -2090,7 +2090,7 @@
       "_origin": "ast",
       "id": "parcelable",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": "parcelable"
     },
     {
@@ -2101,7 +2101,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_moviecategory",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": "moviecategory"
     },
     {
@@ -2112,7 +2112,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_moviecategory_popular",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": "popular"
     },
     {
@@ -2123,7 +2123,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_moviecategory_top_rated",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": "top_rated"
     },
     {
@@ -2134,7 +2134,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_moviecategory_trending",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": "trending"
     },
     {
@@ -2145,7 +2145,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_moviecategory_now_playing",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": "now_playing"
     },
     {
@@ -2156,7 +2156,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_moviecategory_upcoming",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": "upcoming"
     },
     {
@@ -2166,8 +2166,8 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_trailer",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 44,
+      "community_name": "Trailer",
       "norm_label": "trailer"
     },
     {
@@ -2177,8 +2177,8 @@
       "source_location": "L75",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_videogroup",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 59,
+      "community_name": "VideoGroup",
       "norm_label": "videogroup"
     },
     {
@@ -2188,8 +2188,8 @@
       "source_location": "L75",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_videogroup_trailer",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 59,
+      "community_name": "VideoGroup",
       "norm_label": "trailer"
     },
     {
@@ -2199,8 +2199,8 @@
       "source_location": "L75",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_videogroup_teaser",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 59,
+      "community_name": "VideoGroup",
       "norm_label": "teaser"
     },
     {
@@ -2210,8 +2210,8 @@
       "source_location": "L75",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_videogroup_clip",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 59,
+      "community_name": "VideoGroup",
       "norm_label": "clip"
     },
     {
@@ -2221,7 +2221,7 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_castmember",
-      "community": 27,
+      "community": 21,
       "community_name": "CastMember",
       "norm_label": "castmember"
     },
@@ -2277,7 +2277,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_discoverfilter",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": "discoverfilter"
     },
     {
@@ -2287,8 +2287,8 @@
       "source_location": "L122",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_taggedlink",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 2,
+      "community_name": "MovieRepository",
       "norm_label": "taggedlink"
     },
     {
@@ -2298,8 +2298,8 @@
       "source_location": "L127",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_kind",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 2,
+      "community_name": "MovieRepository",
       "norm_label": "kind"
     },
     {
@@ -2309,8 +2309,8 @@
       "source_location": "L127",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_kind_keyword",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 2,
+      "community_name": "MovieRepository",
       "norm_label": "keyword"
     },
     {
@@ -2320,8 +2320,8 @@
       "source_location": "L127",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_kind_company",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 2,
+      "community_name": "MovieRepository",
       "norm_label": "company"
     },
     {
@@ -2331,8 +2331,8 @@
       "source_location": "L127",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_kind_network",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 2,
+      "community_name": "MovieRepository",
       "norm_label": "network"
     },
     {
@@ -2408,8 +2408,8 @@
       "source_location": "L197",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_model_movie_episode",
-      "community": 2,
-      "community_name": "MovieRepository",
+      "community": 27,
+      "community_name": "Episode",
       "norm_label": "episode"
     },
     {
@@ -2849,7 +2849,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionfragment",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": "collectionfragment.kt"
     },
     {
@@ -2860,7 +2860,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionfragment_collectionfragment",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": "collectionfragment"
     },
     {
@@ -2871,7 +2871,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionfragment_kt_fragment",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": "fragment"
     },
     {
@@ -2882,7 +2882,7 @@
       "_origin": "ast",
       "id": "fragmentcollectionbinding",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": "fragmentcollectionbinding"
     },
     {
@@ -2893,7 +2893,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionfragment_collectionfragment_oncreateview",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": ".oncreateview()"
     },
     {
@@ -2904,7 +2904,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionfragment_kt_layoutinflater",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": "layoutinflater"
     },
     {
@@ -2915,7 +2915,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionfragment_kt_viewgroup",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": "viewgroup"
     },
     {
@@ -2926,7 +2926,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionfragment_kt_bundle",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": "bundle"
     },
     {
@@ -2937,7 +2937,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionfragment_kt_view",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": "view"
     },
     {
@@ -2948,7 +2948,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionfragment_collectionfragment_onviewcreated",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": ".onviewcreated()"
     },
     {
@@ -2959,7 +2959,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionfragment_collectionfragment_render",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": ".render()"
     },
     {
@@ -2970,7 +2970,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionfragment_collectionfragment_onmovieselected",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": ".onmovieselected()"
     },
     {
@@ -2981,7 +2981,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionfragment_collectionfragment_ondestroyview",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": ".ondestroyview()"
     },
     {
@@ -2992,7 +2992,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionviewmodel",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": "collectionviewmodel.kt"
     },
     {
@@ -3003,7 +3003,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionviewmodel_collectionuistate",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": "collectionuistate"
     },
     {
@@ -3014,7 +3014,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionviewmodel_collectionviewmodel",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": "collectionviewmodel"
     },
     {
@@ -3025,7 +3025,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionviewmodel_kt_viewmodel",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": "viewmodel"
     },
     {
@@ -3036,7 +3036,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionviewmodel_kt_stateflow",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": "stateflow"
     },
     {
@@ -3047,7 +3047,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionviewmodel_collectionviewmodel_load",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": ".load()"
     },
     {
@@ -3058,7 +3058,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionviewmodel_factory",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": "factory"
     },
     {
@@ -3069,7 +3069,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionviewmodel_kt_viewmodelprovider",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": "viewmodelprovider"
     },
     {
@@ -3080,7 +3080,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionviewmodel_factory_create",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": ".create()"
     },
     {
@@ -3091,7 +3091,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_collection_collectionviewmodel_kt_t",
       "community": 40,
-      "community_name": "CollectionFragment",
+      "community_name": "MovieListItem",
       "norm_label": "t"
     },
     {
@@ -3101,7 +3101,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_castadapter",
-      "community": 27,
+      "community": 21,
       "community_name": "CastMember",
       "norm_label": "castadapter.kt"
     },
@@ -3112,7 +3112,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_castadapter_castadapter",
-      "community": 27,
+      "community": 21,
       "community_name": "CastMember",
       "norm_label": "castadapter"
     },
@@ -3123,7 +3123,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_castadapter_kt_listadapter",
-      "community": 27,
+      "community": 21,
       "community_name": "CastMember",
       "norm_label": "listadapter"
     },
@@ -3134,7 +3134,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_castadapter_castadapter_oncreateviewholder",
-      "community": 27,
+      "community": 21,
       "community_name": "CastMember",
       "norm_label": ".oncreateviewholder()"
     },
@@ -3145,7 +3145,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_castadapter_kt_viewgroup",
-      "community": 27,
+      "community": 21,
       "community_name": "CastMember",
       "norm_label": "viewgroup"
     },
@@ -3156,7 +3156,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_castadapter_castadapter_onbindviewholder",
-      "community": 27,
+      "community": 21,
       "community_name": "CastMember",
       "norm_label": ".onbindviewholder()"
     },
@@ -3167,7 +3167,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_castadapter_castviewholder",
-      "community": 27,
+      "community": 21,
       "community_name": "CastMember",
       "norm_label": "castviewholder"
     },
@@ -3178,7 +3178,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_castadapter_kt_recyclerview",
-      "community": 27,
+      "community": 21,
       "community_name": "CastMember",
       "norm_label": "recyclerview"
     },
@@ -3189,7 +3189,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_castadapter_castviewholder_bind",
-      "community": 27,
+      "community": 21,
       "community_name": "CastMember",
       "norm_label": ".bind()"
     },
@@ -3200,7 +3200,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_castadapter_areitemsthesame",
-      "community": 27,
+      "community": 21,
       "community_name": "CastMember",
       "norm_label": "areitemsthesame()"
     },
@@ -3211,7 +3211,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_castadapter_arecontentsthesame",
-      "community": 27,
+      "community": 21,
       "community_name": "CastMember",
       "norm_label": "arecontentsthesame()"
     },
@@ -3321,8 +3321,8 @@
       "source_location": "L75",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_detailsfragment_detailsfragment_oncreateview",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 58,
+      "community_name": ".onCreateView",
       "norm_label": ".oncreateview()"
     },
     {
@@ -3332,8 +3332,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_detailsfragment_kt_layoutinflater",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 58,
+      "community_name": ".onCreateView",
       "norm_label": "layoutinflater"
     },
     {
@@ -3343,8 +3343,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_detailsfragment_kt_viewgroup",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 58,
+      "community_name": ".onCreateView",
       "norm_label": "viewgroup"
     },
     {
@@ -3354,8 +3354,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_detailsfragment_kt_bundle",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 58,
+      "community_name": ".onCreateView",
       "norm_label": "bundle"
     },
     {
@@ -3365,8 +3365,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_detailsfragment_kt_view",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 58,
+      "community_name": ".onCreateView",
       "norm_label": "view"
     },
     {
@@ -3387,8 +3387,8 @@
       "source_location": "L177",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_detailsfragment_detailsfragment_showmovie",
-      "community": 28,
-      "community_name": "Movie",
+      "community": 4,
+      "community_name": "DetailsFragment",
       "norm_label": ".showmovie()"
     },
     {
@@ -3420,8 +3420,8 @@
       "source_location": "L369",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_detailsfragment_detailsfragment_bindspotlightepisode",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 27,
+      "community_name": "Episode",
       "norm_label": ".bindspotlightepisode()"
     },
     {
@@ -3431,8 +3431,8 @@
       "source_location": "L381",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_detailsfragment_detailsfragment_bindtv",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 20,
+      "community_name": "DetailsViewModel",
       "norm_label": ".bindtv()"
     },
     {
@@ -3497,7 +3497,7 @@
       "source_location": "L433",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_detailsfragment_detailsfragment_oncastselected",
-      "community": 27,
+      "community": 21,
       "community_name": "CastMember",
       "norm_label": ".oncastselected()"
     },
@@ -3508,8 +3508,8 @@
       "source_location": "L441",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_detailsfragment_detailsfragment_openepisode",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 27,
+      "community_name": "Episode",
       "norm_label": ".openepisode()"
     },
     {
@@ -3530,8 +3530,8 @@
       "source_location": "L469",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_detailsfragment_detailsfragment_onsimilarselected",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 57,
+      "community_name": "Intent",
       "norm_label": ".onsimilarselected()"
     },
     {
@@ -3574,8 +3574,8 @@
       "source_location": "L509",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_detailsfragment_detailsfragment_opentrailer",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 57,
+      "community_name": "Intent",
       "norm_label": ".opentrailer()"
     },
     {
@@ -3772,8 +3772,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_episodeadapter",
-      "community": 2,
-      "community_name": "MovieRepository",
+      "community": 27,
+      "community_name": "Episode",
       "norm_label": "episodeadapter.kt"
     },
     {
@@ -3783,8 +3783,8 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_episodeadapter_episodeadapter",
-      "community": 2,
-      "community_name": "MovieRepository",
+      "community": 27,
+      "community_name": "Episode",
       "norm_label": "episodeadapter"
     },
     {
@@ -3794,8 +3794,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_episodeadapter_kt_listadapter",
-      "community": 2,
-      "community_name": "MovieRepository",
+      "community": 27,
+      "community_name": "Episode",
       "norm_label": "listadapter"
     },
     {
@@ -3805,8 +3805,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_episodeadapter_episodeadapter_oncreateviewholder",
-      "community": 2,
-      "community_name": "MovieRepository",
+      "community": 27,
+      "community_name": "Episode",
       "norm_label": ".oncreateviewholder()"
     },
     {
@@ -3816,8 +3816,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_episodeadapter_kt_viewgroup",
-      "community": 2,
-      "community_name": "MovieRepository",
+      "community": 27,
+      "community_name": "Episode",
       "norm_label": "viewgroup"
     },
     {
@@ -3827,8 +3827,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_episodeadapter_episodeadapter_onbindviewholder",
-      "community": 2,
-      "community_name": "MovieRepository",
+      "community": 27,
+      "community_name": "Episode",
       "norm_label": ".onbindviewholder()"
     },
     {
@@ -3838,8 +3838,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_episodeadapter_episodeviewholder",
-      "community": 2,
-      "community_name": "MovieRepository",
+      "community": 27,
+      "community_name": "Episode",
       "norm_label": "episodeviewholder"
     },
     {
@@ -3849,8 +3849,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_episodeadapter_kt_recyclerview",
-      "community": 2,
-      "community_name": "MovieRepository",
+      "community": 27,
+      "community_name": "Episode",
       "norm_label": "recyclerview"
     },
     {
@@ -3860,8 +3860,8 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_episodeadapter_episodeviewholder_bind",
-      "community": 2,
-      "community_name": "MovieRepository",
+      "community": 27,
+      "community_name": "Episode",
       "norm_label": ".bind()"
     },
     {
@@ -3871,8 +3871,8 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_episodeadapter_areitemsthesame",
-      "community": 2,
-      "community_name": "MovieRepository",
+      "community": 27,
+      "community_name": "Episode",
       "norm_label": "areitemsthesame()"
     },
     {
@@ -3882,8 +3882,8 @@
       "source_location": "L60",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_episodeadapter_arecontentsthesame",
-      "community": 2,
-      "community_name": "MovieRepository",
+      "community": 27,
+      "community_name": "Episode",
       "norm_label": "arecontentsthesame()"
     },
     {
@@ -4685,8 +4685,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_traileradapter",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 44,
+      "community_name": "Trailer",
       "norm_label": "traileradapter.kt"
     },
     {
@@ -4696,8 +4696,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_traileradapter_traileradapter",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 44,
+      "community_name": "Trailer",
       "norm_label": "traileradapter"
     },
     {
@@ -4707,8 +4707,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_traileradapter_kt_listadapter",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 44,
+      "community_name": "Trailer",
       "norm_label": "listadapter"
     },
     {
@@ -4718,8 +4718,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_traileradapter_traileradapter_oncreateviewholder",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 44,
+      "community_name": "Trailer",
       "norm_label": ".oncreateviewholder()"
     },
     {
@@ -4729,8 +4729,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_traileradapter_kt_viewgroup",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 44,
+      "community_name": "Trailer",
       "norm_label": "viewgroup"
     },
     {
@@ -4740,8 +4740,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_traileradapter_traileradapter_onbindviewholder",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 44,
+      "community_name": "Trailer",
       "norm_label": ".onbindviewholder()"
     },
     {
@@ -4751,8 +4751,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_traileradapter_trailerviewholder",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 44,
+      "community_name": "Trailer",
       "norm_label": "trailerviewholder"
     },
     {
@@ -4762,8 +4762,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_traileradapter_kt_recyclerview",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 44,
+      "community_name": "Trailer",
       "norm_label": "recyclerview"
     },
     {
@@ -4773,8 +4773,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_traileradapter_trailerviewholder_bind",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 44,
+      "community_name": "Trailer",
       "norm_label": ".bind()"
     },
     {
@@ -4784,8 +4784,8 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_traileradapter_areitemsthesame",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 44,
+      "community_name": "Trailer",
       "norm_label": "areitemsthesame()"
     },
     {
@@ -4795,8 +4795,8 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_details_traileradapter_arecontentsthesame",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 44,
+      "community_name": "Trailer",
       "norm_label": "arecontentsthesame()"
     },
     {
@@ -4872,8 +4872,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_discover_discoverresultsfragment",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 57,
+      "community_name": "Intent",
       "norm_label": "discoverresultsfragment.kt"
     },
     {
@@ -5048,8 +5048,8 @@
       "source_location": "L125",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_discover_discoverresultsfragment_mediatypefrom",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 57,
+      "community_name": "Intent",
       "norm_label": "mediatypefrom()"
     },
     {
@@ -5059,8 +5059,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "intent",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 57,
+      "community_name": "Intent",
       "norm_label": "intent"
     },
     {
@@ -5070,8 +5070,8 @@
       "source_location": "L130",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_discover_discoverresultsfragment_categoryfrom",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 57,
+      "community_name": "Intent",
       "norm_label": "categoryfrom()"
     },
     {
@@ -5081,8 +5081,8 @@
       "source_location": "L135",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_discover_discoverresultsfragment_filterfrom",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 57,
+      "community_name": "Intent",
       "norm_label": "filterfrom()"
     },
     {
@@ -5302,7 +5302,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodefragment",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": "episodefragment.kt"
     },
     {
@@ -5313,7 +5313,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodefragment_episodefragment",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": "episodefragment"
     },
     {
@@ -5324,7 +5324,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodefragment_kt_fragment",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": "fragment"
     },
     {
@@ -5335,7 +5335,7 @@
       "_origin": "ast",
       "id": "fragmentepisodebinding",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": "fragmentepisodebinding"
     },
     {
@@ -5346,7 +5346,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodefragment_episodefragment_oncreateview",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": ".oncreateview()"
     },
     {
@@ -5357,7 +5357,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodefragment_kt_layoutinflater",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": "layoutinflater"
     },
     {
@@ -5368,7 +5368,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodefragment_kt_viewgroup",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": "viewgroup"
     },
     {
@@ -5379,7 +5379,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodefragment_kt_bundle",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": "bundle"
     },
     {
@@ -5390,7 +5390,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodefragment_kt_view",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": "view"
     },
     {
@@ -5401,7 +5401,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodefragment_episodefragment_onviewcreated",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": ".onviewcreated()"
     },
     {
@@ -5412,7 +5412,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodefragment_episodefragment_render",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": ".render()"
     },
     {
@@ -5423,7 +5423,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodefragment_episodefragment_onguestselected",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": ".onguestselected()"
     },
     {
@@ -5434,7 +5434,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodefragment_episodefragment_opengallery",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": ".opengallery()"
     },
     {
@@ -5445,7 +5445,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodefragment_episodefragment_ondestroyview",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": ".ondestroyview()"
     },
     {
@@ -5456,7 +5456,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodeviewmodel",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": "episodeviewmodel.kt"
     },
     {
@@ -5467,7 +5467,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodeviewmodel_episodeuistate",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": "episodeuistate"
     },
     {
@@ -5478,7 +5478,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodeviewmodel_episodeviewmodel",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": "episodeviewmodel"
     },
     {
@@ -5489,7 +5489,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodeviewmodel_kt_viewmodel",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": "viewmodel"
     },
     {
@@ -5500,7 +5500,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodeviewmodel_kt_stateflow",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": "stateflow"
     },
     {
@@ -5511,7 +5511,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodeviewmodel_episodeviewmodel_load",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": ".load()"
     },
     {
@@ -5522,7 +5522,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodeviewmodel_factory",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": "factory"
     },
     {
@@ -5533,7 +5533,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodeviewmodel_kt_viewmodelprovider",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": "viewmodelprovider"
     },
     {
@@ -5544,7 +5544,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodeviewmodel_factory_create",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": ".create()"
     },
     {
@@ -5555,7 +5555,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_episode_episodeviewmodel_kt_t",
       "community": 21,
-      "community_name": "EpisodeFragment",
+      "community_name": "CastMember",
       "norm_label": "t"
     },
     {
@@ -6951,8 +6951,8 @@
       "source_location": "L268",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_main_mainactivity_mainactivity_onmovieselected",
-      "community": 4,
-      "community_name": "DetailsFragment",
+      "community": 57,
+      "community_name": "Intent",
       "norm_label": ".onmovieselected()"
     },
     {
@@ -7315,7 +7315,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_discoverfilterfragment",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": "discoverfilterfragment.kt"
     },
     {
@@ -7326,7 +7326,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_discoverfilterfragment_discoverfilterfragment",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": "discoverfilterfragment"
     },
     {
@@ -7337,7 +7337,7 @@
       "_origin": "ast",
       "id": "bottomsheetdialogfragment",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": "bottomsheetdialogfragment"
     },
     {
@@ -7348,7 +7348,7 @@
       "_origin": "ast",
       "id": "fragmentdiscoverfilterbinding",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": "fragmentdiscoverfilterbinding"
     },
     {
@@ -7359,7 +7359,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_discoverfilterfragment_discoverfilterfragment_oncreateview",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": ".oncreateview()"
     },
     {
@@ -7370,7 +7370,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_discoverfilterfragment_kt_layoutinflater",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": "layoutinflater"
     },
     {
@@ -7381,7 +7381,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_discoverfilterfragment_kt_viewgroup",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": "viewgroup"
     },
     {
@@ -7392,7 +7392,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_discoverfilterfragment_kt_bundle",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": "bundle"
     },
     {
@@ -7403,7 +7403,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_discoverfilterfragment_kt_view",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": "view"
     },
     {
@@ -7414,7 +7414,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_discoverfilterfragment_discoverfilterfragment_onviewcreated",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": ".onviewcreated()"
     },
     {
@@ -7425,7 +7425,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_discoverfilterfragment_discoverfilterfragment_bindgenres",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": ".bindgenres()"
     },
     {
@@ -7436,7 +7436,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_discoverfilterfragment_discoverfilterfragment_bindyears",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": ".bindyears()"
     },
     {
@@ -7447,7 +7447,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_discoverfilterfragment_discoverfilterfragment_bindscore",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": ".bindscore()"
     },
     {
@@ -7458,7 +7458,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_discoverfilterfragment_discoverfilterfragment_setchipstyle",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": ".setchipstyle()"
     },
     {
@@ -7469,7 +7469,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_discoverfilterfragment_discoverfilterfragment_currentfilter",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": ".currentfilter()"
     },
     {
@@ -7480,7 +7480,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_discoverfilterfragment_discoverfilterfragment_publish",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": ".publish()"
     },
     {
@@ -7491,7 +7491,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_discoverfilterfragment_discoverfilterfragment_ondestroyview",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": ".ondestroyview()"
     },
     {
@@ -7502,7 +7502,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_discoverfilterfragment_newinstance",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": "newinstance()"
     },
     {
@@ -7513,7 +7513,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_discoverfilterfragment_filterfrom",
       "community": 23,
-      "community_name": "MovieListViewModel",
+      "community_name": "DiscoverFilter",
       "norm_label": "filterfrom()"
     },
     {
@@ -7523,8 +7523,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movieadapter",
-      "community": 1,
-      "community_name": "MovieListFragment",
+      "community": 40,
+      "community_name": "MovieListItem",
       "norm_label": "movieadapter.kt"
     },
     {
@@ -7534,8 +7534,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movieadapter_movielistitem",
-      "community": 1,
-      "community_name": "MovieListFragment",
+      "community": 40,
+      "community_name": "MovieListItem",
       "norm_label": "movielistitem"
     },
     {
@@ -7545,8 +7545,8 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movieadapter_movieadapter",
-      "community": 1,
-      "community_name": "MovieListFragment",
+      "community": 40,
+      "community_name": "MovieListItem",
       "norm_label": "movieadapter"
     },
     {
@@ -7556,8 +7556,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movieadapter_kt_listadapter",
-      "community": 1,
-      "community_name": "MovieListFragment",
+      "community": 40,
+      "community_name": "MovieListItem",
       "norm_label": "listadapter"
     },
     {
@@ -7567,8 +7567,8 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movieadapter_movieadapter_oncreateviewholder",
-      "community": 1,
-      "community_name": "MovieListFragment",
+      "community": 40,
+      "community_name": "MovieListItem",
       "norm_label": ".oncreateviewholder()"
     },
     {
@@ -7578,8 +7578,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movieadapter_kt_viewgroup",
-      "community": 1,
-      "community_name": "MovieListFragment",
+      "community": 40,
+      "community_name": "MovieListItem",
       "norm_label": "viewgroup"
     },
     {
@@ -7589,8 +7589,8 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movieadapter_movieadapter_onbindviewholder",
-      "community": 1,
-      "community_name": "MovieListFragment",
+      "community": 40,
+      "community_name": "MovieListItem",
       "norm_label": ".onbindviewholder()"
     },
     {
@@ -7600,8 +7600,8 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movieadapter_movieadapter_applyfavouritekeys",
-      "community": 1,
-      "community_name": "MovieListFragment",
+      "community": 40,
+      "community_name": "MovieListItem",
       "norm_label": ".applyfavouritekeys()"
     },
     {
@@ -7611,8 +7611,8 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movieadapter_movieadapter_isfavourite",
-      "community": 1,
-      "community_name": "MovieListFragment",
+      "community": 40,
+      "community_name": "MovieListItem",
       "norm_label": ".isfavourite()"
     },
     {
@@ -7622,8 +7622,8 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movieadapter_movieviewholder",
-      "community": 1,
-      "community_name": "MovieListFragment",
+      "community": 40,
+      "community_name": "MovieListItem",
       "norm_label": "movieviewholder"
     },
     {
@@ -7633,8 +7633,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movieadapter_kt_recyclerview",
-      "community": 1,
-      "community_name": "MovieListFragment",
+      "community": 40,
+      "community_name": "MovieListItem",
       "norm_label": "recyclerview"
     },
     {
@@ -7644,8 +7644,8 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movieadapter_movieviewholder_bind",
-      "community": 1,
-      "community_name": "MovieListFragment",
+      "community": 40,
+      "community_name": "MovieListItem",
       "norm_label": ".bind()"
     },
     {
@@ -7655,8 +7655,8 @@
       "source_location": "L91",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movieadapter_movieviewholder_bindfavourite",
-      "community": 1,
-      "community_name": "MovieListFragment",
+      "community": 40,
+      "community_name": "MovieListItem",
       "norm_label": ".bindfavourite()"
     },
     {
@@ -7666,8 +7666,8 @@
       "source_location": "L112",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movieadapter_areitemsthesame",
-      "community": 1,
-      "community_name": "MovieListFragment",
+      "community": 40,
+      "community_name": "MovieListItem",
       "norm_label": "areitemsthesame()"
     },
     {
@@ -7677,8 +7677,8 @@
       "source_location": "L115",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movieadapter_arecontentsthesame",
-      "community": 1,
-      "community_name": "MovieListFragment",
+      "community": 40,
+      "community_name": "MovieListItem",
       "norm_label": "arecontentsthesame()"
     },
     {
@@ -7689,7 +7689,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": "movielistfragment.kt"
     },
     {
@@ -7700,7 +7700,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_movielistfragment",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": "movielistfragment"
     },
     {
@@ -7711,7 +7711,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_kt_fragment",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": "fragment"
     },
     {
@@ -7722,7 +7722,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_kt_fragmentmovielistbinding",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": "fragmentmovielistbinding"
     },
     {
@@ -7733,7 +7733,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_movielistfragment_oncreateview",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": ".oncreateview()"
     },
     {
@@ -7744,7 +7744,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_kt_layoutinflater",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": "layoutinflater"
     },
     {
@@ -7755,7 +7755,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_kt_viewgroup",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": "viewgroup"
     },
     {
@@ -7766,7 +7766,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_kt_bundle",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": "bundle"
     },
     {
@@ -7777,7 +7777,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_kt_view",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": "view"
     },
     {
@@ -7788,7 +7788,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_movielistfragment_onviewcreated",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": ".onviewcreated()"
     },
     {
@@ -7799,7 +7799,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_movielistfragment_onviewcreated_object_recyclerview_l94",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": "recyclerview"
     },
     {
@@ -7810,7 +7810,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_kt_recyclerview",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": "recyclerview"
     },
     {
@@ -7821,7 +7821,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_movielistfragment_onviewcreated_object_recyclerview_l94_onscrolled",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": ".onscrolled()"
     },
     {
@@ -7832,7 +7832,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_movielistfragment_onviewcreated_object_recyclerview_l94_onscrollstatechanged",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": ".onscrollstatechanged()"
     },
     {
@@ -7843,7 +7843,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_movielistfragment_applycataloglabels",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": ".applycataloglabels()"
     },
     {
@@ -7854,7 +7854,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_movielistfragment_notifytitle",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": ".notifytitle()"
     },
     {
@@ -7865,7 +7865,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_movielistfragment_browsetitle",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": ".browsetitle()"
     },
     {
@@ -7876,7 +7876,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_movielistfragment_catalogchipid",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": ".catalogchipid()"
     },
     {
@@ -7887,7 +7887,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_movielistfragment_catalogfromchip",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": ".catalogfromchip()"
     },
     {
@@ -7897,8 +7897,8 @@
       "source_location": "L170",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_movielistfragment_onmovieselected",
-      "community": 1,
-      "community_name": "MovieListFragment",
+      "community": 40,
+      "community_name": "MovieListItem",
       "norm_label": ".onmovieselected()"
     },
     {
@@ -7909,7 +7909,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_movielistfragment_onsaveclicked",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": ".onsaveclicked()"
     },
     {
@@ -7920,7 +7920,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_movielistfragment_ondestroyview",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": ".ondestroyview()"
     },
     {
@@ -7931,7 +7931,7 @@
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistfragment_newinstance",
       "community": 1,
-      "community_name": "MovieListFragment",
+      "community_name": "MovieListViewModel",
       "norm_label": "newinstance()"
     },
     {
@@ -7941,7 +7941,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistviewmodel",
-      "community": 23,
+      "community": 1,
       "community_name": "MovieListViewModel",
       "norm_label": "movielistviewmodel.kt"
     },
@@ -7952,7 +7952,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistviewmodel_movielistuistate",
-      "community": 23,
+      "community": 1,
       "community_name": "MovieListViewModel",
       "norm_label": "movielistuistate"
     },
@@ -7963,7 +7963,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistviewmodel_movielistviewmodel",
-      "community": 23,
+      "community": 1,
       "community_name": "MovieListViewModel",
       "norm_label": "movielistviewmodel"
     },
@@ -7974,7 +7974,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistviewmodel_kt_viewmodel",
-      "community": 23,
+      "community": 1,
       "community_name": "MovieListViewModel",
       "norm_label": "viewmodel"
     },
@@ -7985,7 +7985,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistviewmodel_kt_job",
-      "community": 23,
+      "community": 1,
       "community_name": "MovieListViewModel",
       "norm_label": "job"
     },
@@ -7996,7 +7996,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistviewmodel_kt_stateflow",
-      "community": 23,
+      "community": 1,
       "community_name": "MovieListViewModel",
       "norm_label": "stateflow"
     },
@@ -8007,7 +8007,7 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistviewmodel_movielistviewmodel_setmediatype",
-      "community": 23,
+      "community": 1,
       "community_name": "MovieListViewModel",
       "norm_label": ".setmediatype()"
     },
@@ -8018,7 +8018,7 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistviewmodel_movielistviewmodel_setcategory",
-      "community": 23,
+      "community": 1,
       "community_name": "MovieListViewModel",
       "norm_label": ".setcategory()"
     },
@@ -8029,7 +8029,7 @@
       "source_location": "L74",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistviewmodel_movielistviewmodel_setfilter",
-      "community": 23,
+      "community": 1,
       "community_name": "MovieListViewModel",
       "norm_label": ".setfilter()"
     },
@@ -8051,7 +8051,7 @@
       "source_location": "L82",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistviewmodel_movielistviewmodel_refresh",
-      "community": 23,
+      "community": 1,
       "community_name": "MovieListViewModel",
       "norm_label": ".refresh()"
     },
@@ -8062,7 +8062,7 @@
       "source_location": "L86",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistviewmodel_movielistviewmodel_loadnextpage",
-      "community": 23,
+      "community": 1,
       "community_name": "MovieListViewModel",
       "norm_label": ".loadnextpage()"
     },
@@ -8073,7 +8073,7 @@
       "source_location": "L92",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistviewmodel_movielistviewmodel_togglefavourite",
-      "community": 23,
+      "community": 1,
       "community_name": "MovieListViewModel",
       "norm_label": ".togglefavourite()"
     },
@@ -8084,7 +8084,7 @@
       "source_location": "L99",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistviewmodel_movielistviewmodel_loadpage",
-      "community": 23,
+      "community": 1,
       "community_name": "MovieListViewModel",
       "norm_label": ".loadpage()"
     },
@@ -8095,7 +8095,7 @@
       "source_location": "L158",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistviewmodel_factory",
-      "community": 23,
+      "community": 1,
       "community_name": "MovieListViewModel",
       "norm_label": "factory"
     },
@@ -8106,7 +8106,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistviewmodel_kt_viewmodelprovider",
-      "community": 23,
+      "community": 1,
       "community_name": "MovieListViewModel",
       "norm_label": "viewmodelprovider"
     },
@@ -8117,7 +8117,7 @@
       "source_location": "L162",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistviewmodel_factory_create",
-      "community": 23,
+      "community": 1,
       "community_name": "MovieListViewModel",
       "norm_label": ".create()"
     },
@@ -8128,7 +8128,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "app_src_main_java_nikhil_cinestine_ui_movie_movielistviewmodel_kt_t",
-      "community": 23,
+      "community": 1,
       "community_name": "MovieListViewModel",
       "norm_label": "t"
     },
@@ -9234,7 +9234,7 @@
       "label": "Features",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L9",
+      "source_location": "L25",
       "_origin": "ast",
       "id": "readme_features",
       "community": 11,
@@ -9242,21 +9242,10 @@
       "norm_label": "features"
     },
     {
-      "label": "Requirements",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L21",
-      "_origin": "ast",
-      "id": "readme_requirements",
-      "community": 11,
-      "community_name": "Cinestine",
-      "norm_label": "requirements"
-    },
-    {
       "label": "Getting started",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L27",
+      "source_location": "L39",
       "_origin": "ast",
       "id": "readme_getting_started",
       "community": 11,
@@ -9267,7 +9256,7 @@
       "label": "Architecture",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L43",
+      "source_location": "L55",
       "_origin": "ast",
       "id": "readme_architecture",
       "community": 11,
@@ -9275,21 +9264,10 @@
       "norm_label": "architecture"
     },
     {
-      "label": "Tech stack",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L64",
-      "_origin": "ast",
-      "id": "readme_tech_stack",
-      "community": 11,
-      "community_name": "Cinestine",
-      "norm_label": "tech stack"
-    },
-    {
       "label": "Attribution",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L77",
+      "source_location": "L81",
       "_origin": "ast",
       "id": "readme_attribution",
       "community": 11,
@@ -9300,7 +9278,7 @@
       "label": "License",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L81",
+      "source_location": "L85",
       "_origin": "ast",
       "id": "readme_license",
       "community": 11,
@@ -25237,7 +25215,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L43",
+      "source_location": "L55",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_cinestine",
@@ -25248,7 +25226,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L77",
+      "source_location": "L81",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_cinestine",
@@ -25259,7 +25237,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L9",
+      "source_location": "L25",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_cinestine",
@@ -25270,7 +25248,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L27",
+      "source_location": "L39",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_cinestine",
@@ -25281,36 +25259,14 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L81",
+      "source_location": "L85",
       "weight": 1.0,
       "_origin": "ast",
       "source": "readme_cinestine",
       "target": "readme_license",
       "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L21",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "readme_cinestine",
-      "target": "readme_requirements",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L64",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "readme_cinestine",
-      "target": "readme_tech_stack",
-      "confidence_score": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "1d37530f0150b0af66290fc4fba9d4baac792d9a"
+  "built_at_commit": "18f87565db663149d3aa96842ea80954a57b6f7a"
 }

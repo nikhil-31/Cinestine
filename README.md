@@ -1,78 +1,82 @@
 # Cinestine
 
-Cinestine is an Android app for discovering movies and TV shows. Browse trending and popular titles, search people and collections, see where something is streaming, and keep a local watchlist.
+<p align="center">
+  <strong>Discover movies and TV shows. Save what you want to watch next.</strong><br/>
+  Browse trending titles, search people and collections, see where something streams, and keep a local watchlist.
+</p>
 
-<a href="https://play.google.com/store/apps/details?id=comnikhil_31.httpsgithub.cinestine&hl=en&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="200"/></a>
+<p align="center">
+  <a href="https://play.google.com/store/apps/details?id=comnikhil_31.httpsgithub.cinestine&hl=en"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="180"/></a>
+</p>
 
-Catalog data comes from [The Movie Database (TMDB)](https://www.themoviedb.org/). Cinestine is not endorsed or certified by TMDB.
+<p align="center">
+  <img src="screenshots/home.jpg" width="220" alt="Home — recently viewed and trending rails"/>
+  <img src="screenshots/hot.jpg" width="220" alt="Hot — popular movies in a poster grid"/>
+  <img src="screenshots/details.jpg" width="220" alt="Title details for Ted Lasso"/>
+</p>
+<p align="center">
+  <img src="screenshots/details-more.jpg" width="220" alt="Cast, where to watch, and similar titles"/>
+  <img src="screenshots/search.jpg" width="220" alt="Search results for Dune"/>
+  <img src="screenshots/watchlist.jpg" width="220" alt="Local watchlist"/>
+</p>
+
+Catalog data is provided by [The Movie Database (TMDB)](https://www.themoviedb.org/). Cinestine is not endorsed or certified by TMDB.
 
 ## Features
 
-- **Home and catalog** — Recently viewed, trending, popular, top rated, in theatres, upcoming, and airing-now rails, with movie and TV filters
-- **Discover** — Narrow results by genre, year, and minimum score; follow keywords, studios, and networks from a title
-- **Search** — Movies, TV shows, people, and collections
-- **Title details** — Story, trailers, teasers, clips, reviews, cast, photos, similar titles, and region-aware “where to watch”
-- **TV** — Seasons, episodes, guest stars, and next/latest episode
-- **People and collections** — Filmography and collection parts
-- **Watchlist** — Save titles locally, search the list, and sort by recent, rating, or title
-- **Preferences** — Light, dark, or system theme, plus a watch region for certifications and streaming providers
-- **Share** — Send a TMDB link for any title
+**Home** — Recently viewed plus trending movies, trending TV, and in-theatres rails. Switch All / Movies / TV, or open Filters for genre, year, and score.
 
-## Requirements
+**Hot & Top rated** — Full poster grids for popular, trending, in theatres, upcoming, airing today, and on the air. Heart any title without leaving the list.
 
-- Android Studio with JDK 17
-- Android 7.0 (API 24) or later
-- A [TMDB API key](https://developer.themoviedb.org/docs/getting-started)
+**Search** — Movies, TV shows, people, and collections, with live results as you type.
+
+**Title details** — Backdrop, score, genres, story, trailers, seasons and episodes, cast, photos, similar titles, and region-aware “where to watch.” Share a TMDB link from the toolbar.
+
+**Watchlist** — Saved on-device with Room. Filter movies or TV, sort by recent, rating, or title, and search within the list.
+
+**Preferences** — Light, dark, or system theme, and a watch region for certifications and streaming providers.
 
 ## Getting started
 
+You need Android Studio with JDK 17, a device or emulator on API 24+, and a [TMDB API key](https://developer.themoviedb.org/docs/getting-started).
+
 1. Clone the repository and open it in Android Studio.
-2. Request a TMDB API key, then add it to `local.properties` (this file is gitignored):
+2. Add your key to `local.properties` (gitignored):
 
    ```properties
    sdk.dir=/path/to/Android/sdk
    tmdb.api.key=YOUR_TMDB_API_KEY
    ```
 
-3. Sync Gradle and run the `debug` variant on a device or emulator.
+3. Sync Gradle and run the **debug** variant.
 
-The TMDB key is injected into `BuildConfig` at compile time. Do not commit `local.properties`.
-
-Firebase Analytics and Crashlytics are enabled through `app/google-services.json`. Debug HTTP logging is on only in debug builds, and the API key is never written to logcat.
+The key is compiled into `BuildConfig`. HTTP logging is debug-only and never includes the API key.
 
 ## Architecture
 
-The app follows MVVM with a single repository as the data boundary.
-
-| Layer | Role |
-| --- | --- |
-| UI | Activities and fragments with View Binding, `ViewModel`, and `StateFlow` |
-| Domain models | Immutable Kotlin types for titles, people, search hits, and filters |
-| Data | `MovieRepository` over Retrofit (TMDB) and Room (watchlist and recently viewed) |
-
-Main navigation is a four-tab pager: Home, Hot, Top rated, and Watchlist. Details, person, collection, episode, and discover each have their own activity.
+MVVM, with one repository between the UI and TMDB / Room.
 
 ```
 app/src/main/java/nikhil/cinestine/
-├── CinestineApp.kt          # App graph: networking, Room, analytics
-├── analytics/               # Firebase Analytics events
-├── data/                    # Repository, TMDB API, Room
-├── model/                   # Shared models
-└── ui/                      # Screens by feature
+├── CinestineApp.kt     Application graph: OkHttp, Retrofit, Room, analytics
+├── analytics/          Firebase Analytics events
+├── data/               MovieRepository, TMDB API, Room
+├── model/              Shared models
+└── ui/                 Screens by feature
 ```
 
-## Tech stack
+Main navigation is a four-tab pager: **Home**, **Hot**, **Top rated**, and **Watchlist**. Details, person, collection, episode, and discover each open in their own activity.
 
 | | |
 | --- | --- |
 | Language | Kotlin 2.2 |
-| UI | Material 3, View Binding, ViewPager2, RecyclerView |
-| Async | Coroutines, Flow |
-| Networking | Retrofit, OkHttp, kotlinx.serialization |
+| UI | Material 3, View Binding, ViewPager2 |
+| Async | Coroutines and Flow |
+| Network | Retrofit, OkHttp, kotlinx.serialization |
 | Images | Coil |
-| Persistence | Room |
+| Storage | Room |
 | Analytics | Firebase Analytics and Crashlytics |
-| Build | Android Gradle Plugin 9.2, compile/target SDK 36 |
+| SDK | min 24, compile/target 36 |
 
 ## Attribution
 
