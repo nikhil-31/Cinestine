@@ -1,22 +1,22 @@
 # Graph Report - Cinestine  (2026-08-20)
 
 ## Corpus Check
-- 61 files · ~21,548 words
+- 61 files · ~21,882 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 845 nodes · 1391 edges · 56 communities (36 shown, 20 thin omitted)
+- 844 nodes · 1390 edges · 56 communities (36 shown, 20 thin omitted)
 - Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 38 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6bdaa4f0`
+- Built from commit: `1d37530f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - FavouritesFragment
-- MovieListViewModel
+- MovieListFragment
 - MovieRepository
 - MainActivity
 - DetailsFragment
@@ -32,13 +32,14 @@
 - DetailsActivity
 - gradlew
 - SeasonAdapter
-- EpisodeAdapter
-- CastMember
+- DetailsViewModel
+- EpisodeFragment
 - SearchViewModel
-- DiscoverFilter
+- MovieListViewModel
 - ImagePagerAdapter
 - HotViewModel
 - ProviderAdapter
+- CastMember
 - Movie
 - MediaImage
 - PersonActivity
@@ -55,7 +56,6 @@
 - .tvCredits
 - .tvDetails
 - .tvSeason
-- MovieListItem
 - SearchAdapter
 - CollectionActivity
 - EpisodeActivity
@@ -102,21 +102,21 @@
 Cohesion: 0.09
 Nodes (16): FavouritesFragment, RecyclerView, Bundle, Fragment, FragmentMovieListBinding, LayoutInflater, RecyclerView, View (+8 more)
 
-### Community 1 - "MovieListViewModel"
-Cohesion: 0.07
-Nodes (24): MovieCategory, NOW_PLAYING, POPULAR, TOP_RATED, TRENDING, UPCOMING, Bundle, Fragment (+16 more)
+### Community 1 - "MovieListFragment"
+Cohesion: 0.08
+Nodes (24): MovieCategory, NOW_PLAYING, POPULAR, TOP_RATED, TRENDING, UPCOMING, areContentsTheSame(), areItemsTheSame() (+16 more)
 
 ### Community 2 - "MovieRepository"
 Cohesion: 0.06
-Nodes (27): Flow, MovieRepository, CollectionSummary, Episode, EpisodeDetails, Genre, Kind, COMPANY (+19 more)
+Nodes (27): Flow, MovieRepository, CollectionSummary, Episode, EpisodeDetails, Genre, MediaType, MOVIE (+19 more)
 
 ### Community 3 - "MainActivity"
 Cohesion: 0.08
 Nodes (12): ActivityMainBinding, AppCompatActivity, Bundle, MainActivity, ViewPager2, MenuItem, SearchView, BrowseScrollHost (+4 more)
 
 ### Community 4 - "DetailsFragment"
-Cohesion: 0.05
-Nodes (32): Trailer, VideoGroup, CLIP, TEASER, TRAILER, DetailsFragment, Bundle, Fragment (+24 more)
+Cohesion: 0.06
+Nodes (28): Kind, COMPANY, KEYWORD, NETWORK, TaggedLink, Trailer, VideoGroup, CLIP (+20 more)
 
 ### Community 5 - "FavouriteDao"
 Cohesion: 0.08
@@ -139,8 +139,8 @@ Cohesion: 0.08
 Nodes (18): Bundle, Fragment, LayoutInflater, View, ViewGroup, PersonFragment, CreditFilter, ACTING (+10 more)
 
 ### Community 11 - "Cinestine"
-Cohesion: 0.20
-Nodes (9): Cinestine, @Copyright 2016 Nikhil Bhaskar, Credits, Instructions, Libraries used:, License, Overview, Playstore (+1 more)
+Cohesion: 0.22
+Nodes (8): Architecture, Attribution, Cinestine, Features, Getting started, License, Requirements, Tech stack
 
 ### Community 12 - "TmdbDtos.kt"
 Cohesion: 0.08
@@ -162,21 +162,21 @@ Nodes (3): gradlew script, die(), warn()
 Cohesion: 0.29
 Nodes (8): areContentsTheSame(), areItemsTheSame(), ListAdapter, RecyclerView, ViewGroup, SeasonAdapter, SeasonListItem, SeasonViewHolder
 
-### Community 20 - "EpisodeAdapter"
-Cohesion: 0.39
-Nodes (5): EpisodeAdapter, EpisodeViewHolder, ListAdapter, RecyclerView, ViewGroup
+### Community 20 - "DetailsViewModel"
+Cohesion: 0.17
+Nodes (9): DetailsUiState, DetailsViewModel, Extras, Factory, Job, StateFlow, T, ViewModel (+1 more)
 
-### Community 21 - "CastMember"
-Cohesion: 0.08
-Nodes (22): CastMember, areContentsTheSame(), areItemsTheSame(), CastAdapter, CastViewHolder, ListAdapter, RecyclerView, ViewGroup (+14 more)
+### Community 21 - "EpisodeFragment"
+Cohesion: 0.11
+Nodes (14): EpisodeFragment, Bundle, Fragment, LayoutInflater, View, ViewGroup, EpisodeUiState, EpisodeViewModel (+6 more)
 
 ### Community 22 - "SearchViewModel"
 Cohesion: 0.06
 Nodes (22): SearchScope, COLLECTION, MOVIE, PERSON, TV, Bundle, Fragment, FragmentMovieListBinding (+14 more)
 
-### Community 23 - "DiscoverFilter"
-Cohesion: 0.17
-Nodes (11): DiscoverFilter, DiscoverFilterFragment, filterFrom(), Bundle, LayoutInflater, View, ViewGroup, newInstance() (+3 more)
+### Community 23 - "MovieListViewModel"
+Cohesion: 0.09
+Nodes (19): DiscoverFilter, DiscoverFilterFragment, filterFrom(), Bundle, LayoutInflater, View, ViewGroup, newInstance() (+11 more)
 
 ### Community 24 - "ImagePagerAdapter"
 Cohesion: 0.18
@@ -189,6 +189,10 @@ Nodes (32): HotFragment, RecyclerView, Bundle, Fragment, LayoutInflater, Recycle
 ### Community 26 - "ProviderAdapter"
 Cohesion: 0.27
 Nodes (8): WatchProvider, areContentsTheSame(), areItemsTheSame(), ListAdapter, RecyclerView, ViewGroup, ProviderAdapter, ProviderViewHolder
+
+### Community 27 - "CastMember"
+Cohesion: 0.26
+Nodes (8): CastMember, areContentsTheSame(), areItemsTheSame(), CastAdapter, CastViewHolder, ListAdapter, RecyclerView, ViewGroup
 
 ### Community 28 - "Movie"
 Cohesion: 0.08
@@ -209,10 +213,6 @@ Nodes (9): Activity, Animator, MotionEvent, View, Overlay, AnimatorListenerAdapt
 ### Community 40 - "CollectionFragment"
 Cohesion: 0.11
 Nodes (14): CollectionFragment, Bundle, Fragment, LayoutInflater, View, ViewGroup, CollectionUiState, CollectionViewModel (+6 more)
-
-### Community 44 - "MovieListItem"
-Cohesion: 0.23
-Nodes (8): areContentsTheSame(), areItemsTheSame(), ListAdapter, RecyclerView, ViewGroup, MovieAdapter, MovieListItem, MovieViewHolder
 
 ### Community 45 - "SearchAdapter"
 Cohesion: 0.24
@@ -238,11 +238,11 @@ Nodes (4): MotionEvent, View, NestedScrollableHost, FrameLayout
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Movie` connect `Movie` to `FavouritesFragment`, `MovieListViewModel`, `MovieRepository`, `DetailsFragment`, `FavouriteDao`, `CollectionFragment`, `DiscoverResultsViewModel`, `PersonFragment`, `MovieListItem`, `SearchViewModel`, `DiscoverFilter`, `HotViewModel`?**
-  _High betweenness centrality (0.243) - this node is a cross-community bridge._
-- **Why does `MediaType` connect `MovieRepository` to `FavouritesFragment`, `MovieListViewModel`, `MainActivity`, `DetailsFragment`, `ReviewAdapter`, `SearchViewModel`, `DiscoverFilter`, `HotViewModel`?**
-  _High betweenness centrality (0.133) - this node is a cross-community bridge._
-- **Why does `MainActivity` connect `MainActivity` to `Movie`, `SearchViewModel`?**
+- **Why does `Movie` connect `Movie` to `FavouritesFragment`, `MovieListFragment`, `MovieRepository`, `DetailsFragment`, `FavouriteDao`, `CollectionFragment`, `DiscoverResultsViewModel`, `PersonFragment`, `DetailsViewModel`, `SearchViewModel`, `MovieListViewModel`, `HotViewModel`?**
+  _High betweenness centrality (0.244) - this node is a cross-community bridge._
+- **Why does `MediaType` connect `MovieRepository` to `FavouritesFragment`, `MovieListFragment`, `MainActivity`, `DetailsFragment`, `ReviewAdapter`, `SearchViewModel`, `MovieListViewModel`, `HotViewModel`?**
+  _High betweenness centrality (0.134) - this node is a cross-community bridge._
+- **Why does `MainActivity` connect `MainActivity` to `DetailsFragment`, `Movie`, `SearchViewModel`?**
   _High betweenness centrality (0.086) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `Movie` (e.g. with `toMovie()` and `toMovie()`) actually correct?**
   _`Movie` has 2 INFERRED edges - model-reasoned connections that need verification._
@@ -250,5 +250,5 @@ _Questions this graph is uniquely positioned to answer:_
   _53 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `FavouritesFragment` be split into smaller, more focused modules?**
   _Cohesion score 0.08620689655172414 - nodes in this community are weakly interconnected._
-- **Should `MovieListViewModel` be split into smaller, more focused modules?**
-  _Cohesion score 0.06767676767676768 - nodes in this community are weakly interconnected._
+- **Should `MovieListFragment` be split into smaller, more focused modules?**
+  _Cohesion score 0.07505285412262157 - nodes in this community are weakly interconnected._
